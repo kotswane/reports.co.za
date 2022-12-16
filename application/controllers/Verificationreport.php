@@ -20,6 +20,8 @@ class Verificationreport extends CI_Controller {
 	 */
 	 
 	private $client;
+	private $reports;
+	private $reports_type;
 	
 	public function  __construct(){
 		parent::__construct();
@@ -36,11 +38,15 @@ class Verificationreport extends CI_Controller {
 			$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
 			redirect('user/login');
 		}
+		
+		$this->reports = $this->Report_model->list_reports();
+		$this->reports_type = $this->Report_type_model->list_reports_type();	
 	 }
 	 
 	
 	public function idverification(){
-		
+		$data["reports_type"] = $this->reports_type;
+		$data["reports"] = $this->reports;		
 		$data["successFlash"] = "";
 		$data["infoFlash"] = "";
 		$data["errorFlash"] = "";
@@ -53,6 +59,8 @@ class Verificationreport extends CI_Controller {
 	
 	public function idphotoverification(){
 		
+		$data["reports_type"] = $this->reports_type;
+		$data["reports"] = $this->reports;
 		$data["successFlash"] = "";
 		$data["infoFlash"] = "";
 		$data["errorFlash"] = "";

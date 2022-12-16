@@ -20,6 +20,9 @@ class Tracereport extends CI_Controller {
 	 */
 	 
 	private $client;
+	private $reports;
+	private $reports_type;
+	
 	
 	public function  __construct(){
 		parent::__construct();
@@ -36,14 +39,19 @@ class Tracereport extends CI_Controller {
 			$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
 			redirect('user/login');
 		}
+		
+		$this->reports = $this->Report_model->list_reports();
+		$this->reports_type = $this->Report_type_model->list_reports_type();
 	 }
 	 
 	public function index(){
 		$data["successFlash"] = "";
 		$data["errorFlash"] = "";
 		$data["infoFlash"] = "";
-		
+		$data["reports_type"] = $this->reports_type;
+		$data["reports"] = $this->reports;
 		$data["content"] = "dashboard/home";
+		
 		$this->load->view('site',$data);
 	}
 	
@@ -51,8 +59,9 @@ class Tracereport extends CI_Controller {
 		$data["successFlash"] = "";
 		$data["infoFlash"] = "";
 		$data["errorFlash"] = "";
-		
-		
+		$data["reports_type"] = $this->reports_type;
+		$data["reports"] = $this->reports;
+		//var_dump($this->menu);
 		if ($this->input->post("postback")=="post"){
 			$response = $this->client->ConnectConsumerMatch(array(
 			'IdNumber'=>$this->input->post('idNumber'),
@@ -87,7 +96,8 @@ class Tracereport extends CI_Controller {
 	}
 	
 	public function addresssearch(){
-		
+		$data["reports_type"] = $this->reports_type;
+		$data["reports"] = $this->reports;		
 		$data["successFlash"] = "";
 		$data["infoFlash"] = "";
 		$data["errorFlash"] = "";
@@ -99,7 +109,8 @@ class Tracereport extends CI_Controller {
 	}
 	
 	public function telephonesearch(){
-		
+		$data["reports_type"] = $this->reports_type;
+		$data["reports"] = $this->reports;		
 		$data["successFlash"] = "";
 		$data["infoFlash"] = "";
 		$data["errorFlash"] = "";
@@ -111,7 +122,8 @@ class Tracereport extends CI_Controller {
 	}
 	
 	public function fuzzysearch(){
-		
+		$data["reports_type"] = $this->reports_type;
+		$data["reports"] = $this->reports;		
 		$data["successFlash"] = "";
 		$data["infoFlash"] = "";
 		$data["errorFlash"] = "";
