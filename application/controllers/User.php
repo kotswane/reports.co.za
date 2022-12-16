@@ -39,7 +39,7 @@ class User extends CI_Controller {
 					$this->load->view('login',$data);
 				}else{
 					$this->session->set_userdata(array('username' => $this->input->post("username"),'isloggedin' => true,'tokenId' => $loginResponse->LoginResult));
-					redirect('/lkcentrixreportservice');
+					redirect('/tracereport');
 				}
 		}
 		else
