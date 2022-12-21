@@ -40,8 +40,11 @@ class Tracereport extends CI_Controller {
 			redirect('user/login');
 		}
 		
+		$this->load->model("Province_model");
+		
 		$this->reports = $this->Report_model->list_reports();
 		$this->reports_type = $this->Report_type_model->list_reports_type();
+		
 	 }
 	 
 	public function index(){
@@ -103,6 +106,7 @@ class Tracereport extends CI_Controller {
 		$data["errorFlash"] = "";
 		$data["errorMessage"] = "";
 		$data["consumerList"] = array();
+		$data["provinces"] = $this->Province_model->list_provinces();
 		$data["content"] = "tracereport/addresssearch";
 		$this->load->view('site',$data);
 		

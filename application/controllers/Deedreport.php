@@ -41,7 +41,7 @@ class Deedreport extends CI_Controller {
 		
 		$this->reports = $this->Report_model->list_reports();
 		$this->reports_type = $this->Report_type_model->list_reports_type();
-	
+		$this->load->model("Deedoffice_model");
 	 }
 	 
 	public function individualsearch(){
@@ -52,6 +52,7 @@ class Deedreport extends CI_Controller {
 		$data["errorFlash"] = "";
 		$data["errorMessage"] = "";
 		$data["consumerList"] = array();
+		$data["officelist"] = $this->Deedoffice_model->list_deedoffice();
 		$data["content"] = "deedreport/individual-search";
 		$this->load->view('site',$data);
 		

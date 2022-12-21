@@ -6,7 +6,7 @@
 <section class="content-header">
     <h1>LKCentrix Solutions PTY LTD</h1>
     <ol class="breadcrumb">
-        <li><a href="<?php echo site_url();?>/lkcentrixreportservice/individualsearch" ><i class="fa fa-dashboard"></i> Dashboard</a></li><li>Deed Report</li>
+        <li><a href="<?php echo site_url();?>/deedreport/individualsearch" ><i class="fa fa-dashboard"></i> Dashboard</a></li><li>Deed Report</li>
         <li class="active">Individual Search</li>
     </ol>
 </section>
@@ -15,7 +15,7 @@
         <div class="box-header with-border">
             <h3 class="box-title">Individual Search</h3>
             <div class="box-tools pull-right">
-                <a href="<?php echo site_url();?>/lkcentrixreportservice/individualsearch" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a>
+                <a href="<?php echo site_url();?>/deedreport/individualsearch" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a>
             </div>
         </div>
            <!-- Error Alert -->
@@ -23,7 +23,7 @@
 				<div class="alert alert-danger" role="alert"><?php echo $errorMessage;?></div>
 		   <?php }?>
 		
-           <form data-toggle="validator" role="DeedOffice Search form" action="<?php echo site_url();?>/lkcentrixreportservice/individualsearch" method="post">
+           <form data-toggle="validator" role="DeedOffice Search form" action="<?php echo site_url();?>/deedreport/individualsearch" method="post">
              <div class="box-body">
                  <br>
 
@@ -31,7 +31,11 @@
                  <label class="col-form-label">Deed Office</label>
                     <select class="form-control" id="listdeedoffice" name="listdeedoffice" required>
 					<option value="">Please Select Deed Office</option>
-					<!--<option th:each="deedOffice : ${deedOffices}"  th:text="${deedOffice}" th:selected="${deedOffice}"></option>-->
+					<?php 
+						foreach($officelist as $office){
+							echo "<option value='$office->deedoffice_description'" . set_select('listdeedoffice', $office->deedoffice_description). " >". $office->deedoffice_description."</option>";
+					}?>
+					
 					</select>
                  </div>
                     <div class="form-group">

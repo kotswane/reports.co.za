@@ -33,7 +33,11 @@
                        <label class="col-form-label">Province</label>
                     <select class="form-control" id="listprovinces" name="listprovinces" required>
 					<option value="">Please Select Province</option>
-					<!--<option th:each="province : ${provinces}" th:value="${province}" th:text="${province}" th:selected="${province}"></option>-->
+					<?php 
+					
+					foreach($provinces as $province){
+							echo "<option value='$province->province_name'" . set_select('listprovinces', $province->province_name). " >". $province->province_name."</option>";
+					} ?>
 					</select>
                  </div>
                  <div class="form-group">
