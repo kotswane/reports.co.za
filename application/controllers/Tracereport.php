@@ -20,6 +20,7 @@ class Tracereport extends CI_Controller {
 	 */
 	 
 	private $client;
+	private $latestclient;
 	private $reports;
 	private $reports_type;
 	
@@ -31,14 +32,6 @@ class Tracereport extends CI_Controller {
 		}
 		
 		
-		$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
-		
-		$this->client = $this->mysoapclient->getClient();
-		
-		if($this->client->IsTicketValid($IsTicketValid) != true){
-			$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
-			redirect('user/login');
-		}
 		
 		$this->load->model("Province_model");
 		
@@ -64,8 +57,19 @@ class Tracereport extends CI_Controller {
 		$data["errorFlash"] = "";
 		$data["reports_type"] = $this->reports_type;
 		$data["reports"] = $this->reports;
-		//var_dump($this->menu);
+		
 		if ($this->input->post("postback")=="post"){
+			
+			$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
+		
+			$this->client = $this->mysoapclient->getClient();
+			$this->latestclient = $this->mysoapclient->getClientlatest();
+			if($this->client->IsTicketValid($IsTicketValid) != true){
+				$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
+				redirect('user/login');
+			}
+		
+		
 			$response = $this->client->ConnectConsumerMatch(array(
 			'IdNumber'=>$this->input->post('idNumber'),
 			'ConnectTicket'=>$this->session->userdata('tokenId'),
@@ -74,28 +78,18 @@ class Tracereport extends CI_Controller {
 			));
 			
 			$xml = simplexml_load_string($response->ConnectConsumerMatchResult);
-			var_dump($xml->ConsumerDetails);
-			//die();
-			$ConnectGetBonusSegments = $this->client->ConnectAddressIDMatch(array(
-			"ConnectTicket"=>$this->session->userdata('tokenId'),
-			"YourReference"=>$xml->ConsumerDetails->Reference,"ConsumerAddressID" => 0));
+			$objJsonDocument = json_encode($xml);
+			$arrOutput = json_decode($objJsonDocument, TRUE);
 			
-			$xml = simplexml_load_string($ConnectGetBonusSegments->ConnectAddressIDMatchResult);
-			var_dump($xml);
-			die();
-			//To view your returned results, use: 
-			echo "<br><br>resultXML[".htmlspecialchars($response->ConnectConsumerMatchResult)."]<br><br>"; 
-			
-			if($response->ConnectConsumerMatchResult == 'Invalid Product Supplied'){
-				$data['errorMessage'] = $response->ConnectConsumerMatchResult; 
-			}
-			
-			$data["content"] = "tracereport/id-search";
+			$response = $this->getSearchData($arrOutput['ConsumerDetails']['EnquiryID'], $arrOutput['ConsumerDetails']['EnquiryResultID']);
+			$data['report'] = $response;
+			$data["content"] = "tracereport/trace-report";
+			$this->load->view('site',$data);
+
 		}else{
 			$data["content"] = "tracereport/id-search";
+			$this->load->view('site',$data);
 		}
-		
-		$this->load->view('site',$data);
 	}
 	
 	public function addresssearch(){
@@ -107,9 +101,80 @@ class Tracereport extends CI_Controller {
 		$data["errorMessage"] = "";
 		$data["consumerList"] = array();
 		$data["provinces"] = $this->Province_model->list_provinces();
-		$data["content"] = "tracereport/addresssearch";
-		$this->load->view('site',$data);
 		
+		
+		if ($this->input->post("postback")=="post"){
+			
+			$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
+		
+			$this->client = $this->mysoapclient->getClient();
+			$this->latestclient = $this->mysoapclient->getClientlatest();
+			if($this->client->IsTicketValid($IsTicketValid) != true){
+				$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
+				redirect('user/login');
+			}
+		
+		$response = $this->client->ConnectAddressMatch(array(
+				'Province' => $this->input->post('listprovinces'),
+				'Suburb' => $this->input->post('suburb'), 
+				'City' => $this->input->post('city'), 
+				'PostalMatch' => true,
+				'ConnectTicket' => $this->session->userdata('tokenId'), 
+				'StreetName_PostalNo' => $this->input->post('streetName'), 
+				'PostalCode' => $this->input->post('postalCode'), 
+				'StreetNo' => $this->input->post('streetNo'), 
+				'Surname' => $this->input->post('surname')));
+				
+			$xml = simplexml_load_string($response->ConnectAddressMatchResult,"SimpleXMLElement");
+			
+			if ($xml->Error || $xml->NotFound){
+				if($xml->Error){
+					$data["errorMessage"] = $xml->Error[0];
+				}else{
+					$data["errorMessage"] = $xml->NotFound;
+				}
+				
+			}else{
+				$data["consumerList"]["details"] = array();
+				$objJsonDocument = json_encode($xml);
+				$arrOutput = json_decode($objJsonDocument, TRUE);
+
+				foreach($arrOutput as $arrOutputListKey => $arrOutputListValue){
+
+					if (!is_array($arrOutputListValue)){
+						$data["consumerList"]["details"][]= $arrOutputListValue;
+						
+						$response = $this->client->AdminEnquiryResult(array(
+						'ConnectTicket' => $this->session->userdata('tokenId'),
+						'EnquiryResultID' => $arrOutputListValue['EnquiryResultID']));
+						
+						$xml = simplexml_load_string($response->AdminEnquiryResultResult,"SimpleXMLElement");
+						$objJsonDocument = json_encode($xml);
+						$arrOutput = json_decode($objJsonDocument, TRUE);
+						$data["consumerList"]["DetailsViewed"][]= (($arrOutput["Result"]["DetailsViewedYN"]=="true")? "Yes":"No");
+					}else{
+							foreach($arrOutputListValue as $arrOutputListValueListKey => $arrOutputListValueListValue){
+							
+							$data["consumerList"]["details"][]= $arrOutputListValueListValue;
+							
+							$response = $this->client->AdminEnquiryResult(array(
+							'ConnectTicket' => $this->session->userdata('tokenId'),
+							'EnquiryResultID' => $arrOutputListValueListValue['EnquiryResultID']));
+							
+							$xml = simplexml_load_string($response->AdminEnquiryResultResult,"SimpleXMLElement");
+							$objJsonDocument = json_encode($xml);
+							$arrOutput = json_decode($objJsonDocument, TRUE);
+							$data["consumerList"]["DetailsViewed"][]= (($arrOutput["Result"]["DetailsViewedYN"]=="true")? "Yes":"No");
+						}
+					}
+					
+				}
+			}
+			
+		}
+		
+		$data["content"] = "tracereport/addresssearch";
+		$this->load->view('site',$data);	
 	}
 	
 	public function telephonesearch(){
@@ -120,7 +185,117 @@ class Tracereport extends CI_Controller {
 		$data["errorFlash"] = "";
 		$data["errorMessage"] = "";
 		$data["consumerList"] = array();
+		
+		if ($this->input->post("postback")=="post"){
+			
+			if ($this->input->post("cellphoneCode") != "" && $this->input->post("cellphoneNo") != ""){
+				$code = $this->input->post("cellphoneCode");
+				$number = $this->input->post("cellphoneNo");
+				
+			}else if($this->input->post("telephoneCode") != "" && $this->input->post("telephoneNo") != ""){
+				$code = $this->input->post("telephoneCode");
+				$number = $this->input->post("telephoneNo");
+			}
+
+			$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
+			
+			$this->client = $this->mysoapclient->getClient();
+			$this->latestclient = $this->mysoapclient->getClientlatest();
+			if($this->client->IsTicketValid($IsTicketValid) != true){
+				$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
+				redirect('user/login');
+			}
+		
+			$response = $this->client->ConnectTelephoneMatch(array(
+				'TelephoneCode' => $code,
+				'ConnectTicket' => $this->session->userdata('tokenId'),
+				'TelephoneNo' => $number));
+			
+
+			$xml = simplexml_load_string($response->ConnectTelephoneMatchResult,"SimpleXMLElement");
+			if ($xml->NotFound){
+				$data["errorMessage"] = $xml->NotFound;
+			}else{
+				$data["consumerList"]["details"] = array();
+				$objJsonDocument = json_encode($xml);
+				$arrOutput = json_decode($objJsonDocument, TRUE);
+				
+				foreach($arrOutput as $arrOutputListKey => $arrOutputListValue){
+					
+					if (!is_array($arrOutputListValue)){
+						$data["consumerList"]["details"][]= $arrOutputListValueListValue;
+						$response = $this->client->AdminEnquiryResult(array(
+						'ConnectTicket' => $this->session->userdata('tokenId'),
+						'EnquiryResultID' => $arrOutputListValueListValue['EnquiryResultID']));
+						
+						$xml = simplexml_load_string($response->AdminEnquiryResultResult,"SimpleXMLElement");
+						$objJsonDocument = json_encode($xml);
+						$arrOutput = json_decode($objJsonDocument, TRUE);
+						$data["consumerList"]["DetailsViewed"][]= (($arrOutput["Result"]["DetailsViewedYN"]=="true")? "Yes":"No");
+					
+					}else{
+						foreach($arrOutputListValue as $arrOutputListValueListKey => $arrOutputListValueListValue){
+							
+							$data["consumerList"]["details"][]= $arrOutputListValueListValue;
+							
+							$response = $this->client->AdminEnquiryResult(array(
+							'ConnectTicket' => $this->session->userdata('tokenId'),
+							'EnquiryResultID' => $arrOutputListValueListValue['EnquiryResultID']));
+							
+							$xml = simplexml_load_string($response->AdminEnquiryResultResult,"SimpleXMLElement");
+							$objJsonDocument = json_encode($xml);
+							$arrOutput = json_decode($objJsonDocument, TRUE);
+							$data["consumerList"]["DetailsViewed"][]= (($arrOutput["Result"]["DetailsViewedYN"]=="true")? "Yes":"No");
+						}
+					}
+				}
+			}
+		
+		}
 		$data["content"] = "tracereport/telephone-search";
+		$this->load->view('site',$data);
+		
+	}
+	
+	private function getSearchData($enquiryID, $enquiryResultID){
+		
+		$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
+		
+		$this->client = $this->mysoapclient->getClient();
+		$this->latestclient = $this->mysoapclient->getClientlatest();
+		if($this->client->IsTicketValid($IsTicketValid) != true){
+			$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
+			redirect('user/login');
+		}
+		
+		$response = $this->client->ConnectGetResult(array(
+				'EnquiryID' => $enquiryID,
+				'EnquiryResultID' => $enquiryResultID, 
+				'ConnectTicket' => $this->session->userdata('tokenId'), 
+				'ProductID' => 2));
+				
+		$xml = simplexml_load_string($response->ConnectGetResultResult,"SimpleXMLElement");
+		$objJsonDocument = json_encode($xml);
+		$arrOutput = json_decode($objJsonDocument, TRUE);
+		return $arrOutput;
+	}
+	
+	public function customerdatalist(){
+		
+		$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
+		
+		$this->client = $this->mysoapclient->getClient();
+		$this->latestclient = $this->mysoapclient->getClientlatest();
+		if($this->client->IsTicketValid($IsTicketValid) != true){
+			$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
+			redirect('user/login');
+		}
+		
+		$data["reports_type"] = $this->reports_type;
+		$data["reports"] = $this->reports;
+		$response = $this->getSearchData($this->uri->segment(3), $this->uri->segment(4));
+		$data['report'] = $response;
+		$data["content"] = "tracereport/trace-report";
 		$this->load->view('site',$data);
 		
 	}

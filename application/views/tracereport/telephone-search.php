@@ -21,7 +21,7 @@
 		   <?php if($errorMessage != ""){?>
 				<div class="alert alert-danger" role="alert"><?php echo $errorMessage;?></div>
 		   <?php }?>
-        <form data-toggle="validator" role="Telephone Search form" action="<?php echo site_url();?>/lkcentrixreportservice/telephonesearch" method="post">
+        <form data-toggle="validator" role="Telephone Search form" action="<?php echo site_url();?>/tracereport/telephonesearch" method="post">
             <div class="box-body">
                     <ul class="nav nav-tabs">
                     <li><a data-toggle="tab" href="#tab1">Cell Number</a></li>
@@ -57,11 +57,18 @@
             <div class="box-footer">
                 <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i>&nbsp; Search</button>
             </div>
-			
+			<?php
+				$csrf = array(
+						'name' => $this->security->get_csrf_token_name(),
+						'hash' => $this->security->get_csrf_hash()
+				);
+			?>
+			<input type="hidden" name="postback" value="post"/>
+			<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
         </form>
     </div>
 	<?php
-	 if (count($consumerList) > 0){
+	 if (count($consumerList['details']) > 0){
 	?>
     <div>
       	 <h5><span><strong>Search Results List</strong></span></h5>
@@ -73,14 +80,18 @@
               <th>Details Viewed</th>
               <th>View</th>
             </tr>
-			<?php foreach($consumerList as $consumerListKey => $consumerListValue){?>
+			<?php 
+				
+				foreach($consumerList['details'] as $consumerListKey => $consumerListValue){
+			?>
+			
             <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td><?php echo $consumerListValue['Reference'];?></td>
+              <td><?php echo $consumerListValue['FirstName']." ".(!is_array($consumerListValue['SecondName'])?$consumerListValue['SecondName']:"")." ".(!is_array($consumerListValue['ThirdName'])?$consumerListValue['ThirdName']:"")." ".(!is_array($consumerListValue['Surname'])?$consumerListValue['Surname']:"");?></td>
+              <td><?php echo $consumerListValue['IDNo'];?></td>
+              <td><?php echo $consumerList['DetailsViewed'][$consumerListKey];?></td>
               <td>
-               <a type="button"  href="/traceenquiry/view-addresstrace-search/nquiryId/enquiryResultId"  class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;View</a> 
+               <a type="button"  href="<?php echo site_url()?>/tracereport/customerdatalist/<?php echo $consumerListValue['EnquiryID'];?>/<?php echo $consumerListValue['EnquiryResultID'];?>"  class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;View</a> 
               </td>
             </tr>
 			<?php }?>

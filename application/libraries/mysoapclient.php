@@ -2,6 +2,7 @@
     class mysoapclient {
 		
 	   private $client;
+	   private $latestClient;
 	   function __construct() {
 		   $options = array(
 				'uri'=>'http://schemas.xmlsoap.org/soap/envelope/',
@@ -15,10 +16,12 @@
 				'exceptions'=>true,
 			);
 		
+			$wsdl3 = "https://www.uat.xds.co.za/xdsconnectws3/xdsconnectws3.asmx?wsdl";
 			$wsdl = "https://www.uat.xds.co.za/xdsconnect/XDSConnectWS.asmx?wsdl";
-	
+		
 			try{
 				$this->client = new SoapClient($wsdl, $options);
+				$this->latestClient = new SoapClient($wsdl3,$options);
 			}catch(Exception $ex){
 				print_r($ex->getMessage());
 			}
@@ -27,6 +30,10 @@
 	   
 	   public function getClient(){
 		   return $this->client;
+	   }
+	   
+	   public function getClientlatest(){
+		   return $this->latestClient;
 	   }
 	   
 	}

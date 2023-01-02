@@ -6,7 +6,7 @@
 <section class="content-header">
     <h1>LKCentrix Solutions PTY LTD</h1>
     <ol class="breadcrumb">
-        <li><a href="<?php echo site_url();?>/lkcentrixreportservice" ><i class="fa fa-dashboard"></i> Dashboard</a></li><li>Trace Report</li>
+        <li><a href="<?php echo site_url();?>/tracereport" ><i class="fa fa-dashboard"></i> Dashboard</a></li><li>Trace Report</li>
         <li class="active">Address Search</li>
     </ol>
 </section>
@@ -15,7 +15,7 @@
         <div class="box-header with-border">
             <h3 class="box-title">Address Search</h3>
             <div class="box-tools pull-right">
-                <a href="<?php echo site_url();?>/lkcentrixreportservice/addresssearch" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a>
+                <a href="<?php echo site_url();?>/tracereport/addresssearch" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a>
             </div>
         </div>
            <!-- Error Alert -->
@@ -23,11 +23,10 @@
 				<div class="alert alert-danger" role="alert"><?php echo $errorMessage;?></div>
 		   <?php }?>
 		
-        <form data-toggle="validator" role="Address Search form" action="<?php echo site_url();?>/lkcentrixreportservice/addressconsumer-list" method="post">
+        <form data-toggle="validator" role="Address Search form" action="<?php echo site_url();?>/tracereport/addresssearch" method="post">
             <div class="box-body"><br>
                  <ul class="nav nav-tabs">
                     <li><a data-toggle="tab" href="#tab1">Residential Address</a></li>
-                    <li><a data-toggle="tab" href="#tab2">Postal</a></li>
                   </ul><br/>
                        <div class="form-group">
                        <label class="col-form-label">Province</label>
@@ -53,15 +52,15 @@
                     <input type="text"  class="form-control" id="suburb" name="suburb" value="<?php echo set_value('suburb');?>" placeholder="Enter Suburb" />
                  </div>
                  <div class="form-group">
-                 <label class="col-form-label">Street Number</label>
+                 <label class="col-form-label">streetNo</label>
                     <input type="text"  class="form-control" id="streetNo" name="streetNo" value="<?php echo set_value('streetNo');?>" placeholder="Enter Street Number" />
                  </div>
                   <div class="form-group">
-                  <label class="col-form-label">Street Name</label>
+                  <label class="col-form-label">streetName</label>
                    <input type="text"  class="form-control" id="streetName" name="streetName" value="<?php echo set_value('streetName');?>" placeholder="Enter Street Name" />
                  </div>
                   <div class="form-group">
-                  <label class="col-form-label">Postal Code</label>
+                  <label class="col-form-label">postalCode</label>
                     <input type="text"  class="form-control" id="postalCode" name="postalCode" value="<?php echo set_value('postalCode');?>" placeholder="Ente Postal Code" />
                  </div>
                        <div class="form-group">
@@ -69,31 +68,17 @@
                     <input type="text"  class="form-control" id="surname" name="surname" value="<?php echo set_value('surname');?>" placeholder="Enter Surname" />
                  </div>  
                  </div>
-                     <!-- For postal Address -->   
-                  <div id="tab2" class="tab-pane fade">
-                        <br>
-                  <div class="form-group">
-                  <label class="col-form-label">Suburb</label>
-                    <input type="text"  class="form-control" id="suburb" name="suburb" value="<?php echo set_value('suburb');?>" placeholder="Enter Suburb" />
-                 </div>
-                 <div class="form-group">
-                 <label class="col-form-label">Street Name</label>
-                   <input type="text"  class="form-control" id="streetName" name="streetName" value="<?php echo set_value('streetName');?>" placeholder="Enter Street Name" />
-                 </div>
-                   <div class="form-group">
-                   <label class="col-form-label">Postal Code</label>
-                    <input type="text"  class="form-control" id="postalCode" name="postalCode" value="<?php echo set_value('postalCode');?>" placeholder="Enter Postal Code" />
-                  </div>
-                  </div>
                   
                 </div> 
             <div class="box-footer">
                 <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i>&nbsp; Search</button>
             </div>
+			<input type="hidden" name="postback" value="post"/>
+			<input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
         </form>
     </div>
 	<?php
-	 if (count($consumerList) > 0){
+	 if (count($consumerList['details']) > 0){
 	?>
     <div>
       	 <h5><span><strong>Search Results List</strong></span></h5>
@@ -105,21 +90,24 @@
               <th>Details Viewed</th>
               <th>View</th>
             </tr>
-			<?php foreach($consumerList as $consumerListKey => $consumerListValue){?>
+			<?php 
+				
+				foreach($consumerList['details'] as $consumerListKey => $consumerListValue){
+			?>
+			
             <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td><?php echo $consumerListValue['Reference'];?></td>
+              <td><?php echo $consumerListValue['Consumername'];?></td>
+              <td><?php echo $consumerListValue['IDno'];?></td>
+              <td><?php echo $consumerList['DetailsViewed'][$consumerListKey];?></td>
               <td>
-               <a type="button"  href="/traceenquiry/view-addresstrace-search/nquiryId/enquiryResultId"  class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;View</a> 
+               <a type="button"  href="<?php echo site_url()?>/tracereport/customerdatalist/<?php echo $consumerListValue['EnquiryID'];?>/<?php echo $consumerListValue['EnquiryResultID'];?>"  class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;View</a> 
               </td>
             </tr>
 			<?php }?>
           </table>
        </div>
 	<?php } ?>
-	
 	
 </section>
 </body>

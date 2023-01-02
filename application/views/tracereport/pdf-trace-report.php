@@ -1,14 +1,15 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <title>Trace Report</title>
-     <link rel="stylesheet" type="text/css" href="css/style.css"/>
+     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/style.css"/>
 </head>
 <body>
 <div>
      <div>
-     <img src="images/logo.jpg" style="width: 150px;height: 65px;text-align: left;" alt="logo" /> 
-     <h3 class="box-title" th:text = "${traceReportRequest.subscriberInputDetails.enquiryType +' Report'}" style="text-align: right;"></h3>
+     <img src="<?php echo base_url();?>images/logo.jpg" style="width: 150px;height: 65px;text-align: left;" alt="logo" /> 
+	 
+	 <h3 class="box-title" style="text-align: right;"><?php echo $report['SubscriberInputDetails']['EnquiryType']." Report";?></h3>
      <div style="text-align: right;">
             <span><small>Bedfordview Corporate park,</small></span>
                 <span><small>4 Skeen BLVD, Bedfordview,</small></span>
@@ -22,7 +23,7 @@
      <!-- Start of  Enquiry Input Details-->
    <hr class="hr_rule"/>
    <div class="title-head"><strong>Enquiry Input Details</strong>
-   <h5 class="subtitle-head" th:text = "${traceReportRequest.subscriberInputDetails.subscriberUserName +' search input details'}"></h5>
+   <h5 class="subtitle-head"><?php echo $report['SubscriberInputDetails']['SubscriberUserName']." search input details";?></h5>
   </div>
    <hr class="hr-line"/>
  <div class="col">
@@ -33,23 +34,23 @@
         </tr>
         <tr class="tr-label">
         <td class="td-label">Enquiry Date</td>
-        <td class="td-value" th:text = "${traceReportRequest.subscriberInputDetails.enquiryDate}"> </td>
+        <td class="td-value"><?php echo $report['SubscriberInputDetails']['EnquiryDate'];?></td>
         </tr>
          <tr class="tr-label">
         <td class="td-label">Enquiry Type</td>
-        <td class="td-value" th:text = "${traceReportRequest.subscriberInputDetails.enquiryType}"> </td>
+        <td class="td-value"><?php echo $report['SubscriberInputDetails']['EnquiryType'];?></td>
         </tr>
          <tr class="tr-label">
         <td class="td-label">Subscriber Name</td>
-        <td class="td-value" th:text = "${traceReportRequest.subscriberInputDetails.subscriberName}"> </td>
+        <td class="td-value"><?php echo $report['SubscriberInputDetails']['SubscriberName'];?></td>
         </tr>
         <tr class="tr-label">
         <td class="td-label">Subscriber User Name</td>
-        <td class="td-value" th:text = "${traceReportRequest.subscriberInputDetails.subscriberUserName}"> </td>
+        <td class="td-value"><?php echo $report['SubscriberInputDetails']['SubscriberUserName'];?></td>
         </tr>
          <tr class="tr-label">
         <td class="td-label">Enquiry Input</td>
-        <td class="td-value" th:text = "${traceReportRequest.subscriberInputDetails.enquiryInput}"> </td>
+        <td class="td-value"><?php echo $report['SubscriberInputDetails']['EnquiryInput'];?></td>
         </tr>
         </table>              
   </div><br/><br/>
@@ -72,47 +73,47 @@ Current Contact, Address, and Employment Info.</h5>
       </tr>
       <tr class="tr-label">
         <td class="td-label">Reference No.</td>
-        <td  class="td-value" th:text = "${traceReportRequest.consumerDetail.referenceNo}"></td>
+        <td  class="td-value"><?php echo $report['ConsumerDetail']['ReferenceNo'];?></td>
        </tr>
        <tr class="tr-label">
         <td class="td-label">ID No</td>
-        <td class="td-value" th:text = "${traceReportRequest.consumerDetail.idNo}"></td>
+        <td class="td-value"><?php echo (string)$report['ConsumerDetail']['IDNo'];?></td>
       </tr>
       <tr class="tr-label">
         <td class="td-label">Surname</td>
-        <td class="td-value" th:text = "${traceReportRequest.consumerDetail.surname}"></td>
+        <td class="td-value"><?php echo (string)$report['ConsumerDetail']['Surname'];?></td>
        </tr>
        <tr class="tr-label">
         <td class="td-label">First Name</td>
-        <td class="td-value" th:text = "${traceReportRequest.consumerDetail.firstName}"></td>
+        <td class="td-value"><?php echo (string)$report['ConsumerDetail']['FirstName'];?></td>
        </tr>
        <tr class="tr-label">
         <td class="td-label">Second Name</td>
-        <td class="td-value" th:text = "${traceReportRequest.consumerDetail.secondName}"></td>
+        <td class="td-value"><?php echo (string)$report['ConsumerDetail']['SecondName'];?></td>
        </tr>
        <tr class="tr-label">
         <td class="td-label">Maiden Name</td>
-        <td class="td-value" th:text = "${traceReportRequest.consumerDetail.maidenName}"></td>
+        <td class="td-value"><?php echo (string)$report['ConsumerDetail']['MaidenName'];?></td>
        </tr>
         <tr class="tr-label">
         <td class="td-label">Title</td>
-        <td class="td-value" th:text = "${traceReportRequest.consumerDetail.titleDesc}"></td>
+        <td class="td-value"><?php echo (string)$report['ConsumerDetail']['TitleDesc'];?></td>
        </tr>
         <tr class="tr-label">
         <td class="td-label">Gender</td>
-        <td class="td-value" th:text = "${traceReportRequest.consumerDetail.gender}"></td>
+        <td class="td-value"><?php echo (string)$report['ConsumerDetail']['Gender'];?></td>
        </tr>
         <tr class="tr-label">
         <td class="td-label">Date of Birth</td>
-        <td class="td-value" th:text = "${traceReportRequest.consumerDetail.birthDate}"></td>
+        <td class="td-value"><?php echo (string)$report['ConsumerDetail']['BirthDate'];?></td>
        </tr>
         <tr class="tr-label">
         <td class="td-label">Marital Status</td>
-        <td class="td-value" th:text = "${traceReportRequest.consumerDetail.maritalStatusDesc}"></td>
+        <td class="td-value"><?php echo (string)$report['ConsumerDetail']['MaritalStatusDesc'];?></td>
        </tr> 
         <tr class="tr-label">
         <td class="td-label">E-mail Address</td>
-        <td class="td-value" th:text = "${traceReportRequest.consumerDetail.emailAddress}"></td>
+        <td class="td-value"><?php echo (string)($report['ConsumerDetail']['EmailAddress'];?></td>
       </tr>
     </table>
   </div>
@@ -125,32 +126,32 @@ Current Contact, Address, and Employment Info.</h5>
       </tr>
       <tr class="tr-label">
         <td class="td-label">External Reference No.</td>
-        <td class="td-value" th:text = "${traceReportRequest.consumerDetail.externalReference}"></td>
+        <td class="td-value"><?php echo (string)($report['ConsumerDetail']['ExternalReference'];?></td>
        </tr>
       <tr class="tr-label">
         <td class="td-label">Passport or 2nd ID No</td>
-        <td class="td-value" th:text = "${traceReportRequest.consumerDetail.passportNo}"></td>
+        <td class="td-value"><?php echo (string)($report['ConsumerDetail']['PassportNo'];?></td>
         
       </tr>
       <tr class="tr-label">
         <td class="td-label">Residential Address</td>
-        <td class="td-value" th:text = "${traceReportRequest.consumerDetail.residentialAddress}"></td>
+        <td class="td-value"><?php echo (string)($report['ConsumerDetail']['ResidentialAddress'];?></td>
       </tr>
        <tr class="tr-label">
         <td class="td-label">Postal Address</td>
-        <td class="td-value" th:text = "${traceReportRequest.consumerDetail.postalAddress}"></td>
+        <td class="td-value"><?php echo (string)($report['ConsumerDetail']['PostalAddress'];?></td>
       </tr>
        <tr class="tr-label">
         <td class="td-label">Telephone No. (H)</td>
-        <td class="td-value" th:text = "${traceReportRequest.consumerDetail.homeTelephoneNo}"></td>
+        <td class="td-value"><?php echo (string)($report['ConsumerDetail']['HomeTelephoneNo'];?></td>
       </tr>
        <tr class="tr-label">
         <td class="td-label">Cellular/Mobile</td>
-        <td class="td-value" th:text = "${traceReportRequest.consumerDetail.cellularNo}"></td>
+        <td class="td-value"><?php echo (string)($report['ConsumerDetail']['CellularNo'];?></td>
       </tr>
         <tr class="tr-label">
         <td class="td-label">Current Employer</td>
-        <td class="td-value" th:text = "${traceReportRequest.consumerDetail.employerDetail}"></td>
+        <td class="td-value"><?php echo (string)($report['ConsumerDetail']['EmployerDetail'];?></td>
       </tr> 
      
     </table>
@@ -160,12 +161,12 @@ Current Contact, Address, and Employment Info.</h5>
   </div><br/><br/>
                       <!-- End of Personal Details Summary-->
                      
-                     <!-- Start of AKAName History -->
+                     <!-- Start of AKAName History 
                     
-                     <div class="title-head"><strong>AKA Names</strong></div>
-                    <hr class="hr-line"/>
-                    <div class="col">
-                    <table class ="table-list" th:if="${not #lists.isEmpty(traceReportRequest.akaNames)}">
+				<div class="title-head"><strong>AKA Names</strong></div>
+				<hr class="hr-line"/>
+				<div class="col">
+                 <table class ="table-list" th:if="${not #lists.isEmpty(traceReportRequest.akaNames)}">
                     <tr class="tr-list">
                         <th class = "th-list">Bureau UpdateDate</th>
                         <th class = "th-list">Home Affairs Name</th>
@@ -178,7 +179,7 @@ Current Contact, Address, and Employment Info.</h5>
                  <div>
                      <span th:if="${#lists.isEmpty(traceReportRequest.akaNames)}" th:text="${traceReportRequest.traceReportMessage.noAkaname}"></span>
                 </div><br/><br/><br/><br/>
-                </div><br/><br/>
+                </div><br/><br/>-->
                      <!-- End of AKAName History -->
                       <!-- Start of Potential Fraud Indicators-->
                      <div class="title-head"><strong>Potential Fraud Indicators</strong>
@@ -193,17 +194,15 @@ Current Contact, Address, and Employment Info.</h5>
 			</tr>
 			<tr class="tr-label">
 				<td class="td-label">ID No. Verified Status</td>
-				<td class="td-value" th:text="${traceReportRequest.consumerFraudIndicatorsSummary.homeAffairsVerificationYN}"></td>
+				<td class="td-value"><?php echo (string)($report['ConsumerFraudIndicatorsSummary']['HomeAffairsVerificationYN'];?></td>
 			</tr>
 			<tr class="tr-label">
 				<td class="td-label">ID No. Deceased Status</td>
-				<td class="td-value"
-					th:text="${traceReportRequest.consumerFraudIndicatorsSummary.homeAffairsDeceasedStatus}"></td>
+				<td class="td-value"><?php echo (string)($report['ConsumerFraudIndicatorsSummary']['HomeAffairsDeceasedStatus'];?></td>
 			</tr>
 			<tr class="tr-label">
 				<td class="td-label">ID No. Found on Fraud Database</td>
-				<td class="td-value"
-					th:text="${traceReportRequest.consumerFraudIndicatorsSummary.sAFPSListingYN}"></td>
+				<td class="td-value"><?php echo (string)($report['ConsumerFraudIndicatorsSummary']['SAFPSListingYN'];?></td>
 			</tr>
 		</table>
 	</div><br/><br/>
