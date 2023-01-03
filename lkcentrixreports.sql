@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 21, 2022 at 10:57 AM
+-- Generation Time: Jan 02, 2023 at 04:24 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -130,7 +130,9 @@ CREATE TABLE `report` (
 INSERT INTO `report` (`report_id`, `report_name`, `report_link`, `icon`) VALUES
 (1, 'Trace Report', 'tracereport', 'fa fa-unlock'),
 (2, 'Deed Report', 'deedreport', 'fa fa-home'),
-(3, 'Verification Report', 'verificationreport', 'fa fa-check-square-o');
+(3, 'Verification Report', 'verificationreport', 'fa fa-check-square-o'),
+(4, 'Procurement Report', 'procurementreport', 'fa fa-ship'),
+(5, 'Indigent Report', 'indigentreport', 'fa fa-unlock');
 
 -- --------------------------------------------------------
 
@@ -154,10 +156,12 @@ INSERT INTO `report_type` (`report_type_id`, `report_type_description`, `report_
 (1, 'ID Search', 1, 'idsearch', 'fa fa-key'),
 (2, 'Address Search', 1, 'addresssearch', 'fa fa-address-book'),
 (3, 'Telephone Search', 1, 'telephonesearch', 'fa fa-phone-square'),
-(4, 'Fuzzy Search', 1, 'fuzzysearch', 'fa fa-etsy'),
 (5, 'Individual Search', 2, 'individualsearch', 'fa fa-key'),
 (6, 'ID Verification', 3, 'idverification', 'fa fa-id-card'),
-(7, 'ID Facial Verification', 3, 'idphotoverification', 'fa fa-id-badge');
+(7, 'ID Facial Verification', 3, 'idphotoverification', 'fa fa-id-badge'),
+(8, 'Company Name', 4, 'companyname', 'fa-houzz'),
+(9, 'Company Registration number', 4, 'companyregistrationno', 'fa-sort-numeric-asc'),
+(10, 'ID Search', 5, 'idsearch', 'fa fa-search');
 
 -- --------------------------------------------------------
 
@@ -256,13 +260,13 @@ ALTER TABLE `province`
 -- AUTO_INCREMENT for table `report`
 --
 ALTER TABLE `report`
-  MODIFY `report_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `report_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `report_type`
 --
 ALTER TABLE `report_type`
-  MODIFY `report_type_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `report_type_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `searchtype`
