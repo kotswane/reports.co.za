@@ -1,4 +1,5 @@
 <?php
+//error_reporting(E_ALL);
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Tracereport extends CI_Controller {
@@ -55,6 +56,7 @@ class Tracereport extends CI_Controller {
 		$data["successFlash"] = "";
 		$data["infoFlash"] = "";
 		$data["errorFlash"] = "";
+		$data["errorMessage"] = "";
 		$data["reports_type"] = $this->reports_type;
 		$data["reports"] = $this->reports;
 		
@@ -78,14 +80,23 @@ class Tracereport extends CI_Controller {
 			));
 			
 			$xml = simplexml_load_string($response->ConnectConsumerMatchResult);
-			$objJsonDocument = json_encode($xml);
-			$arrOutput = json_decode($objJsonDocument, TRUE);
-			
-			$response = $this->getSearchData($arrOutput['ConsumerDetails']['EnquiryID'], $arrOutput['ConsumerDetails']['EnquiryResultID']);
-			$data['report'] = $response;
-			$data["content"] = "tracereport/trace-report";
-			$this->load->view('site',$data);
-
+			if ($xml->Error || $xml->NotFound){
+				if($xml->Error){
+					$data["errorMessage"] = $xml->Error[0];
+				}else{
+					$data["errorMessage"] = $xml->NotFound;
+				}
+			}else {
+				
+				$objJsonDocument = json_encode($xml);
+				$arrOutput = json_decode($objJsonDocument, TRUE);
+				
+				$response = $this->getSearchData($arrOutput['ConsumerDetails']['EnquiryID'], $arrOutput['ConsumerDetails']['EnquiryResultID']);
+				$data['report'] = $response;
+				$this->session->set_userdata(array('report' =>$data['report']));
+				$data["content"] = "tracereport/trace-report";
+				$this->load->view('site',$data);
+			}
 		}else{
 			$data["content"] = "tracereport/id-search";
 			$this->load->view('site',$data);
@@ -169,6 +180,7 @@ class Tracereport extends CI_Controller {
 					}
 					
 				}
+				
 			}
 			
 		}
@@ -250,7 +262,6 @@ class Tracereport extends CI_Controller {
 					}
 				}
 			}
-		
 		}
 		$data["content"] = "tracereport/telephone-search";
 		$this->load->view('site',$data);
@@ -282,6 +293,7 @@ class Tracereport extends CI_Controller {
 	
 	public function customerdatalist(){
 		
+
 		$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
 		
 		$this->client = $this->mysoapclient->getClient();
@@ -295,6 +307,7 @@ class Tracereport extends CI_Controller {
 		$data["reports"] = $this->reports;
 		$response = $this->getSearchData($this->uri->segment(3), $this->uri->segment(4));
 		$data['report'] = $response;
+		$this->session->set_userdata(array('report' =>$data['report']));
 		$data["content"] = "tracereport/trace-report";
 		$this->load->view('site',$data);
 		
@@ -311,5 +324,20 @@ class Tracereport extends CI_Controller {
 		$data["content"] = "tracereport/fuzzy-search";
 		$this->load->view('site',$data);
 		
+	}
+	
+	
+	public function downloadidreport(){
+		try{
+			ob_clean();
+			$data['report'] = $this->session->userdata('report');
+			$this->load->library('pdf');
+			$html = $this->load->view('tracereport/pdf-trace-report',$data, true);
+			$this->pdf->createPDF($html, "customer-tracereport-".time(), true);
+
+		}catch(Exception $ex){
+			print_r($ex);
+		}
+
 	}
 }

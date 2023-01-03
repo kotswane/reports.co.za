@@ -32,7 +32,7 @@
 		   <?php
 				if($report['SubscriberInputDetails']['EnquiryType'] =='Consumer Telephone Trace'){?>
 				<div>
-					 <a href="<?php echo site_url();?>/tracereport/downloadtelephonereport-pdf">
+					 <a href="<?php echo site_url();?>/tracereport/downloadidreport">
 						<img src="<?php echo base_url();?>dist/img/pdf_icon.png" height="35" width="35"/>
 						<span>Download PDF Document</span>
 					</a>
@@ -41,7 +41,7 @@
 				}
 				if($report['SubscriberInputDetails']['EnquiryType'] =='Consumer Easy Trace'){?>
 				<div>
-					 <a href="<?php echo site_url();?>/tracereport/downloadfuzzyreport-pdf">
+					 <a href="<?php echo site_url();?>/tracereport/downloadidreport">
 						<img src="<?php echo base_url();?>dist/img/pdf_icon.png" height="35" width="35"/>
 						<span>Download PDF Document</span>
 					</a>
@@ -50,7 +50,7 @@
 				}
 				if($report['SubscriberInputDetails']['EnquiryType'] =='Consumer Address Trace'){?>
 				<div>
-					 <a href="<?php echo site_url();?>/tracereport/downloadaddressreport-pdf">
+					 <a href="<?php echo site_url();?>/tracereport/downloadidreport">
 						<img src="<?php echo base_url();?>dist/img/pdf_icon.png" height="35" width="35"/>
 						<span>Download PDF Document</span>
 					</a>
@@ -59,7 +59,7 @@
 				}
 				if($report['SubscriberInputDetails']['EnquiryType'] =='Consumer Trace'){?>
 				<div>
-					 <a href="<?php echo site_url();?>/tracereport/downloadidreport-pdf">
+					 <a href="<?php echo site_url();?>/tracereport/downloadidreport">
 						<img src="<?php echo base_url();?>dist/img/pdf_icon.png" height="35" width="35"/>
 						<span>Download PDF Document</span>
 					</a>
@@ -167,8 +167,8 @@
                             <td><?php echo (is_array($ConsumerAddressHistory['PostalCode'])?"":$ConsumerAddressHistory['PostalCode']);?></td>
                         </tr>
 						<?php } ?>
-                    </table><?php } else {
-					?>
+                    </table>
+					<?php } else { ?>
 					<span>Address History Not Found</span><br>
 					<?php } ?>
                     
@@ -245,14 +245,13 @@
             <div class="panel-heading">Contact No. History</div>
             <div class="panel-body">
 				<?php if(count($report['ConsumerTelephoneHistory'])>0){?>
-                <table class="table table-striped"">
+                <table class="table table-striped">
                     <tr>
                         <th>Bureau UpdateDate</th>
                         <th>Type</th>
                         <th>Telephone No</th>
                     </tr>
-					<?php 
-					foreach($report['ConsumerTelephoneHistory'] as $ConsumerTelephoneHistory){ ?>
+					<?php foreach($report['ConsumerTelephoneHistory'] as $ConsumerTelephoneHistory){ ?>
                     <tr>
                         <td><?php echo $ConsumerTelephoneHistory['LastUpdatedDate'];?></td>
                         <td><?php echo $ConsumerTelephoneHistory['TelephoneType'];?></td>
@@ -275,8 +274,7 @@
                 <div class="panel panel-secondary">
                 <div class="panel-heading"><strong>Consumer Telephone Linkage Cellular</strong></div>
                 <div class="panel-body">
-					<?php 
-					if(count($report['ConsumerTelephoneLinkageCellular'])>0){?>
+					<?php if(count($report['ConsumerTelephoneLinkageCellular'])>0){?>
                     <table class="table table-striped">
                         <tr>
                              <th>Customer Id</th>
@@ -295,7 +293,7 @@
                             <td><?php echo (is_array($ConsumerTelephoneLinkageCellular['IDNo'])?"":$ConsumerTelephoneLinkageCellular['IDNo']);?></td>
                             <td><?php echo (is_array($ConsumerTelephoneLinkageCellular['PassportNo'])?"":$ConsumerTelephoneLinkageCellular['PassportNo']);?></td>
                         </tr>
-						 <?php } ?>
+						<?php } ?>
                     </table>
 					<?php } else { ?>
                     <span>Consumer Telephone Linkage Cellular Not Found</span><br>
@@ -323,7 +321,7 @@
                             <td><?php echo (is_array($ConsumerTelephoneLinkageWork['CellularNo'])?"":$ConsumerTelephoneLinkageWork['CellularNo']);?></td>
                             <td><?php echo (is_array($ConsumerTelephoneLinkageWork['HomeTelephone'])?"":$ConsumerTelephoneLinkageWork['HomeTelephone']);?></td>
                             <td><?php echo (is_array($ConsumerTelephoneLinkageWork['IDNo'])?"":$ConsumerTelephoneLinkageWork['IDNo']);?></td>
-                            <td><?php echo (is_array($ConsumerTelephoneLinkageHome['PassportNo'])?"":$ConsumerTelephoneLinkageHome['PassportNo']);?></td>
+                            <td><?php echo (is_array($ConsumerTelephoneLinkageWork['PassportNo'])?"":$ConsumerTelephoneLinkageWork['PassportNo']);?></td>
                         </tr>
 						<?php } ?>
                     </table>
@@ -348,17 +346,18 @@
                         </tr>
 						<?php foreach($report['ConsumerTelephoneLinkageHome'] as $ConsumerTelephoneLinkageHome){?>
                         <tr>
- 							<td><?php echo $ConsumerTelephoneLinkageHome['ConsumerID'];?></td>
+ 							<td><?php echo (is_array($ConsumerTelephoneLinkageHome['ConsumerID'])?"":$ConsumerTelephoneLinkageHome['ConsumerID']);?></td>
                             <td><?php echo $ConsumerTelephoneLinkageHome['ConsumerName']." ".$ConsumerTelephoneLinkageHome['Surname'];?></td>
-                            <td><?php echo $ConsumerTelephoneLinkageHome['CellularNo'];?></td>
-                            <td><?php echo $ConsumerTelephoneLinkageHome['HomeTelephone'];?></td>
-                            <td><?php echo $ConsumerTelephoneLinkageHome['IDNo'];?></td>
+                            <td><?php echo (is_array($ConsumerTelephoneLinkageHome['CellularNo'])?"":$ConsumerTelephoneLinkageHome['CellularNo']);?></td>
+                            <td><?php echo (is_array($ConsumerTelephoneLinkageHome['HomeTelephone'])?"":$ConsumerTelephoneLinkageHome['HomeTelephone']);?></td>
+                            <td><?php echo (is_array($ConsumerTelephoneLinkageHome['IDNo'])?"":$ConsumerTelephoneLinkageHome['IDNo']);?></td>
+                            <td><?php echo (is_array($ConsumerTelephoneLinkageHome['IDNo'])?"":$ConsumerTelephoneLinkageHome['IDNo']);?></td>
                             <td><?php echo (is_array($ConsumerTelephoneLinkageHome['PassportNo'])?"":$ConsumerTelephoneLinkageHome['PassportNo']);?></td>
                         </tr>
 						<?php } ?>
                     </table>
 					<?php } else { ?>
-                    <span>Consumer Telephone Linkage Home Not Found</span><br>
+						<span>Consumer Telephone Linkage Home Not Found</span><br>
 					<?php } ?>
                 </div>
               </div>
