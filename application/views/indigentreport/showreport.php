@@ -64,13 +64,13 @@
                 <div class="panel-body">
                     <div class="col">
                    
-                        <div class="col-xs-4">ID No:&nbsp;&nbsp;<strong><span><?php echo $myData->HAIDNO;?></span></strong></div>
-                        <div class="col-xs-4">First Name:&nbsp;&nbsp;<strong><span><?php echo $myData->HANames;?></span></strong></div>
-                        <div class="col-xs-4">Surname:&nbsp;&nbsp;<strong><span><?php echo $myData->HASurname;?></span></strong></div>
-						<div class="col-xs-4">Deceased Status:&nbsp;&nbsp;<strong><span><?php echo $myData->HADeceasedStatus;?></span></strong></div>
-                        <div class="col-xs-4">ID Book Issue Date:&nbsp;&nbsp;<strong><span><?php echo $myData->HAIDBookIssuedDate;?></span></strong></div>
-                        <div class="col-xs-4">ID Card Issued:&nbsp;&nbsp;<strong><span><?php echo $myData->IdCardInd;?></span></strong></div>
-                        <div class="col-xs-4">ID Card Issued Date:&nbsp;&nbsp;<strong><span><?php echo $myData->HAIDCardDate;?></span></strong></div>
+                        <div class="col-xs-4">ID No:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HAIDNO)?"":$myData->HAIDNO);?></span></strong></div>
+                        <div class="col-xs-4">First Name:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HANames)?"":$myData->HANames);?></span></strong></div>
+                        <div class="col-xs-4">Surname:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HASurname)?"":$myData->HASurname);?></span></strong></div>
+						<div class="col-xs-4">Deceased Status:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HADeceasedStatus)?"":$myData->HADeceasedStatus);?></span></strong></div>
+                        <div class="col-xs-4">ID Book Issue Date:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HAIDBookIssuedDate)?"":$myData->HAIDBookIssuedDate);?></span></strong></div>
+                        <div class="col-xs-4">ID Card Issued:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->IdCardInd)?"":$myData->IdCardInd);?></span></strong></div>
+                        <div class="col-xs-4">ID Card Issued Date:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HAIDCardDate)?"":$myData->HAIDCardDate);?></span></strong></div>
                     </div>
                 </div>
 				<div class="panel-body">
@@ -101,11 +101,11 @@
                 <div class="panel-body">
                     <div class="col">
                    
-                        <div class="col-xs-4">Marital Status:&nbsp;&nbsp;<strong><span><?php echo $myData->HAMarriageStatus;?></span></strong></div>
-                        <div class="col-xs-4">Marriage Date:&nbsp;&nbsp;<strong><span><?php echo $myData->HAMarriageDate;?></span></strong></div>
-                        <div class="col-xs-4">Spouse Name:&nbsp;&nbsp;<strong><span><?php echo $theirData->HANames;?></span></strong></div>
-						<div class="col-xs-4">Spouse Surname:&nbsp;&nbsp;<strong><span><?php echo $theirData->HASurname;?></span></strong></div>
-                        <div class="col-xs-4">Spouse Maiden Name:&nbsp;&nbsp;<strong><span><?php echo $theirData->MaidenName;?></span></strong></div>
+                        <div class="col-xs-4">Marital Status:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HAMarriageStatus)?"":$myData->HAMarriageStatus);?></span></strong></div>
+                        <div class="col-xs-4">Marriage Date:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HAMarriageDate)?"":$myData->HAMarriageDate);?></span></strong></div>
+                        <div class="col-xs-4">Spouse Name:&nbsp;&nbsp;<strong><span><?php echo (is_object($theirData->HANames)?"":$theirData->HANames);?></span></strong></div>
+						<div class="col-xs-4">Spouse Surname:&nbsp;&nbsp;<strong><span><?php echo (is_object($theirData->HASurname)?"":$theirData->HASurname);?></span></strong></div>
+                        <div class="col-xs-4">Spouse Maiden Name:&nbsp;&nbsp;<strong><span><?php echo (is_object($theirData->MaidenName)?"":$theirData->MaidenName);?></span></strong></div>
                         
                     </div>
                 </div>
@@ -130,19 +130,19 @@
 				<?php if($directorship){ ?>
 				   <?php if(is_object($directorship)){ ?>
                     <div class="col">
-                        <div class="col-xs-4">Company Name:&nbsp;&nbsp;<strong><span><?php echo $directorship->CommercialName;?></span></strong></div>
-                        <div class="col-xs-4">Registration Number:&nbsp;&nbsp;<strong><span><?php echo $directorship->RegistrationNo;?></span></strong></div>
-                        <div class="col-xs-4">Director Status:&nbsp;&nbsp;<strong><span><?php echo $directorship->DirectorStatus;?></span></strong></div>
-						<div class="col-xs-4">Company Status:&nbsp;&nbsp;<strong><span><?php echo $directorship->CommercialStatus;?></span></strong></div>
+                        <div class="col-xs-4">Company Name:&nbsp;&nbsp;<strong><span><?php echo (is_object($directorship->CommercialName)?"":$directorship->CommercialName);?></span></strong></div>
+                        <div class="col-xs-4">Registration Number:&nbsp;&nbsp;<strong><span><?php echo (is_object($directorship->RegistrationNo)?"":$directorship->RegistrationNo);?></span></strong></div>
+                        <div class="col-xs-4">Director Status:&nbsp;&nbsp;<strong><span><?php echo (is_object($directorship->DirectorStatus)?"":$directorship->DirectorStatus);?></span></strong></div>
+						<div class="col-xs-4">Company Status:&nbsp;&nbsp;<strong><span><?php echo (is_object($directorship->CommercialStatus)?"":$directorship->CommercialStatus);?></span></strong></div>
                     </div>
 					<?php } else { 
 						foreach($directorship as $director){
 						?>
 						<div class="col">
-							<div class="col-xs-4">Company Name:&nbsp;&nbsp;<strong><span><?php echo $director->CommercialName;?></span></strong></div>
-							<div class="col-xs-4">Registration Number:&nbsp;&nbsp;<strong><span><?php echo $director->RegistrationNo;?></span></strong></div>
-							<div class="col-xs-4">Director Status:&nbsp;&nbsp;<strong><span><?php echo $director->DirectorStatus;?></span></strong></div>
-							<div class="col-xs-4">Company Status:&nbsp;&nbsp;<strong><span><?php echo $director->CommercialStatus;?></span></strong></div>
+							<div class="col-xs-4">Company Name:&nbsp;&nbsp;<strong><span><?php echo (is_object($director->CommercialName)?"":$director->CommercialName);?></span></strong></div>
+							<div class="col-xs-4">Registration Number:&nbsp;&nbsp;<strong><span><?php echo (is_object($director->RegistrationNo)?"":$director->RegistrationNo);?></span></strong></div>
+							<div class="col-xs-4">Director Status:&nbsp;&nbsp;<strong><span><?php echo (is_object($director->DirectorStatus)?"":$director->DirectorStatus);?></span></strong></div>
+							<div class="col-xs-4">Company Status:&nbsp;&nbsp;<strong><span><?php echo (is_object($director->CommercialStatus)?"":$director->CommercialStatus);?></span></strong></div>
 						</div>						
 						<?php } 
 					}?>
@@ -167,16 +167,16 @@
 							if (!is_object($myConsumerAddressHistory)>0){
 								foreach($myConsumerAddressHistory as $ConsumerAddressHistory){ ?>
 									<tr>
-										<td><?php echo $ConsumerAddressHistory->AddressType;?></td>
-										<td><?php echo $ConsumerAddressHistory->Address;?></td>
-										<td><?php echo $ConsumerAddressHistory->LastUpdatedDate;?></td>
+										<td><?php echo (is_object($ConsumerAddressHistory->AddressType)?"":$ConsumerAddressHistory->AddressType);?></td>
+										<td><?php echo (is_object($ConsumerAddressHistory->Address)?"":$ConsumerAddressHistory->Address);?></td>
+										<td><?php echo (is_object($ConsumerAddressHistory->LastUpdatedDate)?"":$ConsumerAddressHistory->LastUpdatedDate);?></td>
 									</tr>
 							  <?php } 
 							} else { ?>
 									<tr>
-										<td><?php echo $myConsumerAddressHistory->AddressType;?></td>
-										<td><?php echo $myConsumerAddressHistory->Address;?></td>
-										<td><?php echo $myConsumerAddressHistory->LastUpdatedDate;?></td>
+										<td><?php echo (is_object($myConsumerAddressHistory->AddressType)?"":$myConsumerAddressHistory->AddressType);?></td>
+										<td><?php echo (is_object($myConsumerAddressHistory->Address)?"":$myConsumerAddressHistory->Address);?></td>
+										<td><?php echo (is_object($myConsumerAddressHistory->LastUpdatedDate)?"":$myConsumerAddressHistory->LastUpdatedDate);?></td>
 									</tr>
 							<?php } ?>
                     </table>
@@ -203,16 +203,16 @@
 							if(!is_object($myConsumerTelephoneHistory)){
 								foreach($myConsumerTelephoneHistory as $ConsumerTelephoneHistory){?>
 										<tr>
-											<td><?php echo $ConsumerTelephoneHistory->TelephoneType;?></td>
-											<td><?php echo $ConsumerTelephoneHistory->TelephoneNo;?></td>
-											<td><?php echo $ConsumerTelephoneHistory->LastUpdatedDate;?></td>
+										<td><?php echo (is_object($ConsumerTelephoneHistory->TelephoneType)?"":$ConsumerTelephoneHistory->TelephoneType);?></td>
+										<td><?php echo (is_object($ConsumerTelephoneHistory->TelephoneNo)?"":$ConsumerTelephoneHistory->TelephoneNo);?></td>
+										<td><?php echo (is_object($ConsumerTelephoneHistory->LastUpdatedDate)?"":$ConsumerTelephoneHistory->LastUpdatedDate);?></td>
 										</tr>
 								<?php } 
 							} else { ?>
 										<tr>
-											<td><?php echo $myConsumerTelephoneHistory->TelephoneType;?></td>
-											<td><?php echo $myConsumerTelephoneHistory->TelephoneNo;?></td>
-											<td><?php echo $myConsumerTelephoneHistory->LastUpdatedDate;?></td>
+											<td><?php echo (is_object($myConsumerTelephoneHistory->TelephoneType)?"":$myConsumerTelephoneHistory->TelephoneType);?></td>
+											<td><?php echo (is_object($myConsumerTelephoneHistory->TelephoneNo)?"":$myConsumerTelephoneHistory->TelephoneNo);?></td>
+											<td><?php echo (is_object($myConsumerTelephoneHistory->LastUpdatedDate)?"":$myConsumerTelephoneHistory->LastUpdatedDate);?></td>
 										</tr>
 							<?php }?>
 					</table>
@@ -238,17 +238,17 @@
 						if(!is_object($myConsumerEmploymentHistory)){
 							foreach($myConsumerEmploymentHistory as $ConsumerEmploymentHistory){?>
 								<tr>
-									<td><?php echo $ConsumerEmploymentHistory->EmployerDetail;?></td>
-									<td><?php echo $ConsumerEmploymentHistory->Designation;?></td>									
-									<td><?php echo $ConsumerEmploymentHistory->LastUpdatedDate;?></td>
+									<td><?php echo (is_object($ConsumerEmploymentHistory->EmployerDetail)?"":$ConsumerEmploymentHistory->EmployerDetail);?></td>
+									<td><?php echo (is_object($ConsumerEmploymentHistory->Designation)?"":$ConsumerEmploymentHistory->Designation);?></td>									
+									<td><?php echo (is_object($ConsumerEmploymentHistory->LastUpdatedDate)?"":$ConsumerEmploymentHistory->LastUpdatedDate);?></td>
 								</tr>
 
 						<?php } 
 						} else { ?>
 								<tr>
-									<td><?php echo $myConsumerEmploymentHistory->EmployerDetail;?></td>
-									<td><?php echo (($myConsumerEmploymentHistory->Designation)?$myConsumerEmploymentHistory->Designation:"-");?></td>									
-									<td><?php echo $myConsumerEmploymentHistory->LastUpdatedDate;?></td>
+										<td><?php echo (is_object($myConsumerEmploymentHistory->EmployerDetail)?"":$myConsumerEmploymentHistory->EmployerDetail);?></td>
+										<td><?php echo (is_object($myConsumerEmploymentHistory->Designation)?"":$myConsumerEmploymentHistory->Designation);?></td>
+										<td><?php echo (is_object($myConsumerEmploymentHistory->LastUpdatedDate)?"":$myConsumerEmploymentHistory->LastUpdatedDate);?></td>
 								</tr>
 						<?php } ?>
                 </table>
