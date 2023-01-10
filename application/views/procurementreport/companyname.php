@@ -32,6 +32,7 @@
             <div class="box-footer">
                 <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i>&nbsp; Search</button>
             </div>
+			<input type="hidden" name="postback" value="post" />
         </form>
     </div>
 </section>

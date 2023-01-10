@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 02, 2023 at 04:24 PM
+-- Generation Time: Jan 10, 2023 at 07:20 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -120,19 +120,20 @@ CREATE TABLE `report` (
   `report_id` bigint(20) NOT NULL,
   `report_name` varchar(45) NOT NULL,
   `report_link` varchar(45) NOT NULL,
-  `icon` varchar(45) NOT NULL
+  `icon` varchar(45) NOT NULL,
+  `active` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `report`
 --
 
-INSERT INTO `report` (`report_id`, `report_name`, `report_link`, `icon`) VALUES
-(1, 'Trace Report', 'tracereport', 'fa fa-unlock'),
-(2, 'Deed Report', 'deedreport', 'fa fa-home'),
-(3, 'Verification Report', 'verificationreport', 'fa fa-check-square-o'),
-(4, 'Procurement Report', 'procurementreport', 'fa fa-ship'),
-(5, 'Indigent Report', 'indigentreport', 'fa fa-unlock');
+INSERT INTO `report` (`report_id`, `report_name`, `report_link`, `icon`, `active`) VALUES
+(1, 'Trace Report', 'tracereport', 'fa fa-unlock', 1),
+(2, 'Deed Report', 'deedreport', 'fa fa-home', 0),
+(3, 'Verification Report', 'verificationreport', 'fa fa-check-square-o', 0),
+(4, 'Procurement Report', 'procurementreport', 'fa fa-ship', 1),
+(5, 'Indigent Report', 'indigentreport', 'fa fa-unlock', 1);
 
 -- --------------------------------------------------------
 

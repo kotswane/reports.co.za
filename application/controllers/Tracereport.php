@@ -32,8 +32,7 @@ class Tracereport extends CI_Controller {
 			 redirect('user/login');
 		}
 		
-		
-		
+
 		$this->load->model("Province_model");
 		
 		$this->reports = $this->Report_model->list_reports();
@@ -62,16 +61,20 @@ class Tracereport extends CI_Controller {
 		
 		if ($this->input->post("postback")=="post"){
 			
+			if(!$this->input->post('idNumber')){
+				redirect('tracereport/id-search');
+			}
+			
 			$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
 		
 			$this->client = $this->mysoapclient->getClient();
 			$this->latestclient = $this->mysoapclient->getClientlatest();
-			if($this->client->IsTicketValid($IsTicketValid) != true){
+			$resp = $this->client->IsTicketValid($IsTicketValid);
+			if($resp->IsTicketValidResult != true || $resp->IsTicketValidResult ==""){
 				$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
 				redirect('user/login');
 			}
-		
-		
+		   
 			$response = $this->client->ConnectConsumerMatch(array(
 			'IdNumber'=>$this->input->post('idNumber'),
 			'ConnectTicket'=>$this->session->userdata('tokenId'),
@@ -80,12 +83,15 @@ class Tracereport extends CI_Controller {
 			));
 			
 			$xml = simplexml_load_string($response->ConnectConsumerMatchResult);
+
 			if ($xml->Error || $xml->NotFound){
 				if($xml->Error){
 					$data["errorMessage"] = $xml->Error[0];
 				}else{
 					$data["errorMessage"] = $xml->NotFound;
 				}
+				$data["content"] = "tracereport/id-search";
+				$this->load->view('site',$data);
 			}else {
 				
 				$objJsonDocument = json_encode($xml);
@@ -116,11 +122,16 @@ class Tracereport extends CI_Controller {
 		
 		if ($this->input->post("postback")=="post"){
 			
+			if(!$this->input->post('listprovinces')){
+				redirect('tracereport/addresssearch');
+			}
+			
 			$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
 		
 			$this->client = $this->mysoapclient->getClient();
 			$this->latestclient = $this->mysoapclient->getClientlatest();
-			if($this->client->IsTicketValid($IsTicketValid) != true){
+			$resp = $this->client->IsTicketValid($IsTicketValid);
+			if($resp->IsTicketValidResult != true || $resp->IsTicketValidResult ==""){
 				$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
 				redirect('user/login');
 			}
@@ -164,6 +175,7 @@ class Tracereport extends CI_Controller {
 						$arrOutput = json_decode($objJsonDocument, TRUE);
 						$data["consumerList"]["DetailsViewed"][]= (($arrOutput["Result"]["DetailsViewedYN"]=="true")? "Yes":"No");
 					}else{
+
 							foreach($arrOutputListValue as $arrOutputListValueListKey => $arrOutputListValueListValue){
 							
 							$data["consumerList"]["details"][]= $arrOutputListValueListValue;
@@ -200,6 +212,10 @@ class Tracereport extends CI_Controller {
 		
 		if ($this->input->post("postback")=="post"){
 			
+			if(!$this->input->post('cellphoneCode')){
+				redirect('tracereport/telephonesearch');
+			}	
+			
 			if ($this->input->post("cellphoneCode") != "" && $this->input->post("cellphoneNo") != ""){
 				$code = $this->input->post("cellphoneCode");
 				$number = $this->input->post("cellphoneNo");
@@ -213,7 +229,8 @@ class Tracereport extends CI_Controller {
 			
 			$this->client = $this->mysoapclient->getClient();
 			$this->latestclient = $this->mysoapclient->getClientlatest();
-			if($this->client->IsTicketValid($IsTicketValid) != true){
+			$resp = $this->client->IsTicketValid($IsTicketValid);
+			if($resp->IsTicketValidResult != true || $resp->IsTicketValidResult ==""){
 				$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
 				redirect('user/login');
 			}
@@ -274,7 +291,8 @@ class Tracereport extends CI_Controller {
 		
 		$this->client = $this->mysoapclient->getClient();
 		$this->latestclient = $this->mysoapclient->getClientlatest();
-		if($this->client->IsTicketValid($IsTicketValid) != true){
+		$resp = $this->client->IsTicketValid($IsTicketValid);
+		if($resp->IsTicketValidResult != true || $resp->IsTicketValidResult ==""){
 			$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
 			redirect('user/login');
 		}
@@ -287,7 +305,7 @@ class Tracereport extends CI_Controller {
 				
 		$xml = simplexml_load_string($response->ConnectGetResultResult,"SimpleXMLElement");
 		$objJsonDocument = json_encode($xml);
-		$arrOutput = json_decode($objJsonDocument, TRUE);
+		$arrOutput = json_decode($objJsonDocument);
 		return $arrOutput;
 	}
 	
@@ -298,7 +316,8 @@ class Tracereport extends CI_Controller {
 		
 		$this->client = $this->mysoapclient->getClient();
 		$this->latestclient = $this->mysoapclient->getClientlatest();
-		if($this->client->IsTicketValid($IsTicketValid) != true){
+		$resp = $this->client->IsTicketValid($IsTicketValid);
+		if($resp->IsTicketValidResult != true || $resp->IsTicketValidResult ==""){
 			$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
 			redirect('user/login');
 		}

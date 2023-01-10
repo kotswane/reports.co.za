@@ -32,8 +32,35 @@
             <div class="box-footer">
                 <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i>&nbsp; Search</button>
             </div>
+			<input type="hidden" name="postback" value="post"/>
         </form>
     </div>
+	<?php
+	 if (count($consumerList) > 0){
+	?>
+    <div>
+      	 <h5><span><strong>Search Results List</strong></span></h5>
+          <table class="table table-striped">
+            <tr>
+            <th>Reference No</th>
+              <th>Names</th>
+              <th>Id Number</th>
+              <th>Gender</th>
+              <th>View</th>
+            </tr>
+
+            <tr>
+              <td><?php echo $consumerList['ConsumerDetails']['Reference'];?></td>
+              <td><?php echo (is_array($consumerList['ConsumerDetails']['FirstName'])?"":$consumerList['ConsumerDetails']['FirstName'])." ".(is_array($consumerList['ConsumerDetails']['SecondName'])?"":$consumerList['ConsumerDetails']['SecondName'])." ".(is_array($consumerList['ConsumerDetails']['Surname'])?"":$consumerList['ConsumerDetails']['Surname']);?></td>
+              <td><?php echo $consumerList['ConsumerDetails']['IDNo'];?></td>
+              <td><?php echo (($consumerList['ConsumerDetails']['GenderInd'] == "M")?"Male":"Female");?></td>
+              <td>
+               <a type="button"  href="<?php echo site_url()?>/indigentreport/getreport/<?php echo $consumerList['ConsumerDetails']['EnquiryID'];?>/<?php echo $consumerList['ConsumerDetails']['EnquiryResultID'];?>/<?php echo $consumerList['ConsumerDetails']['IDNo'];?>" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;View</a> 
+              </td>
+            </tr>
+          </table>
+       </div>
+	<?php } ?>
 </section>
 </body>
 </html>

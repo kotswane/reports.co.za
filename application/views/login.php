@@ -27,14 +27,13 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="hold-transition login-page">
+<body>
 <div class="login-box">
     <div class="login-logo">
-        <h4><strong>LKCENTRIX SOLUTIONS </strong> </h4>
+        <div><img src="https://lkcentrix.co.za/wp-content/uploads/2022/01/lk-Logo-FinalHD.png" style="width:350px;"></div>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">LOGIN LKCENTRIX SOLUTIONS</p>
    <!-- Error Alert -->
 		<?php if($errorSession != ""){?>
          <div class="alert alert-danger"  role="alert">
