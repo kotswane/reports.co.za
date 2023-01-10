@@ -88,25 +88,25 @@
                 <div class="panel-heading">Personal Details Summary</div>
                 <div class="panel-body">
                     <div class="col">
-                        <div class="col-xs-4 ">Reference No:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->ReferenceNo;?></span></strong></div>
-                        <div class="col-xs-4">ID No:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->IDNo;?></span></strong></div>
-                        <div class="col-xs-4">Surname:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->Surname;?></span></strong></div>
-                        <div class="col-xs-4">First Name:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->FirstName;?></span></strong></div>
-                        <div class="col-xs-4">Second Name:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->SecondName;?></span></strong></div>
-                        <div class="col-xs-4">Maiden Name:&nbsp;&nbsp;<strong><span><?php $report->ConsumerDetail->MaidenName;?></span></strong></div>
-                        <div class="col-xs-4">Title:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->TitleDesc;?></span></strong></div>
-                        <div class="col-xs-4">Gender:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->Gender;?></span></strong></div>
-                        <div class="col-xs-4">Date of Birth:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->BirthDate;?></span></strong></div>
-                        <div class="col-xs-4">Marital Status:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->MaritalStatusDesc;?></span></strong></div>
-                        <div class="col-xs-4">External Reference No:&nbsp;&nbsp;<strong><span><?php echo //$report->ConsumerDetail->ExternalReference;?></span></strong></div>
-                        <div class="col-xs-4">Passport or 2nd ID No:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->PassportNo;?></span></strong></div>
-                        <div class="col-xs-4">Residential Address:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->ResidentialAddress;?></span></strong></div>
-                        <div class="col-xs-4">Postal Address:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->PostalAddress;?></span></strong></div>
-                        <div class="col-xs-4">Telephone No. (H):&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->HomeTelephoneNo;?></span></strong></div>
-                        <div class="col-xs-4">Telephone No (W):&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->WorkTelephoneNo;?></span></strong></div>
-                        <div class="col-xs-4">Cellular/Mobile:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->CellularNo;?></span></strong></div>
-                        <div class="col-xs-4">E-mail Address&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->EmailAddress;?></span></strong></div>
-                        <div class="col-xs-4">Current Employer&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->EmployerDetail;?></span></strong></div>
+                        <div class="col-xs-4 ">Reference No:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->ReferenceNo || "";?></span></strong></div>
+                        <div class="col-xs-4">ID No:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->IDNo || "";?></span></strong></div>
+                        <div class="col-xs-4">Surname:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->Surname || "";?></span></strong></div>
+                        <div class="col-xs-4">First Name:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->FirstName || "";?></span></strong></div>
+                        <div class="col-xs-4">Second Name:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->SecondName || "";?></span></strong></div>
+                        <div class="col-xs-4">Maiden Name:&nbsp;&nbsp;<strong><span><?php $report->ConsumerDetail->MaidenName || "";?></span></strong></div>
+                        <div class="col-xs-4">Title:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->TitleDesc || "";?></span></strong></div>
+                        <div class="col-xs-4">Gender:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->Gender || "";?></span></strong></div>
+                        <div class="col-xs-4">Date of Birth:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->BirthDate || "";?></span></strong></div>
+                        <div class="col-xs-4">Marital Status:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->MaritalStatusDesc || "";?></span></strong></div>
+                        <div class="col-xs-4">External Reference No:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->ExternalReference || "";?></span></strong></div>
+                        <div class="col-xs-4">Passport or 2nd ID No:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->PassportNo || "";?></span></strong></div>
+                        <div class="col-xs-4">Residential Address:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->ResidentialAddress || "";?></span></strong></div>
+                        <div class="col-xs-4">Postal Address:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->PostalAddress || "";?></span></strong></div>
+                        <div class="col-xs-4">Telephone No. (H):&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->HomeTelephoneNo || "";?></span></strong></div>
+                        <div class="col-xs-4">Telephone No (W):&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->WorkTelephoneNo || "";?></span></strong></div>
+                        <div class="col-xs-4">Cellular/Mobile:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->CellularNo || "";?></span></strong></div>
+                        <div class="col-xs-4">E-mail Address&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->EmailAddress || "";?></span></strong></div>
+                        <div class="col-xs-4">Current Employer&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->EmployerDetail || "";?></span></strong></div>
                     </div>
                 </div>
               </div>
@@ -134,9 +134,9 @@
                 <div class="panel-heading">Potential Fraud Indicators</div>
                 <div class="panel-body">
                     <div class="col">
-                        <div class="col-xs-4 ">ID No. Verified Status:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerFraudIndicatorsSummary->HomeAffairsVerificationYN;?></span></strong></div>
-                        <div class="col-xs-4">ID No. Deceased Status:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerFraudIndicatorsSummary->HomeAffairsDeceasedStatus;?></span></strong></div>
-                        <div class="col-xs-4">ID No. Found on Fraud Database:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerFraudIndicatorsSummary->SAFPSListingYN;?></span></strong></div>
+                        <div class="col-xs-4 ">ID No. Verified Status:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerFraudIndicatorsSummary->HomeAffairsVerificationYN || "";?></span></strong></div>
+                        <div class="col-xs-4">ID No. Deceased Status:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerFraudIndicatorsSummary->HomeAffairsDeceasedStatus || "";?></span></strong></div>
+                        <div class="col-xs-4">ID No. Found on Fraud Database:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerFraudIndicatorsSummary->SAFPSListingYN || "";?></span></strong></div>
                     </div>
                 </div>
               </div>
@@ -158,27 +158,27 @@
                              <th>Postal Code</th>
                         </tr>
 						<?php 
-							if(!is_object($report->ConsumerAddressHistory)){
-								foreach($report->ConsumerAddressHistory as $ConsumerAddressHistory){ ?>
+							if(!is_object($report->ConsumerAddressHistory || "")){
+								foreach($report->ConsumerAddressHistory || "" as $ConsumerAddressHistory){ ?>
 								<tr>
-									<td><?php echo $ConsumerAddressHistory->LastUpdatedDate;?></td>
-									<td><?php echo $ConsumerAddressHistory->AddressType;?></td>
-									<td><?php echo $ConsumerAddressHistory->Address1;?></td>
-									<td><?php echo $ConsumerAddressHistory->Address2;?></td>
-									<td><?php echo $ConsumerAddressHistory->Address3;?></td>
-									<td><?php echo $ConsumerAddressHistory->Address4;?></td>
-									<td><?php echo $ConsumerAddressHistory->PostalCode;?></td>
+									<td><?php echo $ConsumerAddressHistory->LastUpdatedDate || "";?></td>
+									<td><?php echo $ConsumerAddressHistory->AddressType || "";?></td>
+									<td><?php echo $ConsumerAddressHistory->Address1 || "";?></td>
+									<td><?php echo $ConsumerAddressHistory->Address2 || "";?></td>
+									<td><?php echo $ConsumerAddressHistory->Address3 || "";?></td>
+									<td><?php echo $ConsumerAddressHistory->Address4 || "";?></td>
+									<td><?php echo $ConsumerAddressHistory->PostalCode || "";?></td>
 								</tr>
 								<?php }
 							} else { ?>
 								<tr>
-									<td><?php echo $report->ConsumerAddressHistory->LastUpdatedDate;?></td>
-									<td><?php echo $report->ConsumerAddressHistory->AddressType;?></td>
-									<td><?php echo $report->ConsumerAddressHistory->Address1;?></td>
-									<td><?php echo $report->ConsumerAddressHistory->Address2;?></td>
-									<td><?php echo $report->ConsumerAddressHistory->Address3;?></td>
-									<td><?php echo $report->ConsumerAddressHistory->Address4;?></td>
-									<td><?php echo $report->ConsumerAddressHistory->PostalCode;?></td>
+									<td><?php echo $report->ConsumerAddressHistory->LastUpdatedDate || "";?></td>
+									<td><?php echo $report->ConsumerAddressHistory->AddressType || "";?></td>
+									<td><?php echo $report->ConsumerAddressHistory->Address1 || "";?></td>
+									<td><?php echo $report->ConsumerAddressHistory->Address2 || "";?></td>
+									<td><?php echo $report->ConsumerAddressHistory->Address3 || "";?></td>
+									<td><?php echo $report->ConsumerAddressHistory->Address4 || "";?></td>
+									<td><?php echo $report->ConsumerAddressHistory->PostalCode || "";?></td>
 								</tr>							
 							<?php } ?>
                     </table>
@@ -199,14 +199,14 @@
 						if (!is_object($report->ConsumerEmailHistory)){
 							foreach($report->ConsumerEmailHistory as $ConsumerEmailHistory){?>
 							<div>
-							  Bureau UpdateDate <span><?php echo $ConsumerEmailHistory->LastUpdatedDate;?></span><br>
-							  E-mail Address <span><?php echo $ConsumerEmailHistory->EmailAddress;?></span><br>
+							  Bureau UpdateDate <span><?php echo $ConsumerEmailHistory->LastUpdatedDate || "";?></span><br>
+							  E-mail Address <span><?php echo $ConsumerEmailHistory->EmailAddress || "";?></span><br>
 							 </div>
 							<?php }
 						} else { ?>
 							<div>
-							  Bureau UpdateDate <span><?php echo $report->ConsumerEmailHistory->LastUpdatedDate;?></span><br>
-							  E-mail Address <span><?php echo $report->ConsumerEmailHistory->EmailAddress;?></span><br>
+							  Bureau UpdateDate <span><?php echo $report->ConsumerEmailHistory->LastUpdatedDate || "";?></span><br>
+							  E-mail Address <span><?php echo $report->ConsumerEmailHistory->EmailAddress || "";?></span><br>
 							 </div>
 					<?php } ?>
                      </div>
@@ -232,18 +232,18 @@
 						if(!is_object($report->ConsumerEmploymentHistory)){
 							foreach($report->ConsumerEmploymentHistory as $ConsumerEmploymentHistory){?>
 								<tr>
-									<td><?php echo $ConsumerEmploymentHistory->LastUpdatedDate;?></td>
-									<td><?php echo $ConsumerEmploymentHistory->EmployerDetail;?></td>
-									<td><?php echo $ConsumerEmploymentHistory->Designation;?></td>
+									<td><?php echo $ConsumerEmploymentHistory->LastUpdatedDate || "";?></td>
+									<td><?php echo $ConsumerEmploymentHistory->EmployerDetail || "";?></td>
+									<td><?php echo $ConsumerEmploymentHistory->Designation || "";?></td>
 								</tr>
 							<?php }
 						} else{
 							
 							?>
 								<tr>
-									<td><?php echo $report->ConsumerEmploymentHistory->LastUpdatedDate;?></td>
-									<td><?php echo $report->ConsumerEmploymentHistory->EmployerDetail;?></td>
-									<td><?php echo $report->ConsumerEmploymentHistory->Designation;?></td>
+									<td><?php echo $report->ConsumerEmploymentHistory->LastUpdatedDate || "";?></td>
+									<td><?php echo $report->ConsumerEmploymentHistory->EmployerDetail || "";?></td>
+									<td><?php echo $report->ConsumerEmploymentHistory->Designation || "";?></td>
 								</tr>
 						<?php } ?>
                 </table>
@@ -269,16 +269,16 @@
 							 if(!is_object($report->ConsumerTelephoneHistory)){
 								foreach($report->ConsumerTelephoneHistory as $ConsumerTelephoneHistory){ ?>
 								<tr>
-									<td><?php echo $ConsumerTelephoneHistory->LastUpdatedDate;?></td>
-									<td><?php echo $ConsumerTelephoneHistory->TelephoneType;?></td>
-									<td><?php echo $ConsumerTelephoneHistory->TelephoneNo;?></td>
+									<td><?php echo $ConsumerTelephoneHistory->LastUpdatedDate || "";?></td>
+									<td><?php echo $ConsumerTelephoneHistory->TelephoneType || "";?></td>
+									<td><?php echo $ConsumerTelephoneHistory->TelephoneNo || "";?></td>
 								</tr>
 								<?php } 
 							 } else {?>
 								<tr>
-									<td><?php echo $report->ConsumerTelephoneHistory->LastUpdatedDate;?></td>
-									<td><?php echo $report->ConsumerTelephoneHistory->TelephoneType;?></td>
-									<td><?php echo $report->ConsumerTelephoneHistory->TelephoneNo;?></td>
+									<td><?php echo $report->ConsumerTelephoneHistory->LastUpdatedDate || "";?></td>
+									<td><?php echo $report->ConsumerTelephoneHistory->TelephoneType || "";?></td>
+									<td><?php echo $report->ConsumerTelephoneHistory->TelephoneNo || "";?></td>
 								</tr>							 
 							 <?php } ?>
                 </table>
@@ -310,22 +310,22 @@
 						<?php if(!is_object($report->ConsumerTelephoneLinkageCellular)){
 								foreach($report->ConsumerTelephoneLinkageCellular as $ConsumerTelephoneLinkageCellular){?>
 								<tr>
-									<td><?php echo $ConsumerTelephoneLinkageCellular->ConsumerID;?></td>
+									<td><?php echo $ConsumerTelephoneLinkageCellular->ConsumerID || "";?></td>
 									<td><?php echo $ConsumerTelephoneLinkageCellular->ConsumerName." ".$ConsumerTelephoneLinkageCellular->Surname;?></td>
-									<td><?php echo $ConsumerTelephoneLinkageCellular->CellularNo;?></td>
-									<td><?php echo $ConsumerTelephoneLinkageCellular->HomeTelephone;?></td>
-									<td><?php echo $ConsumerTelephoneLinkageCellular->IDNo;?></td>
-									<td><?php echo $ConsumerTelephoneLinkageCellular->PassportNo;?></td>
+									<td><?php echo $ConsumerTelephoneLinkageCellular->CellularNo || "";?></td>
+									<td><?php echo $ConsumerTelephoneLinkageCellular->HomeTelephone || "";?></td>
+									<td><?php echo $ConsumerTelephoneLinkageCellular->IDNo || "";?></td>
+									<td><?php echo $ConsumerTelephoneLinkageCellular->PassportNo || "";?></td>
 								</tr>
 						<?php } 
 						} else {?>
 								<tr>
-									<td><?php echo $report->ConsumerTelephoneLinkageCellular->ConsumerID;?></td>
+									<td><?php echo $report->ConsumerTelephoneLinkageCellular->ConsumerID || "";?></td>
 									<td><?php echo $report->ConsumerTelephoneLinkageCellular->ConsumerName." ".$ConsumerTelephoneLinkageCellular->Surname;?></td>
-									<td><?php echo $report->ConsumerTelephoneLinkageCellular->CellularNo;?></td>
-									<td><?php echo $report->ConsumerTelephoneLinkageCellular->HomeTelephone;?></td>
-									<td><?php echo $report->ConsumerTelephoneLinkageCellular->IDNo;?></td>
-									<td><?php echo $report->ConsumerTelephoneLinkageCellular->PassportNo;?></td>
+									<td><?php echo $report->ConsumerTelephoneLinkageCellular->CellularNo || "";?></td>
+									<td><?php echo $report->ConsumerTelephoneLinkageCellular->HomeTelephone || "";?></td>
+									<td><?php echo $report->ConsumerTelephoneLinkageCellular->IDNo || "";?></td>
+									<td><?php echo $report->ConsumerTelephoneLinkageCellular->PassportNo || "";?></td>
 								</tr>
 						<?php } ?>
                     </table>
@@ -352,22 +352,22 @@
 							if(!is_object($report->ConsumerTelephoneLinkageWork)){
 								foreach($report->ConsumerTelephoneLinkageWork as $ConsumerTelephoneLinkageWork){?>
 								<tr>
-									<td><?php echo $ConsumerTelephoneLinkageWork->ConsumerID;?></td>
-									<td><?php echo $ConsumerTelephoneLinkageWork->ConsumerName." ".$ConsumerTelephoneLinkageWork->Surname;?></td>
-									<td><?php echo $ConsumerTelephoneLinkageWork->CellularNo;?></td>
-									<td><?php echo $ConsumerTelephoneLinkageWork->HomeTelephone;?></td>
-									<td><?php echo $ConsumerTelephoneLinkageWork->IDNo;?></td>
-									<td><?php echo $ConsumerTelephoneLinkageWork->PassportNo;?></td>
+									<td><?php echo $ConsumerTelephoneLinkageWork->ConsumerID || "";?></td>
+									<td><?php echo $ConsumerTelephoneLinkageWork->ConsumerName." ".$ConsumerTelephoneLinkageWork->Surname || "";?></td>
+									<td><?php echo $ConsumerTelephoneLinkageWork->CellularNo || "";?></td>
+									<td><?php echo $ConsumerTelephoneLinkageWork->HomeTelephone || "";?></td>
+									<td><?php echo $ConsumerTelephoneLinkageWork->IDNo || "";?></td>
+									<td><?php echo $ConsumerTelephoneLinkageWork->PassportNo || "";?></td>
 								</tr>
 								<?php } 
 							} else { ?>
 								<tr>
-									<td><?php echo $report->ConsumerTelephoneLinkageWork->ConsumerID;?></td>
+									<td><?php echo $report->ConsumerTelephoneLinkageWork->ConsumerID || "";?></td>
 									<td><?php echo $report->ConsumerTelephoneLinkageWork->ConsumerName." ".$report->ConsumerTelephoneLinkageWork->Surname;?></td>
-									<td><?php echo $report->ConsumerTelephoneLinkageWork->CellularNo;?></td>
-									<td><?php echo $report->ConsumerTelephoneLinkageWork->HomeTelephone;?></td>
-									<td><?php echo $report->ConsumerTelephoneLinkageWork->IDNo;?></td>
-									<td><?php echo $report->ConsumerTelephoneLinkageWork->PassportNo;?></td>
+									<td><?php echo $report->ConsumerTelephoneLinkageWork->CellularNo || "";?></td>
+									<td><?php echo $report->ConsumerTelephoneLinkageWork->HomeTelephone || "";?></td>
+									<td><?php echo $report->ConsumerTelephoneLinkageWork->IDNo || "";?></td>
+									<td><?php echo $report->ConsumerTelephoneLinkageWork->PassportNo || "";?></td>
 								</tr>							
 							<?php } ?>
                     </table>
@@ -394,22 +394,22 @@
 							if(!is_object($report->ConsumerTelephoneLinkageHome)){
 								foreach($report->ConsumerTelephoneLinkageHome as $ConsumerTelephoneLinkageHome){?>
 								<tr>
-									<td><?php echo $ConsumerTelephoneLinkageHome->ConsumerID;?></td>
+									<td><?php echo $ConsumerTelephoneLinkageHome->ConsumerID || "";?></td>
 									<td><?php echo $ConsumerTelephoneLinkageHome->ConsumerName." ".$ConsumerTelephoneLinkageHome->Surname;?></td>
-									<td><?php echo $ConsumerTelephoneLinkageHome->CellularNo;?></td>
-									<td><?php echo $ConsumerTelephoneLinkageHome->HomeTelephone;?></td>
-									<td><?php echo $ConsumerTelephoneLinkageHome->IDNo;?></td>
-									<td><?php echo $ConsumerTelephoneLinkageHome->PassportNo;?></td>
+									<td><?php echo $ConsumerTelephoneLinkageHome->CellularNo || "";?></td>
+									<td><?php echo $ConsumerTelephoneLinkageHome->HomeTelephone || "";?></td>
+									<td><?php echo $ConsumerTelephoneLinkageHome->IDNo || "";?></td>
+									<td><?php echo $ConsumerTelephoneLinkageHome->PassportNo || "";?></td>
 								</tr>
 							<?php } 
 							} else { ?>
 								<tr>
-									<td><?php echo $report->ConsumerTelephoneLinkageHome->ConsumerID;?></td>
+									<td><?php echo $report->ConsumerTelephoneLinkageHome->ConsumerID || "";?></td>
 									<td><?php echo $report->ConsumerTelephoneLinkageHome->ConsumerName." ".$report->ConsumerTelephoneLinkageHome->Surname;?></td>
-									<td><?php echo $report->ConsumerTelephoneLinkageHome->CellularNo;?></td>
-									<td><?php echo $report->ConsumerTelephoneLinkageHome->HomeTelephone;?></td>
-									<td><?php echo $report->ConsumerTelephoneLinkageHome->IDNo;?></td>
-									<td><?php echo $report->ConsumerTelephoneLinkageHome->PassportNo;?></td>
+									<td><?php echo $report->ConsumerTelephoneLinkageHome->CellularNo || "";?></td>
+									<td><?php echo $report->ConsumerTelephoneLinkageHome->HomeTelephone || "";?></td>
+									<td><?php echo $report->ConsumerTelephoneLinkageHome->IDNo || "";?></td>
+									<td><?php echo $report->ConsumerTelephoneLinkageHome->PassportNo || "";?></td>
 								</tr>							
 							<?php } ?>
                     </table>
@@ -426,8 +426,8 @@
 						<div class="panel-heading">Consumer Property Information Summary</div>
 						<div class="panel-body">
 							<div class="col">
-								<div class="col-xs-4 ">Total Property&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerPropertyInformationSummary->TotalProperty;?></span></strong></div>
-								<div class="col-xs-4">Purchase Price&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerPropertyInformationSummary->PurchasePrice;?></span></strong></div>
+								<div class="col-xs-4 ">Total Property&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerPropertyInformationSummary->TotalProperty || "";?></span></strong></div>
+								<div class="col-xs-4">Purchase Price&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerPropertyInformationSummary->PurchasePrice || "";?></span></strong></div>
 							</div>
 						</div>
 					  </div>
@@ -440,7 +440,7 @@
                 <div class="panel-heading">Consumer Director Summary</div>
                 <div class="panel-body">
                     <div class="col">
-                        <div class="col-xs-4 ">Number Of Company Director&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDirectorSummary->NumberOfCompanyDirector;?></span></strong></div>
+                        <div class="col-xs-4 ">Number Of Company Director&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDirectorSummary->NumberOfCompanyDirector || "";?></span></strong></div>
                     </div>
                 </div>
               </div>
