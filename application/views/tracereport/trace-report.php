@@ -98,7 +98,7 @@
                         <div class="col-xs-4">Gender:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->Gender;?></span></strong></div>
                         <div class="col-xs-4">Date of Birth:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->BirthDate;?></span></strong></div>
                         <div class="col-xs-4">Marital Status:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->MaritalStatusDesc;?></span></strong></div>
-                        <div class="col-xs-4">External Reference No:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->ExternalReference;?></span></strong></div>
+                        <div class="col-xs-4">External Reference No:&nbsp;&nbsp;<strong><span><?php echo //$report->ConsumerDetail->ExternalReference;?></span></strong></div>
                         <div class="col-xs-4">Passport or 2nd ID No:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->PassportNo;?></span></strong></div>
                         <div class="col-xs-4">Residential Address:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->ResidentialAddress;?></span></strong></div>
                         <div class="col-xs-4">Postal Address:&nbsp;&nbsp;<strong><span><?php echo $report->ConsumerDetail->PostalAddress;?></span></strong></div>
