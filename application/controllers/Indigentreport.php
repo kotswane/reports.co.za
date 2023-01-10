@@ -85,11 +85,16 @@ class Indigentreport extends CI_Controller {
 	}
 	
 	public function getreport(){
-	
+		$this->session->unset_userdata("directorship");
+		$this->session->unset_userdata("familyData");
+		$this->session->unset_userdata("report");
+		
 		$data["reports_type"] = $this->reports_type;
 		$data["reports"] = $this->reports;
 		$response = $this->getSearchData($this->uri->segment(3), $this->uri->segment(4));
 		$data['report'] = $response;
+		$this->session->set_userdata(array('report' =>$data['report']));
+		
 		$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
 		$resp = $this->client->IsTicketValid($IsTicketValid);
 		if($resp->IsTicketValidResult != true || $resp->IsTicketValidResult ==""){
@@ -107,6 +112,7 @@ class Indigentreport extends CI_Controller {
 	
 		if ($xml->Error || $xml->NotFound){
 			$data["familyData"] = array();
+			$this->session->set_userdata(array('familyData' =>$data['familyData']));
 			$data["content"] = "indigentreport/showreport";
 			$this->load->view('site',$data);
 		}else {
@@ -115,6 +121,7 @@ class Indigentreport extends CI_Controller {
 			$arrOutput = json_decode($objJsonDocument);
 			
 			$data['familyData']= $arrOutput;
+			$this->session->set_userdata(array('familyData' =>$data['familyData']));
 			
 			$resp = $this->client->IsTicketValid($IsTicketValid);
 			if($resp->IsTicketValidResult != true || $resp->IsTicketValidResult ==""){
@@ -132,7 +139,12 @@ class Indigentreport extends CI_Controller {
 				$objJsonDocument = json_encode($xml);
 			    $arrOutput = json_decode($objJsonDocument);				
 			
-			
+				$resp = $this->client->IsTicketValid($IsTicketValid);
+				if($resp->IsTicketValidResult != true || $resp->IsTicketValidResult ==""){
+					$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
+					redirect('user/login');
+				}
+				
 				$response = $this->client->ConnectGetResult(array(
 				'EnquiryID' => $arrOutput->DirectorDetails->EnquiryID,
 				'EnquiryResultID' => $arrOutput->DirectorDetails->EnquiryResultID, 
@@ -143,6 +155,7 @@ class Indigentreport extends CI_Controller {
 				$objJsonDocument = json_encode($xml);
 				$arrOutput = json_decode($objJsonDocument);
 				$data['directorship'] = $arrOutput->ConsumerDirectorShipLink;
+				$this->session->set_userdata(array('directorship' =>$data['directorship']));
 			}
 			$data["content"] = "indigentreport/showreport";
 			$this->load->view('site',$data);
@@ -170,6 +183,23 @@ class Indigentreport extends CI_Controller {
 		$objJsonDocument = json_encode($xml);
 		$arrOutput = json_decode($objJsonDocument, TRUE);
 		return $arrOutput;
+	}
+	
+	public function downloadidreport(){
+		try{
+			ob_clean();
+			$data['report'] = $this->session->userdata('report');
+			$data['familyData'] = $this->session->userdata('familyData');
+			$data['directorship'] = $this->session->userdata('directorship');
+			
+			$this->load->library('pdf');
+			$html = $this->load->view('indigentreport/pdf-indigent-report',$data, true);
+			$this->pdf->createPDF($html, "customer-tracereport-".time(), true);
+
+		}catch(Exception $ex){
+			print_r($ex);
+		}
+
 	}
 
 }

@@ -28,7 +28,7 @@
    <hr class="hr-line"/>
  <div class="col">
    <table class="table-list">
-           <tr>
+        <tr>
         <th class="th-size-first"></th>
         <th class="th-size-second"></th>
         </tr>
@@ -63,9 +63,7 @@ Current Contact, Address, and Employment Info.</h5>
   </div>
    <hr class="hr-line"/>
   <div class="col">
-   <div class="sub-personal">
     <!-- First personal details -->
-  <div class="col-table-first-div">
   <table class="table-list">
       <tr>
        <th class="th-size-first-first-div"></th>
@@ -115,16 +113,7 @@ Current Contact, Address, and Employment Info.</h5>
         <td class="td-label">E-mail Address</td>
         <td class="td-value"><?php echo (is_object($report->ConsumerDetail->EmailAddress)?"":$report->ConsumerDetail->EmailAddress);?></td>
       </tr>
-    </table>
-  </div>
-  <!-- Second personal details -->
-  <div class="col-table-second-div">
-  <table class="table-list">
-      <tr>
-        <th class="th-size-second-first-div"></th>
-       <th class="th-size-second-second-div"></th>
-      </tr>
-      <tr class="tr-label">
+	  <tr class="tr-label">
         <td class="td-label">External Reference No.</td>
         <td class="td-value"><?php echo (is_object($report->ConsumerDetail->ExternalReference)?"":$report->ConsumerDetail->ExternalReference);?></td>
        </tr>
@@ -153,9 +142,9 @@ Current Contact, Address, and Employment Info.</h5>
         <td class="td-value"><?php echo (is_object($report->ConsumerDetail->EmployerDetail)?"":$report->ConsumerDetail->EmployerDetail);?></td>
       </tr>   
     </table>
-  </div>
-  
-</div>
+ 
+  <!-- Second personal details -->
+ 
   </div><br/><br/>
                       <!-- End of Personal Details Summary-->
                      
@@ -371,10 +360,10 @@ Current Contact, Address, and Employment Info.</h5>
 								<tr class="border_bottom">
 									<td><?php echo $report->ConsumerTelephoneLinkageCellular->ConsumerID;?></td>
 									<td><?php echo $report->ConsumerTelephoneLinkageCellular->ConsumerName." ".$ConsumerTelephoneLinkageCellular->Surname;?></td>
-									<td><?php echo $report->ConsumerTelephoneLinkageCellular->CellularNo;?></td>
-									<td><?php echo $report->ConsumerTelephoneLinkageCellular->HomeTelephone;?></td>
-									<td><?php echo $report->ConsumerTelephoneLinkageCellular->IDNo;?></td>
-									<td><?php echo $report->ConsumerTelephoneLinkageCellular->PassportNo;?></td>
+									<td><?php echo (is_object($report->ConsumerTelephoneLinkageCellular->CellularNo)?"":$report->ConsumerTelephoneLinkageCellular->CellularNo);?></td>
+									<td><?php echo (is_object($report->ConsumerTelephoneLinkageCellular->HomeTelephone)?"":$report->ConsumerTelephoneLinkageCellular->HomeTelephone);?></td>
+									<td><?php echo (is_object($report->ConsumerTelephoneLinkageCellular->IDNo)?"":$report->ConsumerTelephoneLinkageCellular->IDNo);?></td>
+									<td><?php echo (is_object($report->ConsumerTelephoneLinkageCellular->PassportNo)?"":$report->ConsumerTelephoneLinkageCellular->PassportNo);?></td>
 								</tr>
 						<?php } ?>
                     </table>
