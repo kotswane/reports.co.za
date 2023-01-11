@@ -228,11 +228,7 @@ class Tracereport extends CI_Controller {
 			
 			if ($this->input->post("cellphoneCode") != "" && $this->input->post("cellphoneNo") != ""){
 				$code = $this->input->post("cellphoneCode");
-				$number = $this->input->post("cellphoneNo");
-				
-			}else if($this->input->post("telephoneCode") != "" && $this->input->post("telephoneNo") != ""){
-				$code = $this->input->post("telephoneCode");
-				$number = $this->input->post("telephoneNo");
+				$number = $this->input->post("cellphoneNo");	
 			}
 
 			$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));

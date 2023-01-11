@@ -194,7 +194,7 @@ class Indigentreport extends CI_Controller {
 			
 			$this->load->library('pdf');
 			$html = $this->load->view('indigentreport/pdf-indigent-report',$data, true);
-			$this->pdf->createPDF($html, "customer-tracereport-".time(), true);
+			$this->pdf->createPDF($html, "indigent-report-".time(), true);
 
 		}catch(Exception $ex){
 			print_r($ex);

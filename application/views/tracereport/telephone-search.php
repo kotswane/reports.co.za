@@ -24,34 +24,22 @@
         <form data-toggle="validator" role="Telephone Search form" action="<?php echo site_url();?>/tracereport/telephonesearch" method="post">
             <div class="box-body">
                     <ul class="nav nav-tabs">
-                    <li><a data-toggle="tab" href="#tab1">Cell Number</a></li>
-                    <li><a data-toggle="tab" href="#tab2">Landline Number</a></li>
+                    <li><a data-toggle="tab" href="#tab1">Cellphone/Landline Number</a></li>
                   </ul>
 
                   <div class="tab-content">
                     <div id="tab1" class="tab-pane fade in active">
                         <br>
                         <div class="form-group">
-                        <label class="col-form-label">Cellphone Code</label>
-                            <input type="text" class="form-control" name="cellphoneCode" value="<?php echo set_value('cellphoneCode');?>" id="cellphoneCode" name="cellphoneCode" placeholder="Enter Cell Number Code" maxlength="3" autofocus/>
+                        <label class="col-form-label">Cellphone/Landline Code</label>
+                            <input type="text" class="form-control" name="cellphoneCode" value="<?php echo set_value('cellphoneCode');?>" id="cellphoneCode" name="cellphoneCode" placeholder="Cellphone/Landline Code" maxlength="3" autofocus required />
                         </div>
                         <div class="form-group">
-                        <label class="col-form-label">Cellphone Number</label>
-                            <input type="text" class="form-control" name="cellphoneNo" value="<?php echo set_value('cellphoneNo');?>" id="cellphoneNo" name="cellphoneNo" placeholder="Enter Cell Number" maxlength="7"/>
+                        <label class="col-form-label">Cellphone/Landline Number</label>
+                            <input type="text" class="form-control" name="cellphoneNo" value="<?php echo set_value('cellphoneNo');?>" id="cellphoneNo" name="cellphoneNo" placeholder="Cellphone/Landline Number" maxlength="7" required />
                         </div>
                     </div>
- 
-                    <div id="tab2" class="tab-pane fade">
-                        <br>
-                         <div class="form-group">
-                         <label class="col-form-label">Telephone Code</label>
-                            <input type="text" class="form-control"  name="telephoneCode" value="<?php echo set_value('telephoneCode');?>" id="telephoneCode" name="telephoneCode" placeholder="Enter Telephone Number Code" maxlength="3"/>
-                        </div>
-                        <div class="form-group">
-                        <label class="col-form-label">Telephone Number</label>
-                            <input type="text" class="form-control" name="telephoneNo" value="<?php echo set_value('telephoneNo');?>" id="telephoneNo" name="telephoneNo" placeholder="Enter Telephone Number" maxlength="7"/>
-                        </div>
-                  </div>
+
             </div>
             </div>
             <div class="box-footer">
