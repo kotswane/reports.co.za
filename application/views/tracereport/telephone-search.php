@@ -73,12 +73,12 @@
 			?>
 			
             <tr>
-              <td><?php echo $consumerListValue['Reference'];?></td>
-              <td><?php echo $consumerListValue['FirstName']." ".(!is_array($consumerListValue['SecondName'])?$consumerListValue['SecondName']:"")." ".(!is_array($consumerListValue['ThirdName'])?$consumerListValue['ThirdName']:"")." ".(!is_array($consumerListValue['Surname'])?$consumerListValue['Surname']:"");?></td>
-              <td><?php echo $consumerListValue['IDNo'];?></td>
+              <td><?php echo $consumerListValue->Reference;?></td>
+              <td><?php echo $consumerListValue->FirstName." ".(!is_object($consumerListValue->SecondName)?$consumerListValue->SecondName:"")." ".(!is_object($consumerListValue->ThirdName)?$consumerListValue->ThirdName:"")." ".(!is_object($consumerListValue->Surname)?$consumerListValue->Surname:"");?></td>
+              <td><?php echo (!is_object($consumerListValue->IDNo)?$consumerListValue->IDNo:"");?></td>
               <td><?php echo $consumerList['DetailsViewed'][$consumerListKey];?></td>
               <td>
-               <a type="button"  href="<?php echo site_url()?>/tracereport/customerdatalist/<?php echo $consumerListValue['EnquiryID'];?>/<?php echo $consumerListValue['EnquiryResultID'];?>"  class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;View</a> 
+               <a type="button"  href="<?php echo site_url()?>/tracereport/customerdatalist/<?php echo $consumerListValue->EnquiryID;?>/<?php echo $consumerListValue->EnquiryResultID;?>"  class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;View</a> 
               </td>
             </tr>
 			<?php }?>

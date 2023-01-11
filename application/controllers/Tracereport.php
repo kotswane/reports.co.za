@@ -263,6 +263,7 @@ class Tracereport extends CI_Controller {
 			
 
 			$xml = simplexml_load_string($response->ConnectTelephoneMatchResult,"SimpleXMLElement");
+		
 			if ($xml->NotFound || $xml->Error){
 				
 				$data["errorMessage"] = (($xml->NotFound)?$xml->NotFound:$xml->Error);
@@ -270,16 +271,41 @@ class Tracereport extends CI_Controller {
 			}else{
 				$data["consumerList"]["details"] = array();
 				$objJsonDocument = json_encode($xml);
-				$arrOutput = json_decode($objJsonDocument, TRUE);
+				$arrOutput = json_decode($objJsonDocument);
+				if(is_array($arrOutput->ConsumerDetails)){
+					foreach($arrOutput->ConsumerDetails as $arrOutputListValueListValue){
 
-				foreach($arrOutput as $arrOutputListKey => $arrOutputListValue){
-					
-					if (!is_array($arrOutputListValue)){
-						
 						$data["consumerList"]["details"][]= $arrOutputListValueListValue;
+						
 						$response = $this->client->AdminEnquiryResult(array(
 						'ConnectTicket' => $this->session->userdata('tokenId'),
-						'EnquiryResultID' => $arrOutputListValueListValue['EnquiryResultID']));
+						'EnquiryResultID' => $arrOutputListValueListValue->EnquiryResultID));
+						
+						$xml = simplexml_load_string($response->AdminEnquiryResultResult,"SimpleXMLElement");
+						$objJsonDocument = json_encode($xml);
+						$arrOutput = json_decode($objJsonDocument, TRUE);
+						$data["consumerList"]["DetailsViewed"][]= (($arrOutput["Result"]["DetailsViewedYN"]=="true")? "Yes":"No");
+					}
+				}else{
+						$data["consumerList"]["details"][]= $arrOutput->ConsumerDetails;
+						$response = $this->client->AdminEnquiryResult(array(
+						'ConnectTicket' => $this->session->userdata('tokenId'),
+						'EnquiryResultID' => $arrOutput->ConsumerDetails->EnquiryResultID));
+						
+						$xml = simplexml_load_string($response->AdminEnquiryResultResult,"SimpleXMLElement");
+						$objJsonDocument = json_encode($xml);
+						$arrOutput = json_decode($objJsonDocument, TRUE);
+						$data["consumerList"]["DetailsViewed"][]= (($arrOutput["Result"]["DetailsViewedYN"]=="true")? "Yes":"No");
+				}
+				//die();
+				/*foreach($arrOutput as $arrOutputListKey => $arrOutputListValue){
+					
+					if (!is_array($arrOutputListValue)){
+							 
+						$data["consumerList"]["details"][]= $arrOutputListValue;
+						$response = $this->client->AdminEnquiryResult(array(
+						'ConnectTicket' => $this->session->userdata('tokenId'),
+						'EnquiryResultID' => $arrOutputListValue['EnquiryResultID']));
 						
 						$xml = simplexml_load_string($response->AdminEnquiryResultResult,"SimpleXMLElement");
 						$objJsonDocument = json_encode($xml);
@@ -287,8 +313,8 @@ class Tracereport extends CI_Controller {
 						$data["consumerList"]["DetailsViewed"][]= (($arrOutput["Result"]["DetailsViewedYN"]=="true")? "Yes":"No");
 					
 					}else{
-						foreach($arrOutputListValue as $arrOutputListValueListKey => $arrOutputListValueListValue){
-							
+						foreach($arrOutputListValue as $arrOutputListValueListValue){
+
 							$data["consumerList"]["details"][]= $arrOutputListValueListValue;
 							
 							$response = $this->client->AdminEnquiryResult(array(
@@ -301,7 +327,7 @@ class Tracereport extends CI_Controller {
 							$data["consumerList"]["DetailsViewed"][]= (($arrOutput["Result"]["DetailsViewedYN"]=="true")? "Yes":"No");
 						}
 					}
-				}
+				}*/
 			}
 		} else {
 			$data["consumerList"]["details"] = array();
