@@ -35,7 +35,7 @@
         </div>
         <pre>
         <?php
-		 //print_r($familyData);
+		// print_r($report);
 		 //die();
 		 
 		 if(is_array($familyData->Consumer) > 0){
@@ -64,9 +64,9 @@
                 <div class="panel-body">
                     <div class="col">
                    
-                        <div class="col-xs-4">ID No:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HAIDNO)?"":$myData->HAIDNO);?></span></strong></div>
-                        <div class="col-xs-4">First Name:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HANames)?"":$myData->HANames);?></span></strong></div>
-                        <div class="col-xs-4">Surname:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HASurname)?"":$myData->HASurname);?></span></strong></div>
+                        <div class="col-xs-4">ID No:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HAIDNO)?$report['ConsumerDetail']['IDNo']:$myData->HAIDNO);?></span></strong></div>
+                        <div class="col-xs-4">First Name:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HANames)?$report['ConsumerDetail']['FirstName']." ".$report['ConsumerDetail']['SecondName']:$myData->HANames);?></span></strong></div>
+                        <div class="col-xs-4">Surname:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HASurname)?$report['ConsumerDetail']['Surname']:$myData->HASurname);?></span></strong></div>
 						<div class="col-xs-4">Deceased Status:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HADeceasedStatus)?"":$myData->HADeceasedStatus);?></span></strong></div>
                         <div class="col-xs-4">ID Book Issue Date:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HAIDBookIssuedDate)?"":$myData->HAIDBookIssuedDate);?></span></strong></div>
                         <div class="col-xs-4">ID Card Issued:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->IdCardInd)?"":$myData->IdCardInd);?></span></strong></div>
