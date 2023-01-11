@@ -115,17 +115,19 @@ class Indigentreport extends CI_Controller {
 					'ProductID' => 239, 
 					'IdNumber' => $idnumber));
 				$xml = simplexml_load_string($response->ConnectGetFamilyIDPhotoVerificationResult);
+		
 	
 		if ($xml->Error || $xml->NotFound){
 			$data["familyData"] = array();
 			$this->session->set_userdata(array('familyData' =>$data['familyData']));
 			$data["content"] = "indigentreport/showreport";
+			
 			$this->load->view('site',$data);
 		}else {
 			
 			$objJsonDocument = json_encode($xml);
 			$arrOutput = json_decode($objJsonDocument);
-			
+	
 			$data['familyData']= $arrOutput;
 			$this->session->set_userdata(array('familyData' =>$data['familyData']));
 			
@@ -138,13 +140,14 @@ class Indigentreport extends CI_Controller {
 			$response = $this->client->ConnectDirectorMatch(array(
 					'ConnectTicket' => $this->session->userdata('tokenId'), 
 					'IdNumber' => $idnumber));
+			$xml = simplexml_load_string($response->ConnectDirectorMatchResult);		
 			if ($xml->Error || $xml->NotFound){
 				$data['directorship']= "";
 			}else{
-				$xml = simplexml_load_string($response->ConnectDirectorMatchResult);
+				
 				$objJsonDocument = json_encode($xml);
 			    $arrOutput = json_decode($objJsonDocument);				
-			
+
 				$resp = $this->client->IsTicketValid($IsTicketValid);
 				if($resp->IsTicketValidResult != true || $resp->IsTicketValidResult ==""){
 					$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
