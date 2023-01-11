@@ -41,6 +41,9 @@ class Tracereport extends CI_Controller {
 	 }
 	 
 	public function index(){
+		if(!$this->session->userdata('username')){
+			 redirect('user/login');
+		}
 		$data["successFlash"] = "";
 		$data["errorFlash"] = "";
 		$data["infoFlash"] = "";
@@ -52,6 +55,9 @@ class Tracereport extends CI_Controller {
 	}
 	
 	public function idsearch(){
+		if(!$this->session->userdata('username')){
+			 redirect('user/login');
+		}		
 		$data["successFlash"] = "";
 		$data["infoFlash"] = "";
 		$data["errorFlash"] = "";
@@ -110,6 +116,9 @@ class Tracereport extends CI_Controller {
 	}
 	
 	public function addresssearch(){
+		if(!$this->session->userdata('username')){
+			 redirect('user/login');
+		}
 		$data["reports_type"] = $this->reports_type;
 		$data["reports"] = $this->reports;		
 		$data["successFlash"] = "";
@@ -212,6 +221,9 @@ class Tracereport extends CI_Controller {
 	}
 	
 	public function telephonesearch(){
+		if(!$this->session->userdata('username')){
+			 redirect('user/login');
+		}
 		$data["reports_type"] = $this->reports_type;
 		$data["reports"] = $this->reports;		
 		$data["successFlash"] = "";
@@ -295,7 +307,9 @@ class Tracereport extends CI_Controller {
 	}
 	
 	private function getSearchData($enquiryID, $enquiryResultID){
-		
+		if(!$this->session->userdata('username')){
+			 redirect('user/login');
+		}
 		$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
 		
 		$this->client = $this->mysoapclient->getClient();
@@ -319,7 +333,9 @@ class Tracereport extends CI_Controller {
 	}
 	
 	public function customerdatalist(){
-		
+		if(!$this->session->userdata('username')){
+			 redirect('user/login');
+		}		
 
 		$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
 		
@@ -356,6 +372,9 @@ class Tracereport extends CI_Controller {
 	
 	
 	public function downloadidreport(){
+		if(!$this->session->userdata('username')){
+			 redirect('user/login');
+		}
 		try{
 			ob_clean();
 			$data['report'] = $this->session->userdata('report');

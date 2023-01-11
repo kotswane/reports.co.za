@@ -37,6 +37,9 @@ class Indigentreport extends CI_Controller {
 	 
 	
 	public function idsearch(){
+		if(!$this->session->userdata('username')){
+			 redirect('user/login');
+		}
 		$data["reports_type"] = $this->reports_type;
 		$data["reports"] = $this->reports;		
 		$data["successFlash"] = "";
@@ -85,6 +88,9 @@ class Indigentreport extends CI_Controller {
 	}
 	
 	public function getreport(){
+		if(!$this->session->userdata('username')){
+			 redirect('user/login');
+		}
 		$this->session->unset_userdata("directorship");
 		$this->session->unset_userdata("familyData");
 		$this->session->unset_userdata("report");
@@ -162,7 +168,9 @@ class Indigentreport extends CI_Controller {
 		}
 	}
 	private function getSearchData($enquiryID, $enquiryResultID){
-		
+		if(!$this->session->userdata('username')){
+			 redirect('user/login');
+		}		
 		$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
 		
 		$this->client = $this->mysoapclient->getClient();
@@ -186,6 +194,9 @@ class Indigentreport extends CI_Controller {
 	}
 	
 	public function downloadidreport(){
+		if(!$this->session->userdata('username')){
+			 redirect('user/login');
+		}
 		try{
 			ob_clean();
 			$data['report'] = $this->session->userdata('report');

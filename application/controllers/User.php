@@ -18,6 +18,12 @@ class User extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/userguide3/general/urls.html
 	 */
+	public function index()
+	{
+			$data['errorSession'] = "username and password required"; 
+			$this->load->view('login',$data);
+	}
+	
 	public function login()
 	{
 		$data['logoutSession'] = ""; 
@@ -29,17 +35,24 @@ class User extends CI_Controller {
 		
 		if ($this->form_validation->run() != FALSE)
 		{
-				$client = $this->mysoapclient->getClient();
-				$loginRequest = array("strUser"=>$this->input->post("username"),"strPwd"=>$this->input->post("password"));
-				
-				$loginResponse = $client->Login($loginRequest);
-
-				if ($loginResponse->LoginResult == "UserNotFound" || $loginResponse->LoginResult == "NotAuthenticated"){
-					$data['errorSession'] = $loginResponse->LoginResult; 
+				$this->load->model("User_model");
+				if($this->User_model->login(array("username"=>$this->input->post("username"),"password"=>$this->input->post("password"))) == -1){
+					$data['errorSession'] = "Invalid username and password"; 
 					$this->load->view('login',$data);
 				}else{
-					$this->session->set_userdata(array('username' => $this->input->post("username"),'isloggedin' => true,'tokenId' => $loginResponse->LoginResult));
-					redirect('/tracereport');
+					$client = $this->mysoapclient->getClient();
+					$loginRequest = array("strUser"=>"LKcentrix_UAT","strPwd"=>"xds100");
+					
+					$loginResponse = $client->Login($loginRequest);
+
+					if ($loginResponse->LoginResult == "UserNotFound" || $loginResponse->LoginResult == "NotAuthenticated"){
+						//$data['errorSession'] = $loginResponse->LoginResult; 
+						$data['errorSession'] = "Invalid username and password"; 
+						$this->load->view('login',$data);
+					}else{
+						$this->session->set_userdata(array('username' => $this->input->post("username"),'isloggedin' => true,'tokenId' => $loginResponse->LoginResult));
+						redirect('/tracereport');
+					}
 				}
 		}
 		else

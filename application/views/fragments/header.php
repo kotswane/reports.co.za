@@ -1,6 +1,6 @@
 <div class="header">
     <!-- Logo -->
-    <a class="logo" href="index2.html">
+    <a class="logo" >
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>S</b>AL</span>
         <!-- logo for regular state and mobile devices -->

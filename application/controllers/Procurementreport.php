@@ -45,6 +45,9 @@ class Procurementreport extends CI_Controller {
 	 
 	
 	public function companyname(){
+		if(!$this->session->userdata('username')){
+			 redirect('user/login');
+		}
 		$data["reports_type"] = $this->reports_type;
 		$data["reports"] = $this->reports;		
 		$data["successFlash"] = "";
@@ -121,7 +124,9 @@ class Procurementreport extends CI_Controller {
 	}
 	
 	public function companyregistrationno(){
-		
+		if(!$this->session->userdata('username')){
+			 redirect('user/login');
+		}		
 		$data["reports_type"] = $this->reports_type;
 		$data["reports"] = $this->reports;
 		$data["successFlash"] = "";
