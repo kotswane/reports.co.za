@@ -136,7 +136,7 @@ class Tracereport extends CI_Controller {
 				redirect('user/login');
 			}
 		
-		$response = $this->client->ConnectAddressMatch(array(
+			$response = $this->client->ConnectAddressMatch(array(
 				'Province' => $this->input->post('listprovinces'),
 				'Suburb' => $this->input->post('suburb'), 
 				'City' => $this->input->post('city'), 
@@ -155,7 +155,7 @@ class Tracereport extends CI_Controller {
 				}else{
 					$data["errorMessage"] = $xml->NotFound;
 				}
-				
+				$data["consumerList"]["details"] = array();
 			}else{
 				$data["consumerList"]["details"] = array();
 				$objJsonDocument = json_encode($xml);
@@ -166,10 +166,15 @@ class Tracereport extends CI_Controller {
 					if (!is_array($arrOutputListValue)){
 						$data["consumerList"]["details"][]= $arrOutputListValue;
 						
+						$resp = $this->client->IsTicketValid($IsTicketValid);
+						if($resp->IsTicketValidResult != true || $resp->IsTicketValidResult ==""){
+							$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
+							redirect('user/login');
+						}
 						$response = $this->client->AdminEnquiryResult(array(
 						'ConnectTicket' => $this->session->userdata('tokenId'),
 						'EnquiryResultID' => $arrOutputListValue['EnquiryResultID']));
-						
+				
 						$xml = simplexml_load_string($response->AdminEnquiryResultResult,"SimpleXMLElement");
 						$objJsonDocument = json_encode($xml);
 						$arrOutput = json_decode($objJsonDocument, TRUE);
@@ -179,7 +184,11 @@ class Tracereport extends CI_Controller {
 							foreach($arrOutputListValue as $arrOutputListValueListKey => $arrOutputListValueListValue){
 							
 							$data["consumerList"]["details"][]= $arrOutputListValueListValue;
-							
+							$resp = $this->client->IsTicketValid($IsTicketValid);
+							if($resp->IsTicketValidResult != true || $resp->IsTicketValidResult ==""){
+								$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
+								redirect('user/login');
+							}
 							$response = $this->client->AdminEnquiryResult(array(
 							'ConnectTicket' => $this->session->userdata('tokenId'),
 							'EnquiryResultID' => $arrOutputListValueListValue['EnquiryResultID']));
@@ -195,8 +204,9 @@ class Tracereport extends CI_Controller {
 				
 			}
 			
+		}else{
+			$data["consumerList"]["details"] = array();
 		}
-		
 		$data["content"] = "tracereport/addresssearch";
 		$this->load->view('site',$data);	
 	}
@@ -244,6 +254,7 @@ class Tracereport extends CI_Controller {
 			$xml = simplexml_load_string($response->ConnectTelephoneMatchResult,"SimpleXMLElement");
 			if ($xml->NotFound){
 				$data["errorMessage"] = $xml->NotFound;
+				$data["consumerList"]["details"] = array();
 			}else{
 				$data["consumerList"]["details"] = array();
 				$objJsonDocument = json_encode($xml);
@@ -279,6 +290,8 @@ class Tracereport extends CI_Controller {
 					}
 				}
 			}
+		} else {
+			$data["consumerList"]["details"] = array();
 		}
 		$data["content"] = "tracereport/telephone-search";
 		$this->load->view('site',$data);
