@@ -54,6 +54,15 @@
 			 $myConsumerEmploymentHistory = $familyData->Consumer->ConsumerEmploymentHistory;
 			 $hasMultiRecords  = false;
 		 }
+		 
+		 
+		 if (is_object($myData->HANames)){
+			 $firstName = $report['ConsumerDetail']['FirstName']." ";
+		 }
+		 if (!is_array($report['ConsumerDetail']['SecondName'])){
+			 $secondName = $report['ConsumerDetail']['SecondName'];
+		 }
+		 $name=$firstName.$secondName
 
 		?>
 		</pre>
@@ -65,7 +74,7 @@
                     <div class="col">
                    
                         <div class="col-xs-4">ID No:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HAIDNO)?$report['ConsumerDetail']['IDNo']:$myData->HAIDNO);?></span></strong></div>
-                        <div class="col-xs-4">First Name:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HANames)?$report['ConsumerDetail']['FirstName']." ".$report['ConsumerDetail']['SecondName']:$myData->HANames);?></span></strong></div>
+                        <div class="col-xs-4">First Name:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HANames)?$name:$myData->HANames);?></span></strong></div>
                         <div class="col-xs-4">Surname:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HASurname)?$report['ConsumerDetail']['Surname']:$myData->HASurname);?></span></strong></div>
 						<div class="col-xs-4">Deceased Status:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HADeceasedStatus)?"":$myData->HADeceasedStatus);?></span></strong></div>
                         <div class="col-xs-4">ID Book Issue Date:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HAIDBookIssuedDate)?"":$myData->HAIDBookIssuedDate);?></span></strong></div>
