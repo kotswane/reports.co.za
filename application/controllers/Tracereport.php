@@ -234,13 +234,16 @@ class Tracereport extends CI_Controller {
 		
 		if ($this->input->post("postback")=="post"){
 			
-			if(!$this->input->post('cellphoneCode')){
+			if((!$this->input->post('cellphoneNo')) && (!$this->input->post('telephoneNo'))){
 				redirect('tracereport/telephonesearch');
 			}	
 			
-			if ($this->input->post("cellphoneCode") != "" && $this->input->post("cellphoneNo") != ""){
-				$code = $this->input->post("cellphoneCode");
-				$number = $this->input->post("cellphoneNo");	
+			if ($this->input->post("cellphoneNo") != ""){
+				$code = substr($this->input->post("cellphoneNo"),0,3);
+				$number = substr($this->input->post("cellphoneNo"),3,strlen($this->input->post("cellphoneNo")));
+			}else if ($this->input->post("telephoneNo") != ""){
+				$code = substr($this->input->post("telephoneNo"),0,3);
+				$number = substr($this->input->post("telephoneNo"),3,strlen($this->input->post("telephoneNo")));	
 			}
 
 			$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
@@ -260,17 +263,19 @@ class Tracereport extends CI_Controller {
 			
 
 			$xml = simplexml_load_string($response->ConnectTelephoneMatchResult,"SimpleXMLElement");
-			if ($xml->NotFound){
-				$data["errorMessage"] = $xml->NotFound;
+			if ($xml->NotFound || $xml->Error){
+				
+				$data["errorMessage"] = (($xml->NotFound)?$xml->NotFound:$xml->Error);
 				$data["consumerList"]["details"] = array();
 			}else{
 				$data["consumerList"]["details"] = array();
 				$objJsonDocument = json_encode($xml);
 				$arrOutput = json_decode($objJsonDocument, TRUE);
-				
+
 				foreach($arrOutput as $arrOutputListKey => $arrOutputListValue){
 					
 					if (!is_array($arrOutputListValue)){
+						
 						$data["consumerList"]["details"][]= $arrOutputListValueListValue;
 						$response = $this->client->AdminEnquiryResult(array(
 						'ConnectTicket' => $this->session->userdata('tokenId'),

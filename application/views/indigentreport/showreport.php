@@ -33,8 +33,8 @@
 			<br clear="all" />
             </div>
         </div>
-        <pre>
-        <?php
+      
+	 <?php 
 		// print_r($report);
 		 //die();
 		 
@@ -62,10 +62,11 @@
 		 if (!is_array($report['ConsumerDetail']['SecondName'])){
 			 $secondName = $report['ConsumerDetail']['SecondName'];
 		 }
-		 $name=$firstName.$secondName
+		 $name=$firstName.$secondName;
 
-		?>
-		</pre>
+		if($myData->HAErrorDescription){?>
+				<div class="alert alert-danger" role="alert"><?php echo $myData->HAErrorDescription;?></div>
+		<?php } ?>
         <div class="box-body no-padding">
 
               <div class="panel panel-primary">

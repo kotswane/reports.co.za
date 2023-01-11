@@ -24,23 +24,22 @@
         <form data-toggle="validator" role="Telephone Search form" action="<?php echo site_url();?>/tracereport/telephonesearch" method="post">
             <div class="box-body">
                     <ul class="nav nav-tabs">
-                    <li><a data-toggle="tab" href="#tab1">Cellphone/Landline Number</a></li>
-                  </ul>
+                    <li><a data-toggle="tab" href="#tab1">Telephone search</a></li>
+					</ul>
 
                   <div class="tab-content">
                     <div id="tab1" class="tab-pane fade in active">
                         <br>
                         <div class="form-group">
-                        <label class="col-form-label">Cellphone/Landline Code</label>
-                            <input type="text" class="form-control" name="cellphoneCode" value="<?php echo set_value('cellphoneCode');?>" id="cellphoneCode" name="cellphoneCode" placeholder="Cellphone/Landline Code" maxlength="3" autofocus required />
+							<label class="col-form-label">Cellphone Number</label>
+                            <input type="text" class="form-control" name="cellphoneNo"  id="cellphoneNo" name="cellphoneNo" placeholder="e.g 0839685521" maxlength="10" />
                         </div>
-                        <div class="form-group">
-                        <label class="col-form-label">Cellphone/Landline Number</label>
-                            <input type="text" class="form-control" name="cellphoneNo" value="<?php echo set_value('cellphoneNo');?>" id="cellphoneNo" name="cellphoneNo" placeholder="Cellphone/Landline Number" maxlength="7" required />
+						<div class="form-group">
+							<label class="col-form-label">Landline Number</label>
+                            <input type="text" class="form-control" name="telephoneNo"  id="telephoneNo" name="telephoneNo" placeholder="e.g 0115403366" maxlength="10" />
                         </div>
                     </div>
-
-            </div>
+				</div>
             </div>
             <div class="box-footer">
                 <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i>&nbsp; Search</button>
