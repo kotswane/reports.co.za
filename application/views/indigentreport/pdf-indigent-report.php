@@ -154,7 +154,11 @@
 			<tr class="tr-label">
 				<td class="td-label">Category</td>
 				<td class="td-value"><?php echo $report['ConsumerScoring']['RiskCategory'];?></td>
-			</tr>						
+			</tr>	
+			<tr class="tr-label">
+				<td class="td-label">Exception</td>
+				<td class="td-value"><?php echo $report['ConsumerScoring']['Exception_Code'];?></td>
+			</tr>			
 		</table>
 	</div><br/><br/>
 
