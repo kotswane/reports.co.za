@@ -134,6 +134,78 @@ class Procurementreport extends CI_Controller {
 		$data["errorFlash"] = "";
 		$data["errorMessage"] = "";
 		$data["consumerList"] = array();
+
+		
+		if ($this->input->post("postback")=="post"){
+			
+			if(!$this->input->post('companyregistrationno')){
+				redirect('procurementreport/companyregistrationno');
+			}	
+			
+
+			$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
+			
+			$this->client = $this->mysoapclient->getClient();
+			$this->latestclient = $this->mysoapclient->getClientlatest();
+			$resp = $this->client->IsTicketValid($IsTicketValid);
+			if($resp->IsTicketValidResult != true || $resp->IsTicketValidResult ==""){
+				$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
+				redirect('user/login');
+			}
+		
+			$regnumb = explode("/",$this->input->post('companyregistrationno'));
+			if(count($regnumb) < 3){
+				$data["errorMessage"] = "invalid Company Registration Number Format, please use the correct formr eg. 2222/444426/12";
+				$data["content"] = "procurementreport/companyregistrationno";
+				$this->load->view('site',$data);
+			} else {
+				$response = $this->client->ConnectBusinessMatch(array(
+					'Reg1' => $code,
+					'Reg2' => $code,
+					'Reg3' => $code,
+					'ConnectTicket' => $this->session->userdata('tokenId')));
+				
+
+				$xml = simplexml_load_string($response->ConnectTelephoneMatchResult,"SimpleXMLElement");
+				if ($xml->NotFound){
+					$data["errorMessage"] = $xml->NotFound;
+				}else{
+					$data["consumerList"]["details"] = array();
+					$objJsonDocument = json_encode($xml);
+					$arrOutput = json_decode($objJsonDocument, TRUE);
+					
+					foreach($arrOutput as $arrOutputListKey => $arrOutputListValue){
+						
+						if (!is_array($arrOutputListValue)){
+							$data["consumerList"]["details"][]= $arrOutputListValueListValue;
+							$response = $this->client->AdminEnquiryResult(array(
+							'ConnectTicket' => $this->session->userdata('tokenId'),
+							'EnquiryResultID' => $arrOutputListValueListValue['EnquiryResultID']));
+							
+							$xml = simplexml_load_string($response->AdminEnquiryResultResult,"SimpleXMLElement");
+							$objJsonDocument = json_encode($xml);
+							$arrOutput = json_decode($objJsonDocument, TRUE);
+							$data["consumerList"]["DetailsViewed"][]= (($arrOutput["Result"]["DetailsViewedYN"]=="true")? "Yes":"No");
+						
+						}else{
+							foreach($arrOutputListValue as $arrOutputListValueListKey => $arrOutputListValueListValue){
+								
+								$data["consumerList"]["details"][]= $arrOutputListValueListValue;
+								
+								$response = $this->client->AdminEnquiryResult(array(
+								'ConnectTicket' => $this->session->userdata('tokenId'),
+								'EnquiryResultID' => $arrOutputListValueListValue['EnquiryResultID']));
+								
+								$xml = simplexml_load_string($response->AdminEnquiryResultResult,"SimpleXMLElement");
+								$objJsonDocument = json_encode($xml);
+								$arrOutput = json_decode($objJsonDocument, TRUE);
+								$data["consumerList"]["DetailsViewed"][]= (($arrOutput["Result"]["DetailsViewedYN"]=="true")? "Yes":"No");
+							}
+						}
+					}
+				}
+			}
+		}
 		$data["content"] = "procurementreport/companyregistrationno";
 		$this->load->view('site',$data);
 		

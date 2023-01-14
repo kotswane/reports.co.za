@@ -30,7 +30,7 @@ class Indigentreport extends CI_Controller {
 			 redirect('user/login');
 		}
 		
-		
+		$this->load->model("Auditlog_model");
 		$this->reports = $this->Report_model->list_reports();
 		$this->reports_type = $this->Report_type_model->list_reports_type();	
 	 }
@@ -70,6 +70,22 @@ class Indigentreport extends CI_Controller {
 			$xml = simplexml_load_string($responseConsumer->ConnectConsumerMatchResult);
 			
 			if ($xml->Error || $xml->NotFound){
+				
+				$auditlog = array(
+					"auditlog_reportname"=>"indigentreport",
+					"auditlog_userId"=>$this->session->userdata('userId'),
+					"auditlog_reporttype"=>"id-search",
+					"auditlog_searchdata"=>json_encode(array(
+					'IdNumber'=>$this->input->post('idno'),
+					'ConnectTicket'=>$this->session->userdata('tokenId'),
+					'ProductId' => 132,
+					'EnquiryReason' => 'Consumer Trace'
+					)),
+					"auditlog_fnexecuted" => "ConnectConsumerMatch",
+					"auditlog_issuccess" => false
+				);
+				$this->Auditlog_model->save($auditlog);
+				
 				if($xml->Error){
 					$data["errorMessage"] = $xml->Error[0];
 				}else{
@@ -80,6 +96,20 @@ class Indigentreport extends CI_Controller {
 				$objJsonDocument = json_encode($xml);
 				$arrOutput = json_decode($objJsonDocument, TRUE);
 				$data["consumerList"] = $arrOutput;
+				$auditlog = array(
+					"auditlog_reportname"=>"indigentreport",
+					"auditlog_userId"=>$this->session->userdata('userId'),
+					"auditlog_reporttype"=>"id-search",
+					"auditlog_searchdata"=>json_encode(array(
+					'IdNumber'=>$this->input->post('idno'),
+					'ConnectTicket'=>$this->session->userdata('tokenId'),
+					'ProductId' => 132,
+					'EnquiryReason' => 'Consumer Trace'
+					)),
+					"auditlog_fnexecuted" => "ConnectConsumerMatch",
+					"auditlog_issuccess" => true
+				);
+				$this->Auditlog_model->save($auditlog);
 			}
 			
 		}
@@ -118,12 +148,37 @@ class Indigentreport extends CI_Controller {
 		
 	
 		if ($xml->Error || $xml->NotFound){
+			
+			$auditlog = array(
+			"auditlog_reportname"=>"indigentreport",
+			"auditlog_userId"=>$this->session->userdata('userId'),
+			"auditlog_reporttype"=>"id-search",
+			"auditlog_searchdata"=>json_encode(array(
+			'ConnectTicket' => $this->session->userdata('tokenId'), 
+			'ProductID' => 239, 
+			'IdNumber' => $idnumber)),
+			"auditlog_fnexecuted" => "ConnectGetFamilyIDPhotoVerification",
+			"auditlog_issuccess" => false);
+			$this->Auditlog_model->save($auditlog);
+
+			
 			$data["familyData"] = array();
 			$this->session->set_userdata(array('familyData' =>$data['familyData']));
 			$data["content"] = "indigentreport/showreport";
 			
 			$this->load->view('site',$data);
 		}else {
+			$auditlog = array(
+			"auditlog_reportname"=>"indigentreport",
+			"auditlog_userId"=>$this->session->userdata('userId'),
+			"auditlog_reporttype"=>"id-search",
+			"auditlog_searchdata"=>json_encode(array(
+			'ConnectTicket' => $this->session->userdata('tokenId'), 
+			'ProductID' => 239, 
+			'IdNumber' => $idnumber)),
+			"auditlog_fnexecuted" => "ConnectGetFamilyIDPhotoVerification",
+			"auditlog_issuccess" => true);
+			$this->Auditlog_model->save($auditlog);
 			
 			$objJsonDocument = json_encode($xml);
 			$arrOutput = json_decode($objJsonDocument);
@@ -143,11 +198,32 @@ class Indigentreport extends CI_Controller {
 			$xml = simplexml_load_string($response->ConnectDirectorMatchResult);		
 			if ($xml->Error || $xml->NotFound){
 				$data['directorship']= "";
+				
+				$auditlog = array(
+				"auditlog_reportname"=>"indigentreport",
+				"auditlog_userId"=>$this->session->userdata('userId'),
+				"auditlog_reporttype"=>"id-search",
+				"auditlog_searchdata"=>json_encode(array(
+				'ConnectTicket' => $this->session->userdata('tokenId'),'IdNumber' => $idnumber)),
+				"auditlog_fnexecuted" => "ConnectDirectorMatch",
+				"auditlog_issuccess" => false);
+				$this->Auditlog_model->save($auditlog);
+			
 			}else{
 				
 				$objJsonDocument = json_encode($xml);
 			    $arrOutput = json_decode($objJsonDocument);				
 
+				$auditlog = array(
+				"auditlog_reportname"=>"indigentreport",
+				"auditlog_userId"=>$this->session->userdata('userId'),
+				"auditlog_reporttype"=>"id-search",
+				"auditlog_searchdata"=>json_encode(array(
+				'ConnectTicket' => $this->session->userdata('tokenId'),'IdNumber' => $idnumber)),
+				"auditlog_fnexecuted" => "ConnectDirectorMatch",
+				"auditlog_issuccess" => true);
+				$this->Auditlog_model->save($auditlog);
+				
 				$resp = $this->client->IsTicketValid($IsTicketValid);
 				if($resp->IsTicketValidResult != true || $resp->IsTicketValidResult ==""){
 					$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
@@ -159,6 +235,19 @@ class Indigentreport extends CI_Controller {
 				'EnquiryResultID' => $arrOutput->DirectorDetails->EnquiryResultID, 
 				'ConnectTicket' => $this->session->userdata('tokenId'), 
 				'ProductID' => 14));
+
+				$auditlog = array(
+				"auditlog_reportname"=>"indigentreport",
+				"auditlog_userId"=>$this->session->userdata('userId'),
+				"auditlog_reporttype"=>"id-search",
+				"auditlog_searchdata"=>json_encode(array(
+				'EnquiryID' => $arrOutput->DirectorDetails->EnquiryID,
+				'EnquiryResultID' => $arrOutput->DirectorDetails->EnquiryResultID, 
+				'ConnectTicket' => $this->session->userdata('tokenId'), 
+				'ProductID' => 14)),
+				"auditlog_fnexecuted" => "ConnectGetResult",
+				"auditlog_issuccess" => true);
+				$this->Auditlog_model->save($auditlog);
 				
 				$xml = simplexml_load_string($response->ConnectGetResultResult,"SimpleXMLElement");
 				$objJsonDocument = json_encode($xml);
@@ -193,6 +282,18 @@ class Indigentreport extends CI_Controller {
 		$xml = simplexml_load_string($response->ConnectGetResultResult,"SimpleXMLElement");
 		$objJsonDocument = json_encode($xml);
 		$arrOutput = json_decode($objJsonDocument, TRUE);
+			$auditlog = array(
+			"auditlog_reportname"=>"indigentreport",
+			"auditlog_userId"=>$this->session->userdata('userId'),
+			"auditlog_reporttype"=>"id-search",
+			"auditlog_searchdata"=>json_encode(array(
+			'EnquiryID' => $enquiryID,
+			'EnquiryResultID' => $enquiryResultID, 
+			'ConnectTicket' => $this->session->userdata('tokenId'), 
+			'ProductID' => 132)),
+			"auditlog_fnexecuted" => "ConnectGetResult",
+			"auditlog_issuccess" => true);
+		$this->Auditlog_model->save($auditlog);
 		return $arrOutput;
 	}
 	

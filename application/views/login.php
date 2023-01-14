@@ -15,9 +15,11 @@
     <link rel="stylesheet" href="<?php echo base_url();?>bower_components/Ionicons/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url();?>dist/css/LkCentrix.min.css">
+    <link rel="stylesheet" href="<?php echo base_url();?>dist/css/skin-blue.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="<?php echo base_url();?>plugins/iCheck/square/blue.css">
     <link rel="icon" href="<?php echo base_url();?>dist/img/lk-Logo.png">
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -26,6 +28,16 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+	    <style>
+        .alert .alert-info .login-page{
+                color: #172d44 !important;
+                    border-color: #efefef;
+        }
+        .login-page body{
+                background-color:#f9f9f9 !important;
+                	overflow:hidden;
+        }
+        </style>
 </head>
 <body>
 <div class="login-box">
@@ -56,8 +68,9 @@
                 <input type="password" class="form-control" name="password" placeholder="Password" value="<?php echo set_value('password'); ?>"/> <!-- th:field="*{password}" --> 
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
+			<div class="g-recaptcha" data-sitekey="<?php echo $this->config->item('google_key') ?>"></div> 
             <div class="row">
-                <div class="col-xs-4">
+                <div class="col-xs-12">
                     <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
                 </div>
             </div>

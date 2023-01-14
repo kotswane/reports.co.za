@@ -34,30 +34,50 @@ class User extends CI_Controller {
 
 		
 		if ($this->form_validation->run() != FALSE)
-		{
-				$this->load->model("User_model");
-				if($this->User_model->login(array("username"=>$this->input->post("username"),"password"=>$this->input->post("password"))) == -1){
-					$data['errorSession'] = "Invalid username and password"; 
+		{		
+				$recaptchaResponse = trim($this->input->post('g-recaptcha-response'));
+				$userIp=$this->input->ip_address();
+				$secret = $this->config->item('google_secret');
+				$url="https://www.google.com/recaptcha/api/siteverify?secret=".$secret."&response=".$recaptchaResponse."&remoteip=".$userIp;
+		 
+				$ch = curl_init(); 
+				curl_setopt($ch, CURLOPT_URL, $url); 
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+				$output = curl_exec($ch); 
+				curl_close($ch);      
+				 
+				$status= json_decode($output, true);
+				if ($status['success'] == true){
+					$data['errorSession'] = 'Sorry Google Recaptcha Unsuccessful!!';
 					$this->load->view('login',$data);
-				}else{
-					$client = $this->mysoapclient->getClient();
-					$loginRequest = array("strUser"=>"LKcentrix_UAT","strPwd"=>"xds100");
+				}else {
 					
-					$loginResponse = $client->Login($loginRequest);
-
-					if ($loginResponse->LoginResult == "UserNotFound" || $loginResponse->LoginResult == "NotAuthenticated"){
-						//$data['errorSession'] = $loginResponse->LoginResult; 
+					$this->load->model("User_model");
+					$login = $this->User_model->login(array("username"=>$this->input->post("username"),"password"=>$this->input->post("password")));
+					if($this->User_model->login(array("username"=>$this->input->post("username"),"password"=>$this->input->post("password"))) == -1){
 						$data['errorSession'] = "Invalid username and password"; 
 						$this->load->view('login',$data);
 					}else{
-						$this->session->set_userdata(array('username' => $this->input->post("username"),'isloggedin' => true,'tokenId' => $loginResponse->LoginResult));
-						redirect('/tracereport');
+						
+						$client = $this->mysoapclient->getClient();
+						$loginRequest = array("strUser"=>"LKcentrix_UAT","strPwd"=>"xds100");
+						
+						$loginResponse = $client->Login($loginRequest);
+
+						if ($loginResponse->LoginResult == "UserNotFound" || $loginResponse->LoginResult == "NotAuthenticated"){
+							$data['errorSession'] = "Invalid username and password"; 
+							$this->load->view('login',$data);
+						}else{
+							$this->session->set_userdata(array('username' => $this->input->post("username"),'isloggedin' => true,'tokenId' => $loginResponse->LoginResult,'userId' => $login[0]->id));
+							redirect('/tracereport');
+						}
 					}
 				}
+				
+
 		}
 		else
 		{
-				$data['errorSession'] = "username and password required"; 
 				if ($this->session->userdata('tokensession')){
 						$data['errorSession'] = $this->session->userdata('tokensession');
 						$this->session->sess_destroy();

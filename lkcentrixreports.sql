@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 11, 2023 at 08:48 AM
+-- Generation Time: Jan 14, 2023 at 09:05 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -29,9 +29,27 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `auditlog` (
   `auditlog_id` bigint(20) NOT NULL,
-  `auditlog_user` varchar(45) NOT NULL,
   `auditlog_reportname` varchar(45) NOT NULL,
-  `auditlog_datetime` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `auditlog_datetime` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `auditlog_userId` int(11) NOT NULL,
+  `auditlog_reporttype` varchar(45) NOT NULL,
+  `auditlog_searchdata` text NOT NULL,
+  `auditlog_fnexecuted` varchar(80) NOT NULL,
+  `auditlog_issuccess` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `client`
+--
+
+CREATE TABLE `client` (
+  `client_Id` bigint(20) NOT NULL,
+  `client_Name` varchar(60) NOT NULL,
+  `client_Email` varchar(60) NOT NULL,
+  `client_Address` varchar(140) NOT NULL,
+  `client_Contact` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -186,6 +204,21 @@ INSERT INTO `searchtype` (`search_type_id`, `search_type_description`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `search_history`
+--
+
+CREATE TABLE `search_history` (
+  `history_Id` bigint(20) NOT NULL,
+  `history_userId` int(11) NOT NULL,
+  `reportyId` int(11) NOT NULL,
+  `reportType` int(11) NOT NULL,
+  `search_data` varchar(150) NOT NULL,
+  `search_timestamp` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -193,15 +226,17 @@ CREATE TABLE `users` (
   `id` bigint(20) NOT NULL,
   `username` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
-  `created` datetime NOT NULL DEFAULT current_timestamp()
+  `created` datetime NOT NULL DEFAULT current_timestamp(),
+  `name` varchar(45) NOT NULL,
+  `surname` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `created`) VALUES
-(1, 'tester1', 'test', '2023-01-11 09:35:57');
+INSERT INTO `users` (`id`, `username`, `password`, `created`, `name`, `surname`) VALUES
+(1, 'tester1', 'test', '2023-01-11 09:35:57', '', '');
 
 --
 -- Indexes for dumped tables
@@ -212,6 +247,12 @@ INSERT INTO `users` (`id`, `username`, `password`, `created`) VALUES
 --
 ALTER TABLE `auditlog`
   ADD PRIMARY KEY (`auditlog_id`);
+
+--
+-- Indexes for table `client`
+--
+ALTER TABLE `client`
+  ADD PRIMARY KEY (`client_Id`);
 
 --
 -- Indexes for table `deedoffice`
@@ -250,6 +291,12 @@ ALTER TABLE `searchtype`
   ADD PRIMARY KEY (`search_type_id`);
 
 --
+-- Indexes for table `search_history`
+--
+ALTER TABLE `search_history`
+  ADD PRIMARY KEY (`history_Id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -264,6 +311,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `auditlog`
   MODIFY `auditlog_id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `client`
+--
+ALTER TABLE `client`
+  MODIFY `client_Id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `deedoffice`
@@ -300,6 +353,12 @@ ALTER TABLE `report_type`
 --
 ALTER TABLE `searchtype`
   MODIFY `search_type_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `search_history`
+--
+ALTER TABLE `search_history`
+  MODIFY `history_Id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`

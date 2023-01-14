@@ -17,6 +17,7 @@
     
     <link rel="stylesheet" href="<?php echo base_url();?>dist/css/skins/skin-blue.min.css">
     <link rel="icon" href="<?php echo base_url();?>dist/img/lk-Logo.png">
+	<script src='https://www.google.com/recaptcha/api.js'></script>
   <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
