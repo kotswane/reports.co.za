@@ -36,7 +36,7 @@ $config['base_url'] = 'http://ec2-13-244-102-227.af-south-1.compute.amazonaws.co
 | variable so that it is blank.
 |
 */
-$config['index_page'] = '';
+$config['index_page'] = 'index.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -533,5 +533,5 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 $config['composer_autoload'] = TRUE;
 $config['composer_autoload'] = 'vendor/autoload.php';
-$config['google_key'] = '6LfR6vkjAAAAAMDT_fB8QOFueXIAGIuHjE49UV0S';
-$config['google_secret'] = '6LfR6vkjAAAAAFaJuKFM6tHoOxrjao7xw5QzhiiU';
+$config['google_key'] = '6LfQAfojAAAAAJwSBFa5nP7jGhGHO-PjmJHhckce';
+$config['google_secret'] = '6LfQAfojAAAAAC1wdDJP6X6y59Ke8MYTk2p_Fwyu';
