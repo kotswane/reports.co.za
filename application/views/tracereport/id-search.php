@@ -52,6 +52,7 @@
                      <label class="col-form-label">First Name</label>
                            <input type="text"  class="form-control" value="<?php echo set_value("firstname");?>" name="firstname" id="firstname" placeholder="Enter FirstName"/>
                        </div>
+					   <div class="g-recaptcha" data-sitekey="<?php echo $this->config->item('google_key') ?>"></div>
                     </div>
  
                     <div id="tab2" class="tab-pane fade">
@@ -68,7 +69,7 @@
                      <label class="col-form-label">First Name</label>
                            <input type="text"  class="form-control" value="<?php echo set_value("passportFirstName");?>" name="passportFirstName" id="passportFirstName" placeholder="Enter FirstName"/>
                        </div>
-
+					<div class="g-recaptcha" data-sitekey="<?php echo $this->config->item('google_key') ?>"></div>
                   </div>
             </div>
             </div>

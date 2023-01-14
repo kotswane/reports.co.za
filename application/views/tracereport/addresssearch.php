@@ -66,7 +66,8 @@
                        <div class="form-group">
                        <label class="col-form-label">Surname</label>
                     <input type="text"  class="form-control" id="surname" name="surname" value="<?php echo set_value('surname');?>" placeholder="Enter Surname" />
-                 </div>  
+                 </div> 
+					<div class="g-recaptcha" data-sitekey="<?php echo $this->config->item('google_key') ?>"></div>
                  </div>
                   
                 </div> 

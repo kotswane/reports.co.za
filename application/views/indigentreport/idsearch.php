@@ -28,6 +28,7 @@
                     <label for="idno">ID Search</label>
                     <input type="text"  class="form-control" value="<?php echo set_value('idno');?>" id="idno" name="idno" placeholder="ID Number" maxlength="60" autofocus required/>
                  </div>
+				 <div class="g-recaptcha" data-sitekey="<?php echo $this->config->item('google_key') ?>"></div> 
             </div>
             <div class="box-footer">
                 <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i>&nbsp; Search</button>

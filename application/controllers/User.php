@@ -49,7 +49,7 @@ class User extends CI_Controller {
 				$status= json_decode($output, true);
 
 				if ($status['success'] == false){
-					$data['errorSession'] = 'Sorry Google Recaptcha Unsuccessful!!';
+					$data['errorSession'] = 'Sorry Recaptcha Unsuccessful!!';
 					$this->load->view('login',$data);
 				}else {
 					
