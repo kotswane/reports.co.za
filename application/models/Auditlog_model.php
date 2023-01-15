@@ -6,5 +6,11 @@
                 $this->db->insert('auditlog',$data);
 				return $this->db->insert_id();
         }
+		
+		public function findByUser($userId)
+        {
+                $query = $this->db->get_where('auditlog', array('auditlog_userId' => $userId));
+				return $query->result();
+        }
 	}
 ?>
