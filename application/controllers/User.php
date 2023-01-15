@@ -75,10 +75,10 @@ class User extends CI_Controller {
 					}
 				}
 				
-
 		}
 		else
 		{
+				$data['errorSession'] = "Username and Password required";
 				if ($this->session->userdata('tokensession')){
 						$data['errorSession'] = $this->session->userdata('tokensession');
 						$this->session->sess_destroy();
