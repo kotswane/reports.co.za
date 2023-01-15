@@ -241,8 +241,7 @@ class Tracereport extends CI_Controller {
 						'ConnectTicket' => $this->session->userdata('tokenId'), 
 						'StreetName_PostalNo' => $this->input->post('streetName'), 
 						'PostalCode' => $this->input->post('postalCode'), 
-						'StreetNo' => $this->input->post('streetNo'), 
-						'Surname' => $this->input->post('surname'))),
+						'StreetNo' => $this->input->post('streetNo'))),
 						"auditlog_fnexecuted" => "ConnectAddressMatch",
 						"auditlog_issuccess" => false
 					);
@@ -270,8 +269,7 @@ class Tracereport extends CI_Controller {
 						'ConnectTicket' => $this->session->userdata('tokenId'), 
 						'StreetName_PostalNo' => $this->input->post('streetName'), 
 						'PostalCode' => $this->input->post('postalCode'), 
-						'StreetNo' => $this->input->post('streetNo'), 
-						'Surname' => $this->input->post('surname'))),
+						'StreetNo' => $this->input->post('streetNo'))),
 						"auditlog_fnexecuted" => "ConnectAddressMatch",
 						"auditlog_issuccess" => true
 					);

@@ -61,7 +61,11 @@
 			 </div> <!-- th:if="${errorSession}" th:text="${errorSession}" -->
 			<?php }?>
 			
-			<form method="post" action="<?php echo site_url();?>/user/login"> <!--th:action="@{/traceenquiry}" th:object="${signRequest}" --> 
+			<form method="post" action="<?php echo site_url();?>/user/login" id="form-search"> <!--th:action="@{/traceenquiry}" th:object="${signRequest}" --> 
+				
+				<div id="spinner" class="spinner" style="display:none;"  class="form-group has-feedback">
+					<strong>please wait while loading ....</strong>
+				</div>
 				<div class="form-group has-feedback">
 					<input type="text" class="form-control" name="username" placeholder="Username" value="<?php echo set_value('username'); ?>"/> <!-- th:field="*{username}" --> 
 					<span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -74,10 +78,12 @@
 					<div class="g-recaptcha" data-sitekey="<?php echo $this->config->item('google_key') ?>"></div>
 				</div>				
 				<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
-					</div>
-			</form>
-		</div>   </div>
+						<button type="submit" class="btn btn-primary btn-block btn-flat" id="button-search">Login</button>
+				</div>
+				</form>
+			</div>   
+		
+		</div>
 			</div>
 		</div>
 	   
@@ -90,6 +96,31 @@
 <script src="<?php echo base_url();?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="<?php echo base_url();?>plugins/iCheck/icheck.min.js"></script>
+<style>
+.spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -50px; /* half width of the spinner gif */
+    margin-top: -50px; /* half height of the spinner gif */
+    text-align:center;
+    z-index:1234;
+    overflow: auto;
+    width: 200px; /* width of the spinner gif */
+    height: 102px; /*hight of the spinner gif +2px to fix IE8 issue */
+}
+
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#button-search').click(function() {
+		$('#button-search').disabled = true;
+        $('#spinner').show();
+		$('#form-search').submit();
+    });
+});
+</script>
+
 <script>
   $(function () {
     $('input').iCheck({
