@@ -29,7 +29,7 @@
 			</div>
 		<?php }?>
 		
-        <form data-toggle="validator" role="ID Search form" action="<?php echo site_url();?>/tracereport/idsearch" method="post">
+        <form data-toggle="validator" role="ID Search form" id="form-search" action="<?php echo site_url();?>/tracereport/idsearch" method="post">
             <div class="box-body">
                   <ul class="nav nav-tabs">
                     <li><a data-toggle="tab" href="#tab1">ID Number</a></li>
@@ -42,7 +42,7 @@
                         
                         <div class="form-group">
                         <label class="col-form-label">ID Number</label>
-                            <input type="text" class="form-control" value="<?php echo set_value("idNumber");?>" name="idNumber"  id="idNumber" placeholder="Enter ID Number" maxlength="13" autofocus/>
+                            <input type="number" class="form-control" value="<?php echo set_value("idNumber");?>" name="idNumber"  id="idNumber" placeholder="Enter ID Number" maxlength="13" autofocus/>
                         </div>
                          <div class="form-group">
                     <label class="col-form-label">Surname</label>
@@ -74,20 +74,21 @@
             </div>
 
             <div class="box-footer">
-			<div class="form-group has-feedback">
+				<div id="spinner" class="spinner" style="display:none;"  class="form-group has-feedback">
+					<strong>please wait while loading ....</strong>
+				</div>
+				<div class="form-group has-feedback">
 						<div class="g-recaptcha" data-sitekey="<?php echo $this->config->item('google_key') ?>"></div>
-					  </div>
-                <button class="btn btn-primary" id="button-upload" type="submit"><i class="fa fa-search" aria-hidden="true"></i>&nbsp; Search</button>
+				</div>
+                <button class="btn btn-primary" id="button-search" type="button"><i class="fa fa-search" aria-hidden="true"></i>&nbsp; Search</button>
             </div>
             <input type="hidden" name="postback" value="post"/>
-            <div id="spinner" class="spinner" style="display:none;">
-    <img id="img-spinner" src="spinner.gif" alt="Loading"/>
-</div>
         </form>
         
     </div>
 </section>
 </body>
+<script src="<?php echo base_url();?>bower_components/jquery/dist/jquery.min.js"></script>
 <style>
 .spinner {
     position: fixed;
@@ -98,16 +99,18 @@
     text-align:center;
     z-index:1234;
     overflow: auto;
-    width: 100px; /* width of the spinner gif */
+    width: 200px; /* width of the spinner gif */
     height: 102px; /*hight of the spinner gif +2px to fix IE8 issue */
 }
 
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
-    $('#button-upload').click(function() {
+    $('#button-search').click(function() {
         $('#spinner').show();
+		$('#form-search').submit();
     });
 });
+
 </script>
 </html>
