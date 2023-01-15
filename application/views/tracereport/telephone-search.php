@@ -39,7 +39,9 @@
                             <input type="text" class="form-control" name="telephoneNo"  id="telephoneNo" name="telephoneNo" placeholder="e.g 0115403366" maxlength="10" />
                         </div>
                     </div>
-					<div class="g-recaptcha" data-sitekey="<?php echo $this->config->item('google_key') ?>"></div>
+					<div class="form-group has-feedback">
+						<div class="g-recaptcha" data-sitekey="<?php echo $this->config->item('google_key') ?>"></div>
+					</div>
 				</div>
             </div>
             <div class="box-footer">

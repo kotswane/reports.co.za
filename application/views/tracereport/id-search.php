@@ -52,7 +52,7 @@
                      <label class="col-form-label">First Name</label>
                            <input type="text"  class="form-control" value="<?php echo set_value("firstname");?>" name="firstname" id="firstname" placeholder="Enter FirstName"/>
                        </div>
-					   <div class="g-recaptcha" data-sitekey="<?php echo $this->config->item('google_key') ?>"></div>
+
                     </div>
  
                     <div id="tab2" class="tab-pane fade">
@@ -69,11 +69,14 @@
                      <label class="col-form-label">First Name</label>
                            <input type="text"  class="form-control" value="<?php echo set_value("passportFirstName");?>" name="passportFirstName" id="passportFirstName" placeholder="Enter FirstName"/>
                        </div>
-					<div class="g-recaptcha" data-sitekey="<?php echo $this->config->item('google_key') ?>"></div>
                   </div>
             </div>
             </div>
+
             <div class="box-footer">
+			<div class="form-group has-feedback">
+						<div class="g-recaptcha" data-sitekey="<?php echo $this->config->item('google_key') ?>"></div>
+					  </div>
                 <button class="btn btn-primary" id="button-upload" type="submit"><i class="fa fa-search" aria-hidden="true"></i>&nbsp; Search</button>
             </div>
             <input type="hidden" name="postback" value="post"/>

@@ -39,44 +39,50 @@
         }
         </style>
 </head>
-<body>
-<div class="login-box">
-    <div class="login-logo">
-        <div><img src="https://lkcentrix.co.za/wp-content/uploads/2022/01/lk-Logo-FinalHD.png" style="width:350px;"></div>
-    </div>
-    <!-- /.login-logo -->
-    <div class="login-box-body">
-   <!-- Error Alert -->
-		<?php if($errorSession != ""){?>
-         <div class="alert alert-danger"  role="alert">
-			<?php echo $errorSession; ?>
-		 </div> <!-- th:if="${errorSession}" th:text="${errorSession}" -->
-		<?php }?>
-		
-		<?php if($logoutSession != ""){?>
-         <div class="alert alert-success"  role="alert">
-			<?php echo $logoutSession; ?>
-		 </div> <!-- th:if="${errorSession}" th:text="${errorSession}" -->
-		<?php }?>
-		
-        <form method="post" action="<?php echo site_url();?>/user/login"> <!--th:action="@{/traceenquiry}" th:object="${signRequest}" --> 
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" name="username" placeholder="Username" value="<?php echo set_value('username'); ?>"/> <!-- th:field="*{username}" --> 
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
-            </div>
-            <div class="form-group has-feedback">
-                <input type="password" class="form-control" name="password" placeholder="Password" value="<?php echo set_value('password'); ?>"/> <!-- th:field="*{password}" --> 
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            </div>
-			<div class="g-recaptcha" data-sitekey="<?php echo $this->config->item('google_key') ?>"></div> 
-            <div class="row">
-                <div class="col-xs-12">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+<body class="login-page">
+	<div class="login-box" style="">    
+		<!-- /.login-logo -->
+		<div class="login-box-body">
+		<div class="row">
+			<div class="col-md-12">    
+			<div class="col-md-6"> <div class="login-logo">
+			<div><img src="https://lkcentrix.co.za/wp-content/uploads/2022/01/lk-Logo-FinalHD.png" style="width:350px;"></div>
+		</div>   </div>
+			<div class="col-md-6" style="border-left: 1px solid #efefef;"> <!-- Error Alert -->
+			<?php if($errorSession != ""){?>
+			 <div class="alert alert-danger"  role="alert">
+				<?php echo $errorSession; ?>
+			 </div> <!-- th:if="${errorSession}" th:text="${errorSession}" -->
+			<?php }?>
+			
+			<?php if($logoutSession != ""){?>
+			 <div class="alert alert-success"  role="alert">
+				<?php echo $logoutSession; ?>
+			 </div> <!-- th:if="${errorSession}" th:text="${errorSession}" -->
+			<?php }?>
+			
+			<form method="post" action="<?php echo site_url();?>/user/login"> <!--th:action="@{/traceenquiry}" th:object="${signRequest}" --> 
+				<div class="form-group has-feedback">
+					<input type="text" class="form-control" name="username" placeholder="Username" value="<?php echo set_value('username'); ?>"/> <!-- th:field="*{username}" --> 
+					<span class="glyphicon glyphicon-user form-control-feedback"></span>
+				</div>
+				<div class="form-group has-feedback">
+					<input type="password" class="form-control" name="password" placeholder="Password" value="<?php echo set_value('password'); ?>"/> <!-- th:field="*{password}" --> 
+					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+				</div>
+				<div class="form-group has-feedback">
+					<div class="g-recaptcha" data-sitekey="<?php echo $this->config->item('google_key') ?>"></div>
+				</div>				
+				<div class="form-group">
+						<button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
+					</div>
+			</form>
+		</div>   </div>
+			</div>
+		</div>
+	   
+	</div>
+
 
 <!-- jQuery 3 -->
 <script src="<?php echo base_url();?>bower_components/jquery/dist/jquery.min.js"></script>
