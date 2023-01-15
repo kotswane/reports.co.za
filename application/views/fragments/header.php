@@ -4,7 +4,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>S</b>AL</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"> <img alt="User Image" class="user-image" src="<?php echo base_url();?>dist/img/logo.jpg" style="width: 400px;"/>
+        <span class="logo-lg"> <img alt="User Image" class="user-image" src="<?php echo base_url();?>dist/img/logo.png" style="width: 400px;"/>
                        </span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
