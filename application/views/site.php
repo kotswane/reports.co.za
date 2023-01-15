@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="<?php echo base_url();?>dist/css/LkCentrix.min.css">
     
     <link rel="stylesheet" href="<?php echo base_url();?>dist/css/skins/skin-blue.min.css">
-    <link rel="icon" href="<?php echo base_url();?>dist/img/logo.png">
+    <link rel="icon" href="<?php echo base_url();?>dist/img/lk-Logo.png">
 	<script src='https://www.google.com/recaptcha/api.js'></script>
   <!-- Google Font -->
     <link rel="stylesheet"
