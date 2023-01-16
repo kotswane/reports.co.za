@@ -105,8 +105,8 @@ class User extends CI_Controller {
 	{
 		$data['logoutSession'] = "";
 		$data['errorSession'] = "Successfully logged out";
-		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
-		$response = $this->redisclient->remove($data);
+		$datax = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
+		$response = $this->redisclient->remove($datax);
 		$this->session->sess_destroy();
 		$this->load->view('login',$data);
 	}
