@@ -89,9 +89,9 @@ class User extends CI_Controller {
 				$data['errorSession'] = "Username and Password required";
 				if ($this->session->userdata('tokensession')){
 
-						$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
+						$datax = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
 						$data['errorSession'] = $this->session->userdata('tokensession');
-						$response = $this->redisclient->remove($data);
+						$response = $this->redisclient->remove($datax);
 						$this->session->sess_destroy();
 						$this->load->view('login',$data);
 				} else {
