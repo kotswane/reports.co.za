@@ -40,6 +40,14 @@ class Indigentreport extends CI_Controller {
 		if(!$this->session->userdata('username')){
 			 redirect('user/login');
 		}
+		
+		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
+		$response = $this->redisclient->request($data);
+
+		if($response->status != "success"){
+			$this->session->set_userdata(array('tokensession' => 'Session expired, please login again'));
+			redirect('user/login');
+		}
 		$data["reports_type"] = $this->reports_type;
 		$data["reports"] = $this->reports;		
 		$data["successFlash"] = "";
@@ -140,6 +148,15 @@ class Indigentreport extends CI_Controller {
 		if(!$this->session->userdata('username')){
 			 redirect('user/login');
 		}
+		
+		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
+		$response = $this->redisclient->request($data);
+
+		if($response->status != "success"){
+			$this->session->set_userdata(array('tokensession' => 'Session expired, please login again'));
+			redirect('user/login');
+		}
+
 		$this->session->unset_userdata("directorship");
 		$this->session->unset_userdata("familyData");
 		$this->session->unset_userdata("report");
@@ -281,7 +298,17 @@ class Indigentreport extends CI_Controller {
 	private function getSearchData($enquiryID, $enquiryResultID){
 		if(!$this->session->userdata('username')){
 			 redirect('user/login');
-		}		
+		}
+
+		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
+		$response = $this->redisclient->request($data);
+
+		if($response->status != "success"){
+			$this->session->set_userdata(array('tokensession' => 'Session expired, please login again'));
+			redirect('user/login');
+		}
+
+		
 		$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
 		
 		$this->client = $this->mysoapclient->getClient();
@@ -320,6 +347,16 @@ class Indigentreport extends CI_Controller {
 		if(!$this->session->userdata('username')){
 			 redirect('user/login');
 		}
+		
+		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
+		$response = $this->redisclient->request($data);
+
+		if($response->status != "success"){
+			$this->session->set_userdata(array('tokensession' => 'Session expired, please login again'));
+			redirect('user/login');
+		}
+
+
 		try{
 			ob_clean();
 			$data['report'] = $this->session->userdata('report');

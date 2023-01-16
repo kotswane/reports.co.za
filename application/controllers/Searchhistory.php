@@ -38,6 +38,16 @@ class Searchhistory extends CI_Controller {
 		if(!$this->session->userdata('username')){
 			 redirect('user/login');
 		}
+		
+		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
+		$response = $this->redisclient->request($data);
+
+		if($response->status != "success"){
+			$this->session->set_userdata(array('tokensession' => 'Session expired, please login again'));
+			redirect('user/login');
+		}
+
+
 		$this->load->model("Auditlog_model");
 		$data["reports_type"] = $this->reports_type;
 		$data["reports"] = $this->reports;		

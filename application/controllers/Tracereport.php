@@ -44,6 +44,15 @@ class Tracereport extends CI_Controller {
 		if(!$this->session->userdata('username')){
 			 redirect('user/login');
 		}
+		
+		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
+		$response = $this->redisclient->request($data);
+
+		if($response->status != "success"){
+			$this->session->set_userdata(array('tokensession' => 'Session expired, please login again'));
+			redirect('user/login');
+		}
+
 		$data["successFlash"] = "";
 		$data["errorFlash"] = "";
 		$data["infoFlash"] = "";
@@ -58,6 +67,15 @@ class Tracereport extends CI_Controller {
 		if(!$this->session->userdata('username')){
 			 redirect('user/login');
 		}		
+		
+		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
+		$response = $this->redisclient->request($data);
+
+		if($response->status != "success"){
+			$this->session->set_userdata(array('tokensession' => 'Session expired, please login again'));
+			redirect('user/login');
+		}
+
 		$data["successFlash"] = "";
 		$data["infoFlash"] = "";
 		$data["errorFlash"] = "";
@@ -168,6 +186,15 @@ class Tracereport extends CI_Controller {
 		if(!$this->session->userdata('username')){
 			 redirect('user/login');
 		}
+		
+		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
+		$response = $this->redisclient->request($data);
+
+		if($response->status != "success"){
+			$this->session->set_userdata(array('tokensession' => 'Session expired, please login again'));
+			redirect('user/login');
+		}
+
 		$data["reports_type"] = $this->reports_type;
 		$data["reports"] = $this->reports;		
 		$data["successFlash"] = "";
@@ -356,6 +383,15 @@ class Tracereport extends CI_Controller {
 		if(!$this->session->userdata('username')){
 			 redirect('user/login');
 		}
+		
+		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
+		$response = $this->redisclient->request($data);
+
+		if($response->status != "success"){
+			$this->session->set_userdata(array('tokensession' => 'Session expired, please login again'));
+			redirect('user/login');
+		}
+
 		$data["reports_type"] = $this->reports_type;
 		$data["reports"] = $this->reports;		
 		$data["successFlash"] = "";
@@ -513,6 +549,15 @@ class Tracereport extends CI_Controller {
 		if(!$this->session->userdata('username')){
 			 redirect('user/login');
 		}
+		
+		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
+		$response = $this->redisclient->request($data);
+
+		if($response->status != "success"){
+			$this->session->set_userdata(array('tokensession' => 'Session expired, please login again'));
+			redirect('user/login');
+		}
+
 		$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
 		
 		$this->client = $this->mysoapclient->getClient();
@@ -556,6 +601,15 @@ class Tracereport extends CI_Controller {
 			 redirect('user/login');
 		}		
 
+		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
+		$response = $this->redisclient->request($data);
+
+		if($response->status != "success"){
+			$this->session->set_userdata(array('tokensession' => 'Session expired, please login again'));
+			redirect('user/login');
+		}
+
+
 		$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
 		
 		$this->client = $this->mysoapclient->getClient();
@@ -594,6 +648,15 @@ class Tracereport extends CI_Controller {
 		if(!$this->session->userdata('username')){
 			 redirect('user/login');
 		}
+		
+		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
+		$response = $this->redisclient->request($data);
+
+		if($response->status != "success"){
+			$this->session->set_userdata(array('tokensession' => 'Session expired, please login again'));
+			redirect('user/login');
+		}
+
 		try{
 			ob_clean();
 			$data['report'] = $this->session->userdata('report');

@@ -69,8 +69,16 @@ class User extends CI_Controller {
 							$data['errorSession'] = "Invalid username and password"; 
 							$this->load->view('login',$data);
 						}else{
-							$this->session->set_userdata(array('username' => $this->input->post("username"),'isloggedin' => true,'tokenId' => $loginResponse->LoginResult,'userId' => $login[0]->id));
-							redirect('/tracereport');
+							$data = array('id'=>$login[0]->id,'site'=>'tracing portal');
+							$response = $this->redisclient->generate($data);
+							
+							if($response->status == "success"){
+								$this->session->set_userdata(array('username' => $this->input->post("username"),'isloggedin' => true,'tokenId' => $loginResponse->LoginResult,'userId' => $login[0]->id));
+								redirect('/tracereport');
+							}else {
+								$data['errorSession'] = "You have an active session in another computer, please logout and login here"; 
+								$this->load->view('login',$data);
+							}
 						}
 					}
 				}
@@ -80,10 +88,15 @@ class User extends CI_Controller {
 		{
 				$data['errorSession'] = "Username and Password required";
 				if ($this->session->userdata('tokensession')){
+
+						$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
 						$data['errorSession'] = $this->session->userdata('tokensession');
+						$response = $this->redisclient->remove($data);
 						$this->session->sess_destroy();
+						$this->load->view('login',$data);
+				} else {
+					$this->load->view('login',$data);
 				}
-				$this->load->view('login',$data);
 		}
 	
 	}
@@ -92,6 +105,8 @@ class User extends CI_Controller {
 	{
 		$data['logoutSession'] = "";
 		$data['errorSession'] = "Successfully logged out";
+		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
+		$response = $this->redisclient->remove($data);
 		$this->session->sess_destroy();
 		$this->load->view('login',$data);
 	}
