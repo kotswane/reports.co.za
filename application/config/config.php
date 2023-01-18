@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://ec2-13-244-102-227.af-south-1.compute.amazonaws.com/';
+$config['base_url'] = 'http://ec2-13-246-198-32.af-south-1.compute.amazonaws.com/';
 #$config['base_url'] = 'http://localhost:8881/';
 
 /*
@@ -533,5 +533,5 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 $config['composer_autoload'] = TRUE;
 $config['composer_autoload'] = 'vendor/autoload.php';
-$config['google_key'] = '6LfQAfojAAAAAJwSBFa5nP7jGhGHO-PjmJHhckce';
-$config['google_secret'] = '6LfQAfojAAAAAC1wdDJP6X6y59Ke8MYTk2p_Fwyu';
+$config['google_key'] = '6LdMnwkkAAAAALICuZzSQHxAfq4qQX5B2FnmLWMc';
+$config['google_secret'] = '6LdMnwkkAAAAABtvzWiGDxUucUUF04KfkITrOm5t';
