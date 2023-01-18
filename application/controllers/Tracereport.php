@@ -133,7 +133,6 @@ class Tracereport extends CI_Controller {
 						"auditlog_reporttype"=>"id-search",
 						"auditlog_searchdata"=>json_encode(array(
 						'IdNumber'=>$this->input->post('idNumber'),
-						'ConnectTicket'=>$this->session->userdata('tokenId'),
 						'ProductId' => 2,
 						'EnquiryReason' => 'Consumer Trace')),
 						"auditlog_fnexecuted" => "ConnectConsumerMatch",
@@ -159,7 +158,6 @@ class Tracereport extends CI_Controller {
 						"auditlog_reporttype"=>"id-search",
 						"auditlog_searchdata"=>json_encode(array(
 						'IdNumber'=>$this->input->post('idNumber'),
-						'ConnectTicket'=>$this->session->userdata('tokenId'),
 						'ProductId' => 2,
 						'EnquiryReason' => 'Consumer Trace')),
 						"auditlog_fnexecuted" => "ConnectConsumerMatch",
@@ -265,7 +263,6 @@ class Tracereport extends CI_Controller {
 						'Suburb' => $this->input->post('suburb'), 
 						'City' => $this->input->post('city'), 
 						'PostalMatch' => true,
-						'ConnectTicket' => $this->session->userdata('tokenId'), 
 						'StreetName_PostalNo' => $this->input->post('streetName'), 
 						'PostalCode' => $this->input->post('postalCode'), 
 						'StreetNo' => $this->input->post('streetNo'))),
@@ -293,7 +290,6 @@ class Tracereport extends CI_Controller {
 						'Suburb' => $this->input->post('suburb'), 
 						'City' => $this->input->post('city'), 
 						'PostalMatch' => true,
-						'ConnectTicket' => $this->session->userdata('tokenId'), 
 						'StreetName_PostalNo' => $this->input->post('streetName'), 
 						'PostalCode' => $this->input->post('postalCode'), 
 						'StreetNo' => $this->input->post('streetNo'))),
@@ -320,7 +316,6 @@ class Tracereport extends CI_Controller {
 								"auditlog_userId"=>$this->session->userdata('userId'),
 								"auditlog_reporttype"=>"addresssearch",
 								"auditlog_searchdata"=>json_encode(array(
-								'ConnectTicket' => $this->session->userdata('tokenId'),
 								'EnquiryResultID' => $arrOutputListValue['EnquiryResultID'])),
 								"auditlog_fnexecuted" => "AdminEnquiryResult",
 								"auditlog_issuccess" => true
@@ -351,7 +346,6 @@ class Tracereport extends CI_Controller {
 									"auditlog_userId"=>$this->session->userdata('userId'),
 									"auditlog_reporttype"=>"addresssearch",
 									"auditlog_searchdata"=>json_encode(array(
-									'ConnectTicket' => $this->session->userdata('tokenId'),
 									'EnquiryResultID' => $arrOutputListValueListValue['EnquiryResultID'])),
 									"auditlog_fnexecuted" => "AdminEnquiryResult",
 									"auditlog_issuccess" => true
@@ -459,7 +453,6 @@ class Tracereport extends CI_Controller {
 						"auditlog_reporttype"=>"telephonesearch",
 						"auditlog_searchdata"=>json_encode(array(
 						'TelephoneCode' => $code,
-						'ConnectTicket' => $this->session->userdata('tokenId'),
 						'TelephoneNo' => $number)),
 						"auditlog_fnexecuted" => "ConnectTelephoneMatch",
 						"auditlog_issuccess" => false
@@ -477,7 +470,6 @@ class Tracereport extends CI_Controller {
 						"auditlog_reporttype"=>"telephonesearch",
 						"auditlog_searchdata"=>json_encode(array(
 						'TelephoneCode' => $code,
-						'ConnectTicket' => $this->session->userdata('tokenId'),
 						'TelephoneNo' => $number)),
 						"auditlog_fnexecuted" => "ConnectTelephoneMatch",
 						"auditlog_issuccess" => true
@@ -499,7 +491,6 @@ class Tracereport extends CI_Controller {
 								"auditlog_userId"=>$this->session->userdata('userId'),
 								"auditlog_reporttype"=>"telephonesearch",
 								"auditlog_searchdata"=>json_encode(array(
-								'ConnectTicket' => $this->session->userdata('tokenId'),
 								'EnquiryResultID' => $arrOutputListValueListValue->EnquiryResultID)),
 								"auditlog_fnexecuted" => "AdminEnquiryResult",
 								"auditlog_issuccess" => true
@@ -522,7 +513,6 @@ class Tracereport extends CI_Controller {
 								"auditlog_userId"=>$this->session->userdata('userId'),
 								"auditlog_reporttype"=>"telephonesearch",
 								"auditlog_searchdata"=>json_encode(array(
-								'ConnectTicket' => $this->session->userdata('tokenId'),
 								'EnquiryResultID' => $arrOutput->ConsumerDetails->EnquiryResultID)),
 								"auditlog_fnexecuted" => "AdminEnquiryResult",
 								"auditlog_issuccess" => true
@@ -586,7 +576,6 @@ class Tracereport extends CI_Controller {
 			"auditlog_searchdata"=>json_encode(array(
 				'EnquiryID' => $enquiryID,
 				'EnquiryResultID' => $enquiryResultID, 
-				'ConnectTicket' => $this->session->userdata('tokenId'), 
 				'ProductID' => 2)),
 			"auditlog_fnexecuted" => "ConnectGetResult",
 			"auditlog_issuccess" => true

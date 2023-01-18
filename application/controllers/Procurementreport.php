@@ -124,6 +124,23 @@ class Procurementreport extends CI_Controller {
 	
 					if ($xml->NotFound || $xml->Error){
 						
+						$auditlog = array(
+						"auditlog_reportname"=>"procurementreport",
+						"auditlog_userId"=>$this->session->userdata('userId'),
+						"auditlog_reporttype"=>"companyname",
+						"auditlog_searchdata"=>json_encode(array(
+						'Reg1' => '',
+						'Reg2' => '',
+						'Reg3' => '',
+						'BusinessName' => $this->input->post('companyname'),
+						'VatNo' => '',
+						'SolePropIDNo' => '',
+						'YourReference' => $ref)),
+						"auditlog_fnexecuted" => "ConnectBusinessMatch",
+						"auditlog_issuccess" => false);
+						$this->Auditlog_model->save($auditlog);						
+						
+						
 						if ($xml->Error){
 							$data["errorMessage"] = $xml->Error;
 						}else{
@@ -134,6 +151,22 @@ class Procurementreport extends CI_Controller {
 						$this->load->view('site',$data);
 						
 					}else{
+						
+						$auditlog = array(
+						"auditlog_reportname"=>"procurementreport",
+						"auditlog_userId"=>$this->session->userdata('userId'),
+						"auditlog_reporttype"=>"companyname",
+						"auditlog_searchdata"=>json_encode(array(
+						'Reg1' => '',
+						'Reg2' => '',
+						'Reg3' => '',
+						'BusinessName' => $this->input->post('companyname'),
+						'VatNo' => '',
+						'SolePropIDNo' => '',
+						'YourReference' => $ref)),
+						"auditlog_fnexecuted" => "ConnectBusinessMatch",
+						"auditlog_issuccess" => true);
+						$this->Auditlog_model->save($auditlog);
 						
 						$objJsonDocument = json_encode($xml);
 						$data["consumerList"]['details'] = json_decode($objJsonDocument,TRUE);
@@ -234,20 +267,19 @@ class Procurementreport extends CI_Controller {
 						}
 						
 						$auditlog = array(
-							"auditlog_reportname"=>"procurementreport",
-							"auditlog_userId"=>$this->session->userdata('userId'),
-							"auditlog_reporttype"=>"companyregistrationno",
-							"auditlog_searchdata"=>json_encode(array(
-							'Reg1' => $regnumb[0],
-							'Reg2' => $regnumb[1],
-							'Reg3' => $regnumb[2],
-							'BusinessName' => '',
-							'VatNo' => '',
-							'SolePropIDNo' => '',
-							'YourReference' => $ref)),
-							"auditlog_fnexecuted" => "ConnectBusinessMatch",
-							"auditlog_issuccess" => false
-						);
+						"auditlog_reportname"=>"procurementreport",
+						"auditlog_userId"=>$this->session->userdata('userId'),
+						"auditlog_reporttype"=>"companyregistrationno",
+						"auditlog_searchdata"=>json_encode(array(
+						'Reg1' => $regnumb[0],
+						'Reg2' => $regnumb[1],
+						'Reg3' => $regnumb[2],
+						'BusinessName' => '',
+						'VatNo' => '',
+						'SolePropIDNo' => '',
+						'YourReference' => $ref)),
+						"auditlog_fnexecuted" => "ConnectBusinessMatch",
+						"auditlog_issuccess" => false);
 						$this->Auditlog_model->save($auditlog);	
 						
 						$data["content"] = "procurementreport/companyregistrationno";
@@ -256,20 +288,19 @@ class Procurementreport extends CI_Controller {
 					}else{
 					
 						$auditlog = array(
-							"auditlog_reportname"=>"procurementreport",
-							"auditlog_userId"=>$this->session->userdata('userId'),
-							"auditlog_reporttype"=>"companyregistrationno",
-							"auditlog_searchdata"=>json_encode(array(
-							'Reg1' => $regnumb[0],
-							'Reg2' => $regnumb[1],
-							'Reg3' => $regnumb[2],
-							'BusinessName' => '',
-							'VatNo' => '',
-							'SolePropIDNo' => '',
-							'YourReference' => $ref)),
-							"auditlog_fnexecuted" => "ConnectBusinessMatch",
-							"auditlog_issuccess" => true
-						);
+						"auditlog_reportname"=>"procurementreport",
+						"auditlog_userId"=>$this->session->userdata('userId'),
+						"auditlog_reporttype"=>"companyregistrationno",
+						"auditlog_searchdata"=>json_encode(array(
+						'Reg1' => $regnumb[0],
+						'Reg2' => $regnumb[1],
+						'Reg3' => $regnumb[2],
+						'BusinessName' => '',
+						'VatNo' => '',
+						'SolePropIDNo' => '',
+						'YourReference' => $ref)),
+						"auditlog_fnexecuted" => "ConnectBusinessMatch",
+						"auditlog_issuccess" => true);
 						$this->Auditlog_model->save($auditlog);		
 						
 						$objJsonDocument = json_encode($xml);

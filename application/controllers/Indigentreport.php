@@ -103,7 +103,6 @@ class Indigentreport extends CI_Controller {
 						"auditlog_reporttype"=>"id-search",
 						"auditlog_searchdata"=>json_encode(array(
 						'IdNumber'=>$this->input->post('idno'),
-						'ConnectTicket'=>$this->session->userdata('tokenId'),
 						'ProductId' => 132,
 						'EnquiryReason' => 'Consumer Trace'
 						)),
@@ -128,7 +127,6 @@ class Indigentreport extends CI_Controller {
 						"auditlog_reporttype"=>"id-search",
 						"auditlog_searchdata"=>json_encode(array(
 						'IdNumber'=>$this->input->post('idno'),
-						'ConnectTicket'=>$this->session->userdata('tokenId'),
 						'ProductId' => 132,
 						'EnquiryReason' => 'Consumer Trace'
 						)),
@@ -189,8 +187,7 @@ class Indigentreport extends CI_Controller {
 			"auditlog_reportname"=>"indigentreport",
 			"auditlog_userId"=>$this->session->userdata('userId'),
 			"auditlog_reporttype"=>"id-search",
-			"auditlog_searchdata"=>json_encode(array(
-			'ConnectTicket' => $this->session->userdata('tokenId'), 
+			"auditlog_searchdata"=>json_encode(array( 
 			'ProductID' => 239, 
 			'IdNumber' => $idnumber)),
 			"auditlog_fnexecuted" => "ConnectGetFamilyIDPhotoVerification",
@@ -209,7 +206,6 @@ class Indigentreport extends CI_Controller {
 			"auditlog_userId"=>$this->session->userdata('userId'),
 			"auditlog_reporttype"=>"id-search",
 			"auditlog_searchdata"=>json_encode(array(
-			'ConnectTicket' => $this->session->userdata('tokenId'), 
 			'ProductID' => 239, 
 			'IdNumber' => $idnumber)),
 			"auditlog_fnexecuted" => "ConnectGetFamilyIDPhotoVerification",
@@ -239,8 +235,7 @@ class Indigentreport extends CI_Controller {
 				"auditlog_reportname"=>"indigentreport",
 				"auditlog_userId"=>$this->session->userdata('userId'),
 				"auditlog_reporttype"=>"id-search",
-				"auditlog_searchdata"=>json_encode(array(
-				'ConnectTicket' => $this->session->userdata('tokenId'),'IdNumber' => $idnumber)),
+				"auditlog_searchdata"=>json_encode(array('IdNumber' => $idnumber)),
 				"auditlog_fnexecuted" => "ConnectDirectorMatch",
 				"auditlog_issuccess" => false);
 				$this->Auditlog_model->save($auditlog);
@@ -254,8 +249,7 @@ class Indigentreport extends CI_Controller {
 				"auditlog_reportname"=>"indigentreport",
 				"auditlog_userId"=>$this->session->userdata('userId'),
 				"auditlog_reporttype"=>"id-search",
-				"auditlog_searchdata"=>json_encode(array(
-				'ConnectTicket' => $this->session->userdata('tokenId'),'IdNumber' => $idnumber)),
+				"auditlog_searchdata"=>json_encode(array('IdNumber' => $idnumber)),
 				"auditlog_fnexecuted" => "ConnectDirectorMatch",
 				"auditlog_issuccess" => true);
 				$this->Auditlog_model->save($auditlog);
@@ -278,8 +272,7 @@ class Indigentreport extends CI_Controller {
 				"auditlog_reporttype"=>"id-search",
 				"auditlog_searchdata"=>json_encode(array(
 				'EnquiryID' => $arrOutput->DirectorDetails->EnquiryID,
-				'EnquiryResultID' => $arrOutput->DirectorDetails->EnquiryResultID, 
-				'ConnectTicket' => $this->session->userdata('tokenId'), 
+				'EnquiryResultID' => $arrOutput->DirectorDetails->EnquiryResultID,
 				'ProductID' => 14)),
 				"auditlog_fnexecuted" => "ConnectGetResult",
 				"auditlog_issuccess" => true);
@@ -335,7 +328,6 @@ class Indigentreport extends CI_Controller {
 			"auditlog_searchdata"=>json_encode(array(
 			'EnquiryID' => $enquiryID,
 			'EnquiryResultID' => $enquiryResultID, 
-			'ConnectTicket' => $this->session->userdata('tokenId'), 
 			'ProductID' => 132)),
 			"auditlog_fnexecuted" => "ConnectGetResult",
 			"auditlog_issuccess" => true);
