@@ -5,7 +5,7 @@
 	   private $url;
 	   
 	   function __construct() {
-		   $this->url = "http://ec2-13-246-198-32.af-south-1.compute.amazonaws.com:5000/api/";
+		   $this->url = "http://ec2-13-246-207-3.af-south-1.compute.amazonaws.com:5000/api/";
 	   }
 	   
 	   public function generate($data) {

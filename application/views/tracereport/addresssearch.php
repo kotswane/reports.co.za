@@ -14,9 +14,7 @@
     <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">Address Search</h3>
-            <div class="box-tools pull-right">
-                <a href="<?php echo site_url();?>/tracereport/addresssearch" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a>
-            </div>
+
         </div>
            <!-- Error Alert -->
 		   <?php if($errorMessage != ""){?>
