@@ -24,6 +24,7 @@ class Procurementreport extends CI_Controller {
 	private $reports_type;
 	
 	public function  __construct(){
+		ini_set('default_socket_timeout', 6000);
 		parent::__construct();
 		if(!$this->session->userdata('username')){
 			 redirect('user/login');
@@ -107,7 +108,7 @@ class Procurementreport extends CI_Controller {
 					$this->load->view('site',$data);
 				} else {
 					
-					$ticket = $this->session->userdata('tokenId');
+					
 					$ref = $this->session->userdata('userId')."-".uniqid()."-".rand(10,100);
 					$response = $this->client->ConnectBusinessMatch(array(
 						'Reg1' => '',
@@ -117,7 +118,7 @@ class Procurementreport extends CI_Controller {
 						'VatNo' => '',
 						'SolePropIDNo' => '',
 						'YourReference' => $ref,
-						'ConnectTicket' => $ticket));
+						'ConnectTicket' => $this->session->userdata('tokenId')));
 
 					$xml = simplexml_load_string($response->ConnectBusinessMatchResult,"SimpleXMLElement");
 	
@@ -233,16 +234,19 @@ class Procurementreport extends CI_Controller {
 						}
 						
 						$auditlog = array(
-						'Reg1' => $regnumb[0],
-						'Reg2' => $regnumb[1],
-						'Reg3' => $regnumb[2],
-						'BusinessName' => '',
-						'VatNo' => '',
-						'SolePropIDNo' => '',
-						'YourReference' => $ref,
-						'ConnectTicket' => $this->session->userdata('tokenId'),
-						"auditlog_fnexecuted" => "ConnectBusinessMatch",
-						"auditlog_issuccess" => false						
+							"auditlog_reportname"=>"procurementreport",
+							"auditlog_userId"=>$this->session->userdata('userId'),
+							"auditlog_reporttype"=>"companyregistrationno",
+							"auditlog_searchdata"=>json_encode(array(
+							'Reg1' => $regnumb[0],
+							'Reg2' => $regnumb[1],
+							'Reg3' => $regnumb[2],
+							'BusinessName' => '',
+							'VatNo' => '',
+							'SolePropIDNo' => '',
+							'YourReference' => $ref)),
+							"auditlog_fnexecuted" => "ConnectBusinessMatch",
+							"auditlog_issuccess" => false
 						);
 						$this->Auditlog_model->save($auditlog);	
 						
@@ -250,17 +254,21 @@ class Procurementreport extends CI_Controller {
 						$this->load->view('site',$data);
 						
 					}else{
+					
 						$auditlog = array(
-						'Reg1' => $regnumb[0],
-						'Reg2' => $regnumb[1],
-						'Reg3' => $regnumb[2],
-						'BusinessName' => '',
-						'VatNo' => '',
-						'SolePropIDNo' => '',
-						'YourReference' => $ref,
-						'ConnectTicket' => $this->session->userdata('tokenId'),
-						"auditlog_fnexecuted" => "ConnectBusinessMatch",
-						"auditlog_issuccess" => true						
+							"auditlog_reportname"=>"procurementreport",
+							"auditlog_userId"=>$this->session->userdata('userId'),
+							"auditlog_reporttype"=>"companyregistrationno",
+							"auditlog_searchdata"=>json_encode(array(
+							'Reg1' => $regnumb[0],
+							'Reg2' => $regnumb[1],
+							'Reg3' => $regnumb[2],
+							'BusinessName' => '',
+							'VatNo' => '',
+							'SolePropIDNo' => '',
+							'YourReference' => $ref)),
+							"auditlog_fnexecuted" => "ConnectBusinessMatch",
+							"auditlog_issuccess" => true
 						);
 						$this->Auditlog_model->save($auditlog);		
 						

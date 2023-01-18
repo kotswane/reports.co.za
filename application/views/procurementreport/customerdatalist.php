@@ -5,8 +5,7 @@
 <body>
 <section class="content-header">
     <?php
-		print '<pre>';
-		
+
 		if($report->SubscriberInputDetails->SubscriberName){
 			?>
 				<h1><?php echo $report->SubscriberInputDetails->SubscriberName;?></h1>
@@ -81,39 +80,56 @@
                 </div>
               </div>
                            
-              <div class="panel panel-primary">
-                <div class="panel-heading">Director Current Business interests</div>
-                <div class="panel-body">
-                    <div class="col">
-                        <div class="col-xs-4 ">Commercial Name:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->DirectorCurrentBusinessinterests->CommercialName)?"":$report->DirectorCurrentBusinessinterests->CommercialName);?></span></strong></div>
-                        <div class="col-xs-4">Registration No:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->DirectorCurrentBusinessinterests->RegistrationNo)?"":$report->DirectorCurrentBusinessinterests->RegistrationNo);?></span></strong></div>
-                        <div class="col-xs-4">Commercial Status:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->DirectorCurrentBusinessinterests->CommercialStatus)?"":$report->DirectorCurrentBusinessinterests->CommercialStatus);?></span></strong></div>
-                        <div class="col-xs-4">Judgments Count:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->DirectorCurrentBusinessinterests->JudgmentsCount)?"":$report->DirectorCurrentBusinessinterests->JudgmentsCount);?></span></strong></div>
-                        <div class="col-xs-4">Default Count:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->DirectorCurrentBusinessinterests->DefaultCount)?"":$report->DirectorCurrentBusinessinterests->DefaultCount);?></span></strong></div>
-                        <div class="col-xs-4">Liquidation:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->DirectorCurrentBusinessinterests->Liquidation)?"":$report->DirectorCurrentBusinessinterests->Liquidation);?></span></strong></div>
-                        <div class="col-xs-4">Age Of Business:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->DirectorCurrentBusinessinterests->AgeOfBusiness)?"":$report->DirectorCurrentBusinessinterests->AgeOfBusiness);?></span></strong></div>
-                        <div class="col-xs-4">Judgment Status:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->DirectorCurrentBusinessinterests->JudgmentStatus)?"":$report->DirectorCurrentBusinessinterests->JudgmentStatus);?></span></strong></div>
-                        <div class="col-xs-4">Director Status Date:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->DirectorCurrentBusinessinterests->DirectorStatusDate)?"":$report->DirectorCurrentBusinessinterests->DirectorStatusDate);?></span></strong></div>
-                    </div>
-                </div>
-              </div>
-
-              <div class="panel panel-primary">
+		       <div class="panel panel-primary">
                 <div class="panel-heading">Director Previous Business interests</div>
                 <div class="panel-body">
-                    <div class="col">
-                        <div class="col-xs-4 ">Commercial Name:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->DirectorPreviousBusinessInterests->CommercialName)?"":$report->DirectorPreviousBusinessInterests->CommercialName);?></span></strong></div>
-                        <div class="col-xs-4">Registration No:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->DirectorPreviousBusinessInterests->RegistrationNo)?"":$report->DirectorPreviousBusinessInterests->RegistrationNo);?></span></strong></div>
-                        <div class="col-xs-4">Commercial Status:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->DirectorPreviousBusinessInterests->CommercialStatus)?"":$report->DirectorPreviousBusinessInterests->CommercialStatus);?></span></strong></div>
-                        <div class="col-xs-4">Judgments Count:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->DirectorPreviousBusinessInterests->JudgmentsCount)?"":$report->DirectorPreviousBusinessInterests->JudgmentsCount);?></span></strong></div>
-                        <div class="col-xs-4">Default Count:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->DirectorPreviousBusinessInterests->DefaultCount)?"":$report->DirectorPreviousBusinessInterests->DefaultCount);?></span></strong></div>
-                        <div class="col-xs-4">Liquidation:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->DirectorPreviousBusinessInterests->Liquidation)?"":$report->DirectorPreviousBusinessInterests->Liquidation);?></span></strong></div>
-                        <div class="col-xs-4">Age Of Business:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->DirectorPreviousBusinessInterests->AgeOfBusiness)?"":$report->DirectorPreviousBusinessInterests->AgeOfBusiness);?></span></strong></div>
-                        <div class="col-xs-4">Judgment Status:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->DirectorPreviousBusinessInterests->JudgmentStatus)?"":$report->DirectorPreviousBusinessInterests->JudgmentStatus);?></span></strong></div>
-                        <div class="col-xs-4">Director Status Date:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->DirectorPreviousBusinessInterests->DirectorStatusDate)?"":$report->DirectorPreviousBusinessInterests->DirectorStatusDate);?></span></strong></div>
-                    </div>
+					<?php if($report->ActiveDirectorCurrentBusinessinterests){ ?>
+                    <table class="table table-striped">
+                        <tr>
+                             <th>Commercial Name</th>
+                             <th>Registration No</th>
+                             <th>Commercial Status</th>
+                             <th>Judgments Count</th>
+                             <th>Default Count</th>
+                             <th>Liquidation</th>
+                             <th>Age Of Business</th>
+                             <th>Judgment Status</th>
+                             <th>Director Status Date</th>
+                        </tr>
+						<?php if(!is_array($report->ActiveDirectorCurrentBusinessinterests)){ ?>
+						<tr>
+							<td><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->CommercialName)?"":$report->ActiveDirectorCurrentBusinessinterests->CommercialName);?></td>
+							<td><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->RegistrationNo)?"":$report->ActiveDirectorCurrentBusinessinterests->RegistrationNo);?></td>
+							<td><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->CommercialStatus)?"":$report->ActiveDirectorCurrentBusinessinterests->CommercialStatus);?></td>
+							<td><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->JudgmentsCount)?"":$report->ActiveDirectorCurrentBusinessinterests->JudgmentsCount);?></td>
+							<td><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->DefaultCount)?"":$report->ActiveDirectorCurrentBusinessinterests->DefaultCount);?></td>
+							<td><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->Liquidation)?"":$report->ActiveDirectorCurrentBusinessinterests->Liquidation);?></td>
+							<td><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->AgeOfBusiness)?"":$report->ActiveDirectorCurrentBusinessinterests->AgeOfBusiness);?></td>
+							<td><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->JudgmentStatus)?"":$report->ActiveDirectorCurrentBusinessinterests->JudgmentStatus);?></td>
+							<td><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->DirectorStatusDate)?"":$report->ActiveDirectorCurrentBusinessinterests->DirectorStatusDate);?></td>
+						</tr>
+						<?php } else {
+							foreach($report->ActiveDirectorCurrentBusinessinterests as $ActiveDirectorCurrentBusinessinterestsKey => $ActiveDirectorCurrentBusinessinterestsVal){
+							?>
+								<tr>
+									<td><?php echo (is_object($ActiveDirectorCurrentBusinessinterestsVal->CommercialName)?"":$ActiveDirectorCurrentBusinessinterestsVal->CommercialName);?></td>
+									<td><?php echo (is_object($ActiveDirectorCurrentBusinessinterestsVal->RegistrationNo)?"":$ActiveDirectorCurrentBusinessinterestsVal->RegistrationNo);?></td>
+									<td><?php echo (is_object($ActiveDirectorCurrentBusinessinterestsVal->CommercialStatus)?"":$ActiveDirectorCurrentBusinessinterestsVal->CommercialStatus);?></td>
+									<td><?php echo (is_object($ActiveDirectorCurrentBusinessinterestsVal->JudgmentsCount)?"":$ActiveDirectorCurrentBusinessinterestsVal->JudgmentsCount);?></td>
+									<td><?php echo (is_object($ActiveDirectorCurrentBusinessinterestsVal->DefaultCount)?"":$ActiveDirectorCurrentBusinessinterestsVal->DefaultCount);?></td>
+									<td><?php echo (is_object($ActiveDirectorCurrentBusinessinterestsVal->Liquidation)?"":$ActiveDirectorCurrentBusinessinterestsVal->Liquidation);?></td>
+									<td><?php echo (is_object($ActiveDirectorCurrentBusinessinterestsVal->AgeOfBusiness)?"":$ActiveDirectorCurrentBusinessinterestsVal->AgeOfBusiness);?></td>
+									<td><?php echo (is_object($ActiveDirectorCurrentBusinessinterestsVal->JudgmentStatus)?"":$ActiveDirectorCurrentBusinessinterestsVal->JudgmentStatus);?></td>
+									<td><?php echo (is_object($ActiveDirectorCurrentBusinessinterestsVal->DirectorStatusDate)?"":$ActiveDirectorCurrentBusinessinterestsVal->DirectorStatusDate);?></td>
+								</tr>												
+							<?php }
+						} ?>
+                    </table>
+					<?php } else { ?>
+					<span>Director Previous Business interests Not Found</span><br>
+					<?php } ?>
                 </div>
-              </div>
+              </div>	
 			  
               <div class="panel panel-primary">
                 <div class="panel-heading">Commercial Principal Information</div>
@@ -168,7 +184,7 @@
 									<td><?php echo (is_object($CommercialPrincipalInformation->PostalAddress)?"":$CommercialPrincipalInformation->PostalAddress);?></td>
 									<td><?php echo (is_object($CommercialPrincipalInformation->HomeTelephoneNo)?"":$CommercialPrincipalInformation->HomeTelephoneNo);?></td>
 									<td><?php echo (is_object($CommercialPrincipalInformation->WorkTelephoneNo)?"":$CommercialPrincipalInformation->WorkTelephoneNo);?></td>
-									<td><?php echo (is_object($CommercialPrincipalInfosrmation->CellularNo)?"":$CommercialPrincipalInformation->CellularNo);?></td>
+									<td><?php echo (is_object($CommercialPrincipalInformation->CellularNo)?"":$CommercialPrincipalInformation->CellularNo);?></td>
 									<td><?php echo (is_object($CommercialPrincipalInformation->EmailAddress)?"":$CommercialPrincipalInformation->EmailAddress);?></td>
 									<td><?php echo (is_object($CommercialPrincipalInformation->Age)?"":$CommercialPrincipalInformation->Age);?></td>
 									<td><?php echo (is_object($CommercialPrincipalInformation->YearsWithBusiness)?"":$CommercialPrincipalInformation->YearsWithBusiness);?></td>
@@ -222,13 +238,19 @@
                 <div class="panel-heading">Commercial Active Principal Info Summary</div>
                 <div class="panel-body">
 				<?php if($report->CommercialActivePrincipalInfoSummary){ ?>
-                    <div>
-							<div>
-							  Number Of Principals<span><?php echo (is_object($report->CommercialActivePrincipalInfoSummary->NoOfPrincipals)?"":$report->CommercialActivePrincipalInfoSummary->NoOfPrincipals);?></span><br>
-							  Number Of Inactive Principals <span><?php echo (is_object($report->CommercialActivePrincipalInfoSummary->NoOfInactivePrincipals)?"":$report->CommercialActivePrincipalInfoSummary->NoOfInactivePrincipals);?></span><br>
-							  Average Age <span><?php echo (is_object($report->CommercialActivePrincipalInfoSummary->AverageAge)?"":$report->CommercialActivePrincipalInfoSummary->AverageAge);?></span><br>
-							 </div>
-                     </div>
+					 <table class="table table-striped">
+						<tr>
+							<th>Number Of Principals</th>
+							<th>Number Of Inactive Principals</th>
+							<th>Average Age</th>
+						</tr>
+
+						<tr>
+							<td><?php echo (is_object($report->CommercialActivePrincipalInfoSummary->NoOfPrincipals)?"":$report->CommercialActivePrincipalInfoSummary->NoOfPrincipals);?></td>
+							<td><?php echo (is_object($report->CommercialActivePrincipalInfoSummary->NoOfInactivePrincipals)?"":$report->CommercialActivePrincipalInfoSummary->NoOfInactivePrincipals);?></td>
+							<td><?php echo (is_object($report->CommercialActivePrincipalInfoSummary->AverageAge)?"":$report->CommercialActivePrincipalInfoSummary->AverageAge);?></td>
+						</tr>
+					</table>
 				<?php } else { ?>
                        <div>
                          <span>Commercial Active Principal Info Summary Not Found</span><br>
@@ -265,7 +287,9 @@
 		  <div class="panel panel-primary">
                 <div class="panel-heading">Commercial Active Principal Information</div>
                 <div class="panel-body">
-					<?php if($report->CommercialActivePrincipalInformation){ ?>
+					<?php 
+
+					if($report->CommercialActivePrincipalInformation){ ?>
                     <table class="table table-striped">
                         <tr>
                              <th>ID Number</th>
@@ -295,8 +319,41 @@
                              <th>Resignation Date</th>
                              <th>Consumer Score</th>
                         </tr>
-						
+						<?php if(is_array($report->CommercialActivePrincipalInformation)){
+							
+						foreach($report->CommercialActivePrincipalInformation as $CommercialActivePrincipalInformationKey => $CommercialActivePrincipalInformationVal){
+							?>
 						<tr>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->IDNo)?"":$CommercialActivePrincipalInformationVal->IDNo);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->Fullname)?"":$CommercialActivePrincipalInformationVal->Fullname);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->BirthDate)?"":$CommercialActivePrincipalInformationVal->BirthDate);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->DirectorStatusCode)?"":$CommercialActivePrincipalInformationVal->DirectorStatusCode);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->AppointmentDate)?"":$CommercialActivePrincipalInformationVal->AppointmentDate);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->Designation)?"":$CommercialActivePrincipalInformationVal->Designation);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->MemberControlPerc)?"":$CommercialActivePrincipalInformationVal->MemberControlPerc);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->DirectorIndicator)?"":$CommercialActivePrincipalInformationVal->DirectorIndicator);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->PrincipalType)?"":$CommercialActivePrincipalInformationVal->PrincipalType);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->ISRSAResident)?"":$CommercialActivePrincipalInformationVal->ISRSAResident);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->ISIDVerified)?"":$CommercialActivePrincipalInformationVal->ISIDVerified);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->ISCIPROConfirmed)?"":$CommercialActivePrincipalInformationVal->ISCIPROConfirmed);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->PhysicalAddress)?"":$CommercialActivePrincipalInformationVal->PhysicalAddress);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->PostalAddress)?"":$CommercialActivePrincipalInformationVal->PostalAddress);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->HomeTelephoneNo)?"":$CommercialActivePrincipalInformationVal->HomeTelephoneNo);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->WorkTelephoneNo)?"":$CommercialActivePrincipalInformationVal->WorkTelephoneNo);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->CellularNo)?"":$CommercialActivePrincipalInformationVal->CellularNo);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->EmailAddress)?"":$CommercialActivePrincipalInformationVal->EmailAddress);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->Age)?"":$CommercialActivePrincipalInformationVal->Age);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->YearsWithBusiness)?"":$CommercialActivePrincipalInformationVal->YearsWithBusiness);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->DirectorStatusDate)?"":$CommercialActivePrincipalInformationVal->DirectorStatusDate);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->Executor)?"":$CommercialActivePrincipalInformationVal->Executor);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->ExecutorAppointmentDate)?"":$CommercialActivePrincipalInformationVal->ExecutorAppointmentDate);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->Estate)?"":$CommercialActivePrincipalInformationVal->Estate);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->ResignationDate)?"":$CommercialActivePrincipalInformationVal->ResignationDate);?></td>
+							<td><?php echo (is_object($CommercialActivePrincipalInformationVal->ConsumerScore)?"":$CommercialActivePrincipalInformationVal->ConsumerScore);?></td>
+						 </tr>
+						<?php }
+						} else { ?>
+						  <tr>
 							<td><?php echo (is_object($report->CommercialActivePrincipalInformation->IDNo)?"":$report->CommercialActivePrincipalInformation->IDNo);?></td>
 							<td><?php echo (is_object($report->CommercialActivePrincipalInformation->Fullname)?"":$report->CommercialActivePrincipalInformation->Fullname);?></td>
 							<td><?php echo (is_object($report->CommercialActivePrincipalInformation->BirthDate)?"":$report->CommercialActivePrincipalInformation->BirthDate);?></td>
@@ -323,7 +380,8 @@
 							<td><?php echo (is_object($report->CommercialActivePrincipalInformation->Estate)?"":$report->CommercialActivePrincipalInformation->Estate);?></td>
 							<td><?php echo (is_object($report->CommercialActivePrincipalInformation->ResignationDate)?"":$report->CommercialActivePrincipalInformation->ResignationDate);?></td>
 							<td><?php echo (is_object($report->CommercialActivePrincipalInformation->ConsumerScore)?"":$report->CommercialActivePrincipalInformation->ConsumerScore);?></td>
-						</tr>
+						  </tr>
+						<?php } ?>
                     </table>
 					<?php } else { ?>
 					<span>Commercial Principal Information Not Found</span><br>
@@ -332,108 +390,58 @@
                 </div>
               </div>
 
-		  <div class="panel panel-primary">
-                <div class="panel-heading">Commercial InActive Principal Information</div>
-                <div class="panel-body">
-					<?php if($report->CommercialInactivePrincipalInformation){ ?>
-                    <table class="table table-striped">
-                        <tr>
-                             <th>ID Number</th>
-                             <th>Fullname</th>
-                             <th>Birth Date</th>
-                             <th>Director Status Code</th>
-                             <th>Appointment Date</th>
-                             <th>Designation</th>
-                             <th>Member Control Percent</th>
-                             <th>Director Indicator</th>
-                             <th>Principal Type</th>
-                             <th>RSA Resident</th>
-                             <th>ID Verified</th>
-                             <th>CIPRO Confirmed</th>
-                             <th>Physical Address</th>
-                             <th>Postal Address</th>
-                             <th>Home Telephone No</th>
-                             <th>Work Telephone No</th>
-                             <th>Cellular No</th>
-                             <th>Email Address</th>
-                             <th>Age</th>
-                             <th>Years With Business</th>
-                             <th>Director Status Date</th>
-                             <th>Executor</th>
-                             <th>Executor Appointment Date</th>
-                             <th>Estate</th>
-                             <th>Resignation Date</th>
-                             <th>Consumer Score</th>
-                        </tr>
-						
-						<tr>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->IDNo)?"":$report->CommercialInactivePrincipalInformation->IDNo);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->Fullname)?"":$report->CommercialInactivePrincipalInformation->Fullname);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->BirthDate)?"":$report->CommercialInactivePrincipalInformation->BirthDate);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->DirectorStatusCode)?"":$report->CommercialInactivePrincipalInformation->DirectorStatusCode);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->AppointmentDate)?"":$report->CommercialInactivePrincipalInformation->AppointmentDate);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->Designation)?"":$report->CommercialInactivePrincipalInformation->Designation);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->MemberControlPerc)?"":$report->CommercialInactivePrincipalInformation->MemberControlPerc);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->DirectorIndicator)?"":$report->CommercialInactivePrincipalInformation->DirectorIndicator);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->PrincipalType)?"":$report->CommercialInactivePrincipalInformation->PrincipalType);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->ISRSAResident)?"":$report->CommercialInactivePrincipalInformation->ISRSAResident);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->ISIDVerified)?"":$report->CommercialInactivePrincipalInformation->ISIDVerified);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->ISCIPROConfirmed)?"":$report->CommercialInactivePrincipalInformation->ISCIPROConfirmed);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->PhysicalAddress)?"":$report->CommercialInactivePrincipalInformation->PhysicalAddress);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->PostalAddress)?"":$report->CommercialInactivePrincipalInformation->PostalAddress);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->HomeTelephoneNo)?"":$report->CommercialInactivePrincipalInformation->HomeTelephoneNo);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->WorkTelephoneNo)?"":$report->CommercialInactivePrincipalInformation->WorkTelephoneNo);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->CellularNo)?"":$report->CommercialInactivePrincipalInformation->CellularNo);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->EmailAddress)?"":$report->CommercialInactivePrincipalInformation->EmailAddress);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->Age)?"":$report->CommercialInactivePrincipalInformation->Age);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->YearsWithBusiness)?"":$report->CommercialInactivePrincipalInformation->YearsWithBusiness);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->DirectorStatusDate)?"":$report->CommercialInactivePrincipalInformation->DirectorStatusDate);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->Executor)?"":$report->CommercialInactivePrincipalInformation->Executor);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->ExecutorAppointmentDate)?"":$report->CommercialInactivePrincipalInformation->ExecutorAppointmentDate);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->Estate)?"":$report->CommercialInactivePrincipalInformation->Estate);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->ResignationDate)?"":$report->CommercialInactivePrincipalInformation->ResignationDate);?></td>
-							<td><?php echo (is_object($report->CommercialInactivePrincipalInformation->ConsumerScore)?"":$report->CommercialInactivePrincipalInformation->ConsumerScore);?></td>
-						</tr>
-                    </table>
-					<?php } else { ?>
-					<span>Commercial Principal Information Not Found</span><br>
-					<?php } ?>
-                </div>
-              </div>
-
-              <div class="panel panel-primary">
+ 
+			<div class="panel panel-primary">
                 <div class="panel-heading">Active Director Current Business interests</div>
                 <div class="panel-body">
-                    <div class="col">
-                        <div class="col-xs-4 ">Commercial Name:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->CommercialName)?"":$report->ActiveDirectorCurrentBusinessinterests->CommercialName);?></span></strong></div>
-                        <div class="col-xs-4">Registration No:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->RegistrationNo)?"":$report->ActiveDirectorCurrentBusinessinterests->RegistrationNo);?></span></strong></div>
-                        <div class="col-xs-4">Commercial Status:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->CommercialStatus)?"":$report->ActiveDirectorCurrentBusinessinterests->CommercialStatus);?></span></strong></div>
-                        <div class="col-xs-4">Judgments Count:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->JudgmentsCount)?"":$report->ActiveDirectorCurrentBusinessinterests->JudgmentsCount);?></span></strong></div>
-                        <div class="col-xs-4">Default Count:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->DefaultCount)?"":$report->ActiveDirectorCurrentBusinessinterests->DefaultCount);?></span></strong></div>
-                        <div class="col-xs-4">Liquidation:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->Liquidation)?"":$report->ActiveDirectorCurrentBusinessinterests->Liquidation);?></span></strong></div>
-                        <div class="col-xs-4">Age Of Business:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->AgeOfBusiness)?"":$report->ActiveDirectorCurrentBusinessinterests->AgeOfBusiness);?></span></strong></div>
-                        <div class="col-xs-4">Judgment Status:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->JudgmentStatus)?"":$report->ActiveDirectorCurrentBusinessinterests->JudgmentStatus);?></span></strong></div>
-                        <div class="col-xs-4">Director Status Date:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->DirectorStatusDate)?"":$report->ActiveDirectorCurrentBusinessinterests->DirectorStatusDate);?></span></strong></div>
-                    </div>
+					<?php if($report->ActiveDirectorCurrentBusinessinterests){ ?>
+                    <table class="table table-striped">
+                        <tr>
+                             <th>Commercial Name</th>
+                             <th>Registration No</th>
+                             <th>Commercial Status</th>
+                             <th>Judgments Count</th>
+                             <th>Default Count</th>
+                             <th>Liquidation</th>
+                             <th>Age Of Business</th>
+                             <th>Judgment Status</th>
+                             <th>Director Status Date</th>
+                        </tr>
+						<?php if(!is_array($report->ActiveDirectorCurrentBusinessinterests)){ ?>
+						<tr>
+							<td><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->CommercialName)?"":$report->ActiveDirectorCurrentBusinessinterests->CommercialName);?></td>
+							<td><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->RegistrationNo)?"":$report->ActiveDirectorCurrentBusinessinterests->RegistrationNo);?></td>
+							<td><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->CommercialStatus)?"":$report->ActiveDirectorCurrentBusinessinterests->CommercialStatus);?></td>
+							<td><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->JudgmentsCount)?"":$report->ActiveDirectorCurrentBusinessinterests->JudgmentsCount);?></td>
+							<td><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->DefaultCount)?"":$report->ActiveDirectorCurrentBusinessinterests->DefaultCount);?></td>
+							<td><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->Liquidation)?"":$report->ActiveDirectorCurrentBusinessinterests->Liquidation);?></td>
+							<td><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->AgeOfBusiness)?"":$report->ActiveDirectorCurrentBusinessinterests->AgeOfBusiness);?></td>
+							<td><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->JudgmentStatus)?"":$report->ActiveDirectorCurrentBusinessinterests->JudgmentStatus);?></td>
+							<td><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->DirectorStatusDate)?"":$report->ActiveDirectorCurrentBusinessinterests->DirectorStatusDate);?></td>
+						</tr>
+						<?php } else {
+							foreach($report->ActiveDirectorCurrentBusinessinterests as $ActiveDirectorCurrentBusinessinterestsKey => $ActiveDirectorCurrentBusinessinterestsVal){
+							?>
+								<tr>
+									<td><?php echo (is_object($ActiveDirectorCurrentBusinessinterestsVal->CommercialName)?"":$ActiveDirectorCurrentBusinessinterestsVal->CommercialName);?></td>
+									<td><?php echo (is_object($ActiveDirectorCurrentBusinessinterestsVal->RegistrationNo)?"":$ActiveDirectorCurrentBusinessinterestsVal->RegistrationNo);?></td>
+									<td><?php echo (is_object($ActiveDirectorCurrentBusinessinterestsVal->CommercialStatus)?"":$ActiveDirectorCurrentBusinessinterestsVal->CommercialStatus);?></td>
+									<td><?php echo (is_object($ActiveDirectorCurrentBusinessinterestsVal->JudgmentsCount)?"":$ActiveDirectorCurrentBusinessinterestsVal->JudgmentsCount);?></td>
+									<td><?php echo (is_object($ActiveDirectorCurrentBusinessinterestsVal->DefaultCount)?"":$ActiveDirectorCurrentBusinessinterestsVal->DefaultCount);?></td>
+									<td><?php echo (is_object($ActiveDirectorCurrentBusinessinterestsVal->Liquidation)?"":$ActiveDirectorCurrentBusinessinterestsVal->Liquidation);?></td>
+									<td><?php echo (is_object($ActiveDirectorCurrentBusinessinterestsVal->AgeOfBusiness)?"":$ActiveDirectorCurrentBusinessinterestsVal->AgeOfBusiness);?></td>
+									<td><?php echo (is_object($ActiveDirectorCurrentBusinessinterestsVal->JudgmentStatus)?"":$ActiveDirectorCurrentBusinessinterestsVal->JudgmentStatus);?></td>
+									<td><?php echo (is_object($ActiveDirectorCurrentBusinessinterestsVal->DirectorStatusDate)?"":$ActiveDirectorCurrentBusinessinterestsVal->DirectorStatusDate);?></td>
+								</tr>												
+							<?php }
+						} ?>
+                    </table>
+					<?php } else { ?>
+					<span>Active Director Current Business interests Not Found</span><br>
+					<?php } ?>
                 </div>
-              </div>
+              </div>			  
 
-              <div class="panel panel-primary">
-                <div class="panel-heading">Inactive Director Previous Business Interests</div>
-                <div class="panel-body">
-                    <div class="col">
-                        <div class="col-xs-4 ">Commercial Name:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->InactiveDirectorPreviousBusinessInterests->CommercialName)?"":$report->InactiveDirectorPreviousBusinessInterests->CommercialName);?></span></strong></div>
-                        <div class="col-xs-4">Registration No:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->InactiveDirectorPreviousBusinessInterests->RegistrationNo)?"":$report->InactiveDirectorPreviousBusinessInterests->RegistrationNo);?></span></strong></div>
-                        <div class="col-xs-4">Commercial Status:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->InactiveDirectorPreviousBusinessInterests->CommercialStatus)?"":$report->InactiveDirectorPreviousBusinessInterests->CommercialStatus);?></span></strong></div>
-                        <div class="col-xs-4">Judgments Count:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->InactiveDirectorPreviousBusinessInterests->JudgmentsCount)?"":$report->InactiveDirectorPreviousBusinessInterests->JudgmentsCount);?></span></strong></div>
-                        <div class="col-xs-4">Default Count:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->InactiveDirectorPreviousBusinessInterests->DefaultCount)?"":$report->InactiveDirectorPreviousBusinessInterests->DefaultCount);?></span></strong></div>
-                        <div class="col-xs-4">Liquidation:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->InactiveDirectorPreviousBusinessInterests->Liquidation)?"":$report->InactiveDirectorPreviousBusinessInterests->Liquidation);?></span></strong></div>
-                        <div class="col-xs-4">Age Of Business:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->InactiveDirectorPreviousBusinessInterests->AgeOfBusiness)?"":$report->InactiveDirectorPreviousBusinessInterests->AgeOfBusiness);?></span></strong></div>
-                        <div class="col-xs-4">Judgment Status:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->InactiveDirectorPreviousBusinessInterests->JudgmentStatus)?"":$report->InactiveDirectorPreviousBusinessInterests->JudgmentStatus);?></span></strong></div>
-                        <div class="col-xs-4">Director Status Date:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->InactiveDirectorPreviousBusinessInterests->DirectorStatusDate)?"":$report->InactiveDirectorPreviousBusinessInterests->DirectorStatusDate);?></span></strong></div>
-                    </div>
-                </div>
-              </div>
 			  
           <div class="panel panel-primary">
             <div class="panel-heading">Active Director Address History</div>
@@ -568,46 +576,7 @@
 				<?php } ?>
           </div>
          </div>
-	
-        <div class="panel panel-primary">
-            <div class="panel-heading">Active Director Contact History</div>
-            <div class="panel-body">
-				<?php if($report->ActiveDirectorContactHistory){?>
-                <table class="table table-striped">
-                    <tr>
-                        <th>Bureau Update</th>
-                        <th>Captured date</th>
-                        <th>Contact Type</th>
-                        <th>Detail</th>
-                    </tr>
-						<?php 
-							 if(!is_object($report->ActiveDirectorContactHistory)){
-								foreach($report->ActiveDirectorContactHistory as $ActiveDirectorContactHistory){ ?>
-								<tr>
-									<td><?php echo (is_object($ActiveDirectorContactHistory->BureauUpdate)?"":$ActiveDirectorContactHistory->BureauUpdate);?></td>
-									<td><?php echo (is_object($ActiveDirectorContactHistory->Captureddate)?"":$ActiveDirectorContactHistory->Captureddate);?></td>
-									<td><?php echo (is_object($ActiveDirectorContactHistory->ContactType)?"":$ActiveDirectorContactHistory->ContactType);?></td>
-									<td><?php echo (is_object($ActiveDirectorContactHistory->Detail)?"":$ActiveDirectorContactHistory->Detail);?></td>
-								</tr>
-								<?php } 
-							 } else {?>
-								<tr>
-									<td><?php echo (is_object($report->ActiveDirectorContactHistory->BureauUpdate)?"":$report->ActiveDirectorContactHistory->BureauUpdate);?></td>
-									<td><?php echo (is_object($report->ActiveDirectorContactHistory->Captureddate)?"":$report->ActiveDirectorContactHistory->Captureddate);?></td>
-									<td><?php echo (is_object($report->ActiveDirectorContactHistory->ContactType)?"":$report->ActiveDirectorContactHistory->ContactType);?></td>
-									<td><?php echo (is_object($report->ActiveDirectorContactHistory->Detail)?"":$report->ActiveDirectorContactHistory->Detail);?></td>
-								</tr>							 
-							 <?php } ?>
-                </table>
-				<?php } else { ?>
-                 <div>
-					<span>Active Director Contact History Not Found</span><br>
-                </div>
-				<?php } ?>
-          </div>
-         </div>
-	
- 
+
        <div class="panel panel-primary">
             <div class="panel-heading">Director Contact History</div>
             <div class="panel-body">

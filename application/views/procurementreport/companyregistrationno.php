@@ -51,7 +51,6 @@
               <th>Reference Number</th>
               <th>Business Name</th>
               <th>Registration Number</th>
-              <th>Legal Entity</th>
               <th>View</th>
             </tr>
 
@@ -59,7 +58,6 @@
               <td><?php echo $consumerList->Reference;?></td>
               <td><?php echo $consumerList->Businessname;?></td>
               <td><?php echo $consumerList->RegistrationNo;?></td>
-              <td><?php echo $consumerList->LegalEntity;?></td>
               <td>
                <a type="button" onClick="fnRedirect('<?php echo site_url()?>/procurementreport/customerdatalist/<?php echo $consumerList->EnquiryID;?>/<?php echo $consumerList->EnquiryResultID;?>/<?php echo $companyregistrationno;?>')"  class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;View</a>              
 			  </td>
