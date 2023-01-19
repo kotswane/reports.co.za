@@ -99,7 +99,10 @@ function fnRedirect(strVal){
 }
 
 $(document).ready(function(){
-    $('#companyname_table').DataTable();
+    $('#companyname_table').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
 });
 </script>
 </html>

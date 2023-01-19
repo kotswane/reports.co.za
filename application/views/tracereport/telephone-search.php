@@ -114,7 +114,10 @@
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
-	$('#telephone_search_table').DataTable();
+	$('#telephone_search_table').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
     $('#button-search').click(function() {
         $('#spinner').show();
 		$('#form-search').submit();

@@ -133,7 +133,10 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-		$('#addresssearch_table').DataTable();
+		$('#addresssearch_table').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
 		$('#button-search').click(function() {
         $('#spinner').show();
 		$('#form-search').submit();

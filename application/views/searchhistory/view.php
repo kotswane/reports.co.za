@@ -54,7 +54,10 @@
 </body>
 <script>
 $(document).ready(function(){
-	$('#search_history_table').DataTable();
+	$('#search_history_table').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
 });
 </script>
 </html>

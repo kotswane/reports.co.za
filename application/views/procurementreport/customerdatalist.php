@@ -1,6 +1,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Trace Report</title>
+	<style>
+	.scroll {
+	   width: 600px;
+	   overflow: scroll;
+	}
+	</style>
 </head>
 <body>
 <section class="content-header">
@@ -83,6 +89,7 @@
 		       <div class="panel panel-primary">
                 <div class="panel-heading">Director Previous Business interests</div>
                 <div class="panel-body">
+				
 					<?php if($report->ActiveDirectorCurrentBusinessinterests){ ?>
                     <table class="table table-striped" id="ActiveDirectorCurrentBusinessinterestsTable">
                         <thead>
@@ -137,7 +144,7 @@
 			  
               <div class="panel panel-primary">
                 <div class="panel-heading">Commercial Principal Information</div>
-                <div class="panel-body">
+                <div class="panel-body" style="overflow:scroll !important;">
 					<?php if($report->CommercialPrincipalInformation){ ?>
                     <table class="table table-striped" id="CommercialPrincipalInformation">
                         <thead>
@@ -300,7 +307,7 @@
 		  
 		  <div class="panel panel-primary">
                 <div class="panel-heading">Commercial Active Principal Information</div>
-                <div class="panel-body">
+                <div class="panel-body" style="overflow:scroll !important;">
 					<?php 
 
 					if($report->CommercialActivePrincipalInformation){ ?>
@@ -659,16 +666,43 @@
 </body>
 <script>
 $(document).ready(function(){
-    $('#DirectorContactHistory').DataTable();
-    $('#ActiveDirectorContactHistory').DataTable();
-    $('#InactiveDirectorAddressHistory').DataTable();
-    $('#ActiveDirectorAddressHistory').DataTable();
-    $('#ActiveDirectorCurrentBusinessinterests').DataTable();
-    $('#CommercialActivePrincipalInformation').DataTable();
-    $('#CommercialInActivePrincipalInfoSummary').DataTable();
-    $('#CommercialActivePrincipalInfoSummary').DataTable();
+    $('#DirectorContactHistory').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
+    $('#ActiveDirectorContactHistory').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
+    $('#InactiveDirectorAddressHistory').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
+    $('#ActiveDirectorAddressHistory').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
+    $('#ActiveDirectorCurrentBusinessinterests').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
+    $('#CommercialActivePrincipalInformation').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
+    $('#CommercialInActivePrincipalInfoSummary').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
+    $('#CommercialActivePrincipalInfoSummary').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
     $('#CommercialPrincipalInformation').DataTable();
-    $('#ActiveDirectorCurrentBusinessinterestsTable').DataTable();
+    $('#ActiveDirectorCurrentBusinessinterestsTable').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
 });
 </script>
 </html>

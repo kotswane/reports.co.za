@@ -455,12 +455,30 @@
 </body>
 <script type="text/javascript">
 $(document).ready(function(){
-	$('#ConsumerAddressHistory').DataTable();
-	$('#ConsumerEmploymentHistory').DataTable();
-	$('#ConsumerTelephoneHistory').DataTable();
-	$('#ConsumerTelephoneLinkageCellular').DataTable();
-	$('#ConsumerTelephoneLinkageWork').DataTable();
-	$('#ConsumerTelephoneLinkageHome').DataTable();
+	$('#ConsumerAddressHistory').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
+	$('#ConsumerEmploymentHistory').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
+	$('#ConsumerTelephoneHistory').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
+	$('#ConsumerTelephoneLinkageCellular').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
+	$('#ConsumerTelephoneLinkageWork').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
+	$('#ConsumerTelephoneLinkageHome').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
 });
 </script>
 </html>

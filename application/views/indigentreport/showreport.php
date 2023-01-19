@@ -278,9 +278,18 @@
 </body>
 <script type="text/javascript">
 $(document).ready(function(){
-	$('#myConsumerEmploymentHistory').DataTable();
-	$('#myConsumerTelephoneHistory').DataTable();
-	$('#myConsumerAddressHistory').DataTable();
+	$('#myConsumerEmploymentHistory').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
+	$('#myConsumerTelephoneHistory').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
+	$('#myConsumerAddressHistory').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
 });
 </script>
 </html>

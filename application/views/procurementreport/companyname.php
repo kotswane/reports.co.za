@@ -94,7 +94,10 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	$('#companyname_table').DataTable();
+	$('#companyname_table').DataTable({
+        /* No ordering applied by DataTables during initialisation */
+        "order": []
+    });
     $('#button-search').click(function() {
         $('#spinner').show();
 		$('#form-search').submit();
