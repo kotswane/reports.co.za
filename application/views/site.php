@@ -72,7 +72,7 @@
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        <strong>Copyright &copy; 2022 LKcentrix Solutions.</strong>
+        <strong>Copyright &copy; 2022 LKCentrix Solutions.</strong>
     </footer>
 </div>
 <!-- ./wrapper -->
