@@ -25,13 +25,16 @@
 	 if (count($consumerList) > 0){
 	?>
     <div>
-          <table class="table table-striped">
+          <table class="table table-striped" id="search_history_table">
+		    <thead>
             <tr>
               <th>Report Name</th>
               <th>Report Type</th>
               <th>Date Time</th>
               <th>Search Data</th>
             </tr>
+			</thead>
+			<tbody>
 			<?php 
 				foreach($consumerList as $consumerListKey => $consumerListValue){
 			?>
@@ -43,9 +46,15 @@
               <td><?php echo $consumerListValue->auditlog_searchdata;?></td>
             </tr>
 			<?php } ?>
+			<t/body>
           </table>
        </div>
 	<?php } ?>
 </section>
 </body>
+<script>
+$(document).ready(function(){
+	$('#search_history_table').DataTable();
+});
+</script>
 </html>

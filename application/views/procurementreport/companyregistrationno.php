@@ -46,7 +46,7 @@
 	?>
     <div>
       	 <h5><span><strong>Search Results List</strong></span></h5>
-          <table class="table table-striped">
+          <table class="table table-striped" id="companyname_table">
             <tr>
               <th>Reference Number</th>
               <th>Business Name</th>
@@ -97,6 +97,10 @@ function fnRedirect(strVal){
 	$('#spinner').show();
 	location.href = strVal;
 }
+
+$(document).ready(function(){
+    $('#companyname_table').DataTable();
+});
 </script>
 </html>
 

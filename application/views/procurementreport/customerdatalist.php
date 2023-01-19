@@ -84,8 +84,9 @@
                 <div class="panel-heading">Director Previous Business interests</div>
                 <div class="panel-body">
 					<?php if($report->ActiveDirectorCurrentBusinessinterests){ ?>
-                    <table class="table table-striped">
-                        <tr>
+                    <table class="table table-striped" id="ActiveDirectorCurrentBusinessinterestsTable">
+                        <thead>
+						<tr>
                              <th>Commercial Name</th>
                              <th>Registration No</th>
                              <th>Commercial Status</th>
@@ -96,6 +97,8 @@
                              <th>Judgment Status</th>
                              <th>Director Status Date</th>
                         </tr>
+						</thead>
+						<tbody>
 						<?php if(!is_array($report->ActiveDirectorCurrentBusinessinterests)){ ?>
 						<tr>
 							<td><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->CommercialName)?"":$report->ActiveDirectorCurrentBusinessinterests->CommercialName);?></td>
@@ -124,6 +127,7 @@
 								</tr>												
 							<?php }
 						} ?>
+						</tbody>
                     </table>
 					<?php } else { ?>
 					<span>Director Previous Business interests Not Found</span><br>
@@ -135,8 +139,9 @@
                 <div class="panel-heading">Commercial Principal Information</div>
                 <div class="panel-body">
 					<?php if($report->CommercialPrincipalInformation){ ?>
-                    <table class="table table-striped">
-                        <tr>
+                    <table class="table table-striped" id="CommercialPrincipalInformation">
+                        <thead>
+						<tr>
                              <th>ID Number</th>
                              <th>Fullname</th>
                              <th>Birth Date</th>
@@ -164,6 +169,8 @@
                              <th>Resignation Date</th>
                              <th>Consumer Score</th>
                         </tr>
+						</thead>
+						<tbody>
 						<?php 
 							if(!is_object($report->CommercialPrincipalInformation)){
 								foreach($report->CommercialPrincipalInformation as $CommercialPrincipalInformation){ ?>
@@ -226,6 +233,7 @@
 										<td><?php echo (is_object($report->CommercialPrincipalInformation->ConsumerScore)?"":$report->CommercialPrincipalInformation->ConsumerScore);?></td>
 									</tr>							
 							<?php } ?>
+						</tbody>
                     </table>
 					<?php } else { ?>
 					<span>Commercial Principal Information Not Found</span><br>
@@ -238,18 +246,21 @@
                 <div class="panel-heading">Commercial Active Principal Info Summary</div>
                 <div class="panel-body">
 				<?php if($report->CommercialActivePrincipalInfoSummary){ ?>
-					 <table class="table table-striped">
+					 <table class="table table-striped" id="CommercialActivePrincipalInfoSummary">
+						<thead>
 						<tr>
 							<th>Number Of Principals</th>
 							<th>Number Of Inactive Principals</th>
 							<th>Average Age</th>
 						</tr>
-
+						</thead>
+						<tbody>
 						<tr>
 							<td><?php echo (is_object($report->CommercialActivePrincipalInfoSummary->NoOfPrincipals)?"":$report->CommercialActivePrincipalInfoSummary->NoOfPrincipals);?></td>
 							<td><?php echo (is_object($report->CommercialActivePrincipalInfoSummary->NoOfInactivePrincipals)?"":$report->CommercialActivePrincipalInfoSummary->NoOfInactivePrincipals);?></td>
 							<td><?php echo (is_object($report->CommercialActivePrincipalInfoSummary->AverageAge)?"":$report->CommercialActivePrincipalInfoSummary->AverageAge);?></td>
 						</tr>
+						</tbody>
 					</table>
 				<?php } else { ?>
                        <div>
@@ -263,18 +274,21 @@
             <div class="panel-heading">Commercial InActive Principal Info Summary</div>
             <div class="panel-body">
 			<?php if($report->CommercialInActivePrincipalInfoSummary){ ?>
-                <table class="table table-striped">
-                    <tr>
+                <table class="table table-striped" id="CommercialInActivePrincipalInfoSummary">
+                    <thead>
+					<tr>
                         <th>Number Of Principals</th>
                         <th>Number Of Inactive Principals</th>
                         <th>Average Age</th>
                     </tr>
-
+					</thead>
+					<tbody>
 					<tr>
 						<td><?php echo (is_object($report->CommercialInActivePrincipalInfoSummary->NoOfPrincipals)?"":$report->CommercialInActivePrincipalInfoSummary->NoOfPrincipals);?></td>
 						<td><?php echo (is_object($report->CommercialInActivePrincipalInfoSummary->NoOfInactivePrincipals)?"":$report->CommercialInActivePrincipalInfoSummary->NoOfInactivePrincipals);?></td>
 						<td><?php echo (is_object($report->CommercialInActivePrincipalInfoSummary->AverageAge)?"":$report->CommercialInActivePrincipalInfoSummary->AverageAge);?></td>
 					</tr>
+					</tbody>
                 </table>
 				<?php } else { ?>
                  <div>
@@ -290,7 +304,8 @@
 					<?php 
 
 					if($report->CommercialActivePrincipalInformation){ ?>
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="CommercialActivePrincipalInformation">
+						<thead>
                         <tr>
                              <th>ID Number</th>
                              <th>Fullname</th>
@@ -319,6 +334,8 @@
                              <th>Resignation Date</th>
                              <th>Consumer Score</th>
                         </tr>
+						</thead>
+						<tbody>
 						<?php if(is_array($report->CommercialActivePrincipalInformation)){
 							
 						foreach($report->CommercialActivePrincipalInformation as $CommercialActivePrincipalInformationKey => $CommercialActivePrincipalInformationVal){
@@ -382,6 +399,7 @@
 							<td><?php echo (is_object($report->CommercialActivePrincipalInformation->ConsumerScore)?"":$report->CommercialActivePrincipalInformation->ConsumerScore);?></td>
 						  </tr>
 						<?php } ?>
+						</tbody>
                     </table>
 					<?php } else { ?>
 					<span>Commercial Principal Information Not Found</span><br>
@@ -395,8 +413,9 @@
                 <div class="panel-heading">Active Director Current Business interests</div>
                 <div class="panel-body">
 					<?php if($report->ActiveDirectorCurrentBusinessinterests){ ?>
-                    <table class="table table-striped">
-                        <tr>
+                    <table class="table table-striped" id="ActiveDirectorCurrentBusinessinterests">
+                        <thead>
+						<tr>
                              <th>Commercial Name</th>
                              <th>Registration No</th>
                              <th>Commercial Status</th>
@@ -407,6 +426,8 @@
                              <th>Judgment Status</th>
                              <th>Director Status Date</th>
                         </tr>
+						</thead>
+						<tbody>
 						<?php if(!is_array($report->ActiveDirectorCurrentBusinessinterests)){ ?>
 						<tr>
 							<td><?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->CommercialName)?"":$report->ActiveDirectorCurrentBusinessinterests->CommercialName);?></td>
@@ -435,6 +456,7 @@
 								</tr>												
 							<?php }
 						} ?>
+						</tbody>
                     </table>
 					<?php } else { ?>
 					<span>Active Director Current Business interests Not Found</span><br>
@@ -447,8 +469,9 @@
             <div class="panel-heading">Active Director Address History</div>
             <div class="panel-body">
 				<?php if($report->ActiveDirectorAddressHistory){?>
-                <table class="table table-striped">
-                    <tr>
+                <table class="table table-striped" id="ActiveDirectorAddressHistory">
+                    <thead>
+					<tr>
                         <th>Address Type</th>
                         <th>Address1</th>
                         <th>Address2</th>
@@ -457,6 +480,8 @@
                         <th>Postal Code</th>
                         <th>Created On Date</th>
                     </tr>
+					<thead>
+					<tbody>
 						<?php 
 							 if(!is_object($report->ActiveDirectorAddressHistory)){
 								foreach($report->ActiveDirectorAddressHistory as $ActiveDirectorAddressHistory){ ?>
@@ -481,6 +506,7 @@
 									<td><?php echo (is_object($report->ActiveDirectorAddressHistory->CreatedOnDate)?"":$report->ActiveDirectorAddressHistory->CreatedOnDate);?></td>
 								</tr>							 
 							 <?php } ?>
+					</tbody>		 
                 </table>
 				<?php } else { ?>
                  <div>
@@ -495,8 +521,9 @@
             <div class="panel-heading">Inactive Director Address History</div>
             <div class="panel-body">
 				<?php if($report->InactiveDirectorAddressHistory){?>
-                <table class="table table-striped">
-                    <tr>
+                <table class="table table-striped" id="InactiveDirectorAddressHistory">
+                    <thead>
+					<tr>
                         <th>Address Type</th>
                         <th>Address1</th>
                         <th>Address2</th>
@@ -505,6 +532,8 @@
                         <th>Postal Code</th>
                         <th>Created On Date</th>
                     </tr>
+					</thead>
+					<tbody>
 						<?php 
 							 if(!is_object($report->InactiveDirectorAddressHistory)){
 								foreach($report->InactiveDirectorAddressHistory as $InactiveDirectorAddressHistory){ ?>
@@ -529,6 +558,7 @@
 									<td><?php echo (is_object($report->InactiveDirectorAddressHistory->CreatedOnDate)?"":$report->InactiveDirectorAddressHistory->CreatedOnDate);?></td>
 								</tr>							 
 							 <?php } ?>
+					</tbody>
                 </table>
 				<?php } else { ?>
                  <div>
@@ -543,13 +573,16 @@
             <div class="panel-heading">Active Director Contact History</div>
             <div class="panel-body">
 				<?php if($report->ActiveDirectorContactHistory){?>
-                <table class="table table-striped">
-                    <tr>
+                <table class="table table-striped" id="ActiveDirectorContactHistory">
+                    <thead>
+					<tr>
                         <th>Bureau Update</th>
                         <th>Captured date</th>
                         <th>Contact Type</th>
                         <th>Detail</th>
                     </tr>
+					</thead>
+					<tbody>
 						<?php 
 							 if(!is_object($report->ActiveDirectorContactHistory)){
 								foreach($report->ActiveDirectorContactHistory as $ActiveDirectorContactHistory){ ?>
@@ -568,6 +601,7 @@
 									<td><?php echo (is_object($report->ActiveDirectorContactHistory->Detail)?"":$report->ActiveDirectorContactHistory->Detail);?></td>
 								</tr>							 
 							 <?php } ?>
+					</tbody>
                 </table>
 				<?php } else { ?>
                  <div>
@@ -581,13 +615,16 @@
             <div class="panel-heading">Director Contact History</div>
             <div class="panel-body">
 				<?php if($report->DirectorContactHistory){?>
-                <table class="table table-striped">
-                    <tr>
+                <table class="table table-striped " id="DirectorContactHistory">
+                    <thead>
+					<tr>
                         <th>Bureau Update</th>
                         <th>Captured date</th>
                         <th>Contact Type</th>
                         <th>Detail</th>
                     </tr>
+					</thead>
+					<tbody>
 						<?php 
 							 if(!is_object($report->DirectorContactHistory)){
 								foreach($report->DirectorContactHistory as $DirectorContactHistory){ ?>
@@ -606,6 +643,7 @@
 									<td><?php echo (is_object($report->DirectorContactHistory->Detail)?"":$report->DirectorContactHistory->Detail);?></td>
 								</tr>							 
 							 <?php } ?>
+					</tbody>
                 </table>
 				<?php } else { ?>
                  <div>
@@ -619,4 +657,18 @@
     </div>
 </div>
 </body>
+<script>
+$(document).ready(function(){
+    $('#DirectorContactHistory').DataTable();
+    $('#ActiveDirectorContactHistory').DataTable();
+    $('#InactiveDirectorAddressHistory').DataTable();
+    $('#ActiveDirectorAddressHistory').DataTable();
+    $('#ActiveDirectorCurrentBusinessinterests').DataTable();
+    $('#CommercialActivePrincipalInformation').DataTable();
+    $('#CommercialInActivePrincipalInfoSummary').DataTable();
+    $('#CommercialActivePrincipalInfoSummary').DataTable();
+    $('#CommercialPrincipalInformation').DataTable();
+    $('#ActiveDirectorCurrentBusinessinterestsTable').DataTable();
+});
+</script>
 </html>

@@ -65,7 +65,8 @@
 	?>
     <div>
       	 <h5><span><strong>Search Results List</strong></span></h5>
-          <table class="table table-striped">
+          <table class="table table-striped" id="telephone_search_table">
+		   <thead>
             <tr>
             <th>Reference No</th>
               <th>Names</th>
@@ -73,6 +74,8 @@
               <th>Details Viewed</th>
               <th>View</th>
             </tr>
+			</thead>
+			<tbody>
 			<?php 
 				
 				foreach($consumerList['details'] as $consumerListKey => $consumerListValue){
@@ -88,12 +91,12 @@
               </td>
             </tr>
 			<?php }?>
+			</tbody>
           </table>
        </div>
 	<?php } ?>
 </section>
 </body>
-<script src="<?php echo base_url();?>bower_components/jquery/dist/jquery.min.js"></script>
 <style>
 .spinner {
     position: fixed;
@@ -111,6 +114,7 @@
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
+	$('#telephone_search_table').DataTable();
     $('#button-search').click(function() {
         $('#spinner').show();
 		$('#form-search').submit();

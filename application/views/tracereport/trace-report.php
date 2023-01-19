@@ -110,26 +110,7 @@
                     </div>
                 </div>
               </div>
-              
-          <!-- <div class="panel panel-primary">
-            <div class="panel-heading">AKA Names</div>
-            <div class="panel-body">
-                <table class="table table-striped" th:if="${not #lists.isEmpty(traceReportRequest.akaNames)}">
-                    <tr>
-                        <th>Bureau UpdateDate</th>
-                        <th>Home Affairs Name</th>
-                    </tr>
-                    <tr th:each="row : ${traceReportRequest.akaNames}">
-                        <td th:text="${row.lastUpdateddate}"></td>
-                        <td th:text="${row.homeAffairsName}"></td>
-                   </tr>
-                </table>
-                 <div>
-                     <span th:if="${#lists.isEmpty(traceReportRequest.akaNames)}" th:text="${traceReportRequest.traceReportMessage.noAkaname}"></span>
-                </div>
-            </div>
-          </div>-->
-              
+ 
               <div class="panel panel-primary">
                 <div class="panel-heading">Potential Fraud Indicators</div>
                 <div class="panel-body">
@@ -145,7 +126,8 @@
                 <div class="panel-heading">Address History</div>
                 <div class="panel-body">
 					<?php if($report->ConsumerAddressHistory){ ?>
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="ConsumerAddressHistory">
+						<thead>
                         <tr>
                             <th>Bureau UpdateDate</th>
                             <th>Type</th>
@@ -155,6 +137,8 @@
                              <th>Line4</th>
                              <th>Postal Code</th>
                         </tr>
+						</thead>
+						<tbody>
 						<?php 
 							if(!is_object($report->ConsumerAddressHistory)){
 								foreach($report->ConsumerAddressHistory as $ConsumerAddressHistory){ ?>
@@ -179,6 +163,7 @@
 									<td><?php echo (is_object($report->ConsumerAddressHistory->PostalCode)?"":$report->ConsumerAddressHistory->PostalCode);?></td>
 								</tr>							
 							<?php } ?>
+							</tbody>
                     </table>
 					<?php } else { ?>
 					<span>Address History Not Found</span><br>
@@ -220,12 +205,15 @@
             <div class="panel-heading">Consumer Employment History</div>
             <div class="panel-body">
 			<?php if($report->ConsumerEmploymentHistory){ ?>
-                <table class="table table-striped">
+                <table class="table table-striped" id="ConsumerEmploymentHistory">
+					<thead>
                     <tr>
                         <th>Bureau UpdateDate</th>
                         <th>Employer</th>
                         <th>Designation</th>
                     </tr>
+					</thead>
+					<tbody>
 					<?php 
 						if(!is_object($report->ConsumerEmploymentHistory)){
 							foreach($report->ConsumerEmploymentHistory as $ConsumerEmploymentHistory){?>
@@ -244,6 +232,7 @@
 									<td><?php echo (is_object($report->ConsumerEmploymentHistory->Designation)?"":$report->ConsumerEmploymentHistory->Designation);?></td>
 								</tr>
 						<?php } ?>
+						</tbody>
                 </table>
 				<?php } else { ?>
                  <div>
@@ -257,12 +246,15 @@
             <div class="panel-heading">Contact No. History</div>
             <div class="panel-body">
 				<?php if($report->ConsumerTelephoneHistory){?>
-                <table class="table table-striped">
+                <table class="table table-striped" id="ConsumerTelephoneHistory">
+					<thead>
                     <tr>
                         <th>Bureau UpdateDate</th>
                         <th>Type</th>
                         <th>Telephone No</th>
                     </tr>
+					</thead>
+					<tbody>
 						<?php 
 							 if(!is_object($report->ConsumerTelephoneHistory)){
 								foreach($report->ConsumerTelephoneHistory as $ConsumerTelephoneHistory){ ?>
@@ -279,6 +271,7 @@
 									<td><?php echo (is_object($report->ConsumerTelephoneHistory->TelephoneNo)?"":$report->ConsumerTelephoneHistory->TelephoneNo);?></td>
 								</tr>							 
 							 <?php } ?>
+					</tbody>
                 </table>
 				<?php } else { ?>
                  <div>
@@ -296,7 +289,8 @@
                 <div class="panel-heading"><strong>Consumer Telephone Linkage Cellular</strong></div>
                 <div class="panel-body">
 					<?php if($report->ConsumerTelephoneLinkageCellular){?>
-                    <table class="table table-striped">
+                    <table class="table table-striped"id="ConsumerTelephoneLinkageCellular">
+						<thead>
                         <tr>
                              <th>Customer Id</th>
                             <th>Name</th>
@@ -305,6 +299,8 @@
                              <th>Idno</th>
                              <th>PassportNo</th>
                         </tr>
+						</thead>
+						<tbody>
 						<?php if(!is_object($report->ConsumerTelephoneLinkageCellular)){
 								foreach($report->ConsumerTelephoneLinkageCellular as $ConsumerTelephoneLinkageCellular){?>
 								<tr>
@@ -326,6 +322,7 @@
 									<td><?php echo (is_object($report->ConsumerTelephoneLinkageCellular->PassportNo)?"":$report->ConsumerTelephoneLinkageCellular->PassportNo);?></td>
 								</tr>
 						<?php } ?>
+						</tbody>
                     </table>
 					<?php } else { ?>
                     <span>Consumer Telephone Linkage Cellular Not Found</span><br>
@@ -337,7 +334,8 @@
                 <div class="panel-heading"><strong>Consumer Telephone Linkage Work</strong></div>
                 <div class="panel-body">
 				<?php if($report->ConsumerTelephoneLinkageWork){?>
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="ConsumerTelephoneLinkageWork">
+						<thead>
                         <tr>
                              <th>Customer Id</th>
                              <th>Name</th>
@@ -346,6 +344,8 @@
                              <th>Idno</th>
                              <th>PassportNo</th>
                         </tr>
+						</thead>
+						<tbody>
 						<?php 
 							if(!is_object($report->ConsumerTelephoneLinkageWork)){
 								foreach($report->ConsumerTelephoneLinkageWork as $ConsumerTelephoneLinkageWork){?>
@@ -368,6 +368,7 @@
 									<td><?php echo (is_object($report->ConsumerTelephoneLinkageWork->PassportNo)?"":$report->ConsumerTelephoneLinkageWork->PassportNo);?></td>
 								</tr>							
 							<?php } ?>
+						</tbody>
                     </table>
 					<?php } else { ?>
                     <span>Consumer Telephone Linkage Work Not Found</span><br>
@@ -379,7 +380,8 @@
                 <div class="panel-heading"><strong>Consumer Telephone Linkage Home</strong></div>
                 <div class="panel-body">
 				<?php if($report->ConsumerTelephoneLinkageHome){?>
-                    <table class="table table-striped">
+                    <table class="table table-striped"id="ConsumerTelephoneLinkageHome">
+						<thead>
                         <tr>
                              <th>Customer Id</th>
                             <th>Name</th>
@@ -388,6 +390,8 @@
                              <th>Idno</th>
                              <th>PassportNo</th>
                         </tr>
+						</thead>
+						<tbody>
 						<?php 
 							if(!is_object($report->ConsumerTelephoneLinkageHome)){
 								foreach($report->ConsumerTelephoneLinkageHome as $ConsumerTelephoneLinkageHome){?>
@@ -410,6 +414,7 @@
 									<td><?php echo (is_object($report->ConsumerTelephoneLinkageHome->PassportNo)?"":$report->ConsumerTelephoneLinkageHome->PassportNo);?></td>
 								</tr>							
 							<?php } ?>
+							</tbody>
                     </table>
 					<?php } else { ?>
 						<span>Consumer Telephone Linkage Home Not Found</span><br>
@@ -448,4 +453,14 @@
     </div>
 </div>
 </body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#ConsumerAddressHistory').DataTable();
+	$('#ConsumerEmploymentHistory').DataTable();
+	$('#ConsumerTelephoneHistory').DataTable();
+	$('#ConsumerTelephoneLinkageCellular').DataTable();
+	$('#ConsumerTelephoneLinkageWork').DataTable();
+	$('#ConsumerTelephoneLinkageHome').DataTable();
+});
+</script>
 </html>

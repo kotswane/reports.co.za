@@ -17,6 +17,20 @@
     
     <link rel="stylesheet" href="<?php echo base_url();?>dist/css/skins/skin-blue.min.css">
     <link rel="icon" href="<?php echo base_url();?>dist/img/lk-Logo.png">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+	
+	<!-- ./wrapper -->
+
+	<!-- REQUIRED JS SCRIPTS -->
+	<!-- jQuery 3 -->
+	<script src="<?php echo base_url();?>bower_components/jquery/dist/jquery.min.js"></script>
+	<!-- Bootstrap 3.3.7 -->
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+	<script src="<?php echo base_url();?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+	<!-- AdminLTE App -->
+	<script src="<?php echo base_url();?>dist/js/lkcentrix.min.js"></script>
+	
 	<script src='https://www.google.com/recaptcha/api.js'></script>
   <!-- Google Font -->
     <link rel="stylesheet"
@@ -75,14 +89,7 @@
         <strong>Copyright &copy; 2022 LKCentrix Solutions.</strong>
     </footer>
 </div>
-<!-- ./wrapper -->
 
-<!-- REQUIRED JS SCRIPTS -->
-<!-- jQuery 3 -->
-<script src="<?php echo base_url();?>bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="<?php echo base_url();?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<?php echo base_url();?>dist/js/lkcentrix.min.js"></script>
+
 </body>
 </html>

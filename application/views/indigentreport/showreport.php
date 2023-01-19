@@ -168,7 +168,7 @@
                 <div class="panel-heading">Address History</div>
                 <div class="panel-body">
 					<?php if($myConsumerAddressHistory){ ?>
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="myConsumerAddressHistory">
                         <tr>
                             <th>Type</th>
                             <th>Full Address</th>
@@ -203,7 +203,7 @@
 				<div class="panel-heading">Telephone History</div>
 				<div class="panel-body">
 				<?php if($myConsumerTelephoneHistory){ ?>
-					<table class="table table-striped">
+					<table class="table table-striped" id="myConsumerTelephoneHistory">
 						<tr>
 							<th>Type</th>
 							<th>Full Number</th>
@@ -240,7 +240,7 @@
             <div class="panel-heading">Consumer Employment History</div>
             <div class="panel-body">
 			<?php if($myConsumerEmploymentHistory){ ?>
-                <table class="table table-striped">
+                <table class="table table-striped" id="myConsumerEmploymentHistory">
                     <tr>
                         <th>Employer Name</th>
                         <th>Designation</th>
@@ -276,4 +276,11 @@
 	</div>
 </section>
 </body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#myConsumerEmploymentHistory').DataTable();
+	$('#myConsumerTelephoneHistory').DataTable();
+	$('#myConsumerAddressHistory').DataTable();
+});
+</script>
 </html>
