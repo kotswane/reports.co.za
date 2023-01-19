@@ -83,7 +83,7 @@ Current Contact, Address, and Employment Info.</h5>
        </tr>
        <tr class="tr-label">
         <td class="td-label">BusinessStart Date</td>
-        <td class="td-value"><?php echo (is_object($report->CommercialBusinessInformation->FirstName)?"":$report->CommercialBusinessInformation->FirstName);?></td>
+        <td class="td-value"><?php echo (is_object($report->CommercialBusinessInformation->BusinessStartDate)?"":$report->CommercialBusinessInformation->BusinessStartDate);?></td>
        </tr>
        <tr class="tr-label">
         <td class="td-label">Financial Year End</td>
@@ -95,7 +95,7 @@ Current Contact, Address, and Employment Info.</h5>
        </tr>
         <tr class="tr-label">
         <td class="td-label">Commercial Status</td>
-        <td class="td-value"><?php (is_object($report->CommercialBusinessInformation->CommercialStatus)?"":$report->CommercialBusinessInformation->CommercialStatus);?></td>
+        <td class="td-value"><?php echo (is_object($report->CommercialBusinessInformation->CommercialStatus)?"":$report->CommercialBusinessInformation->CommercialStatus);?></td>
        </tr>
         <tr class="tr-label">
         <td class="td-label">Commercial Type</td>
@@ -103,7 +103,7 @@ Current Contact, Address, and Employment Info.</h5>
        </tr>
         <tr class="tr-label">
         <td class="td-label">Tax Number</td>
-        <td class="td-value"><?php (is_object($report->CommercialBusinessInformation->TaxNo)?"":$report->CommercialBusinessInformation->TaxNo);?></td>
+        <td class="td-value"><?php echo (is_object($report->CommercialBusinessInformation->TaxNo)?"":$report->CommercialBusinessInformation->TaxNo);?></td>
        </tr>
         <tr class="tr-label">
         <td class="td-label">Trade Name</td>
@@ -120,10 +120,6 @@ Current Contact, Address, and Employment Info.</h5>
       <tr class="tr-label">
         <td class="td-label">Registration Date</td>
         <td class="td-value"><?php echo (is_object($report->CommercialBusinessInformation->RegistrationDate)?"":$report->CommercialBusinessInformation->RegistrationDate);?></td>
-      </tr>
-      <tr class="tr-label">
-        <td class="td-label">Residential Address</td>
-        <td class="td-value"><?php echo (is_object($report->CommercialBusinessInformation->ResidentialAddress)?"":$report->CommercialBusinessInformation->ResidentialAddress);?></td>
       </tr>
       <tr class="tr-label">
         <td class="td-label">Telephone Number</td>
@@ -144,7 +140,7 @@ Current Contact, Address, and Employment Info.</h5>
 	  
 	  
       <tr class="tr-label">
-        <td class="td-label">Age of Businessd</td>
+        <td class="td-label">Age of Business</td>
         <td class="td-value"><?php echo (is_object($report->CommercialBusinessInformation->AgeofBusiness)?"":$report->CommercialBusinessInformation->AgeofBusiness);?></td>
       </tr>
       <tr class="tr-label">
