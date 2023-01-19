@@ -341,6 +341,7 @@ class Procurementreport extends CI_Controller {
 		$response = $this->getSearchData($this->uri->segment(3), $this->uri->segment(4),$this->uri->segment(5));
 		$data['content'] = "procurementreport/customerdatalist";
 		$data['report'] = $response;
+		$this->session->set_userdata(array('report' =>$data['report']));
 		$this->load->view('site',$data);
 	}
 	
@@ -392,5 +393,30 @@ class Procurementreport extends CI_Controller {
 		$this->Auditlog_model->save($auditlog);
 				
 		return $arrOutput;
+	}
+	
+	public function downloadidreport(){
+		if(!$this->session->userdata('username')){
+			 redirect('user/login');
+		}
+		
+		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
+		$response = $this->redisclient->request($data);
+
+		if($response->status != "success"){
+			$this->session->set_userdata(array('tokensession' => 'Session expired, please login again'));
+			redirect('user/login');
+		}
+
+		try{
+			ob_clean();
+			$data['report'] = $this->session->userdata('report');
+			$this->load->library('pdf');
+			$html = $this->load->view('procurementreport/pdf-procurementreport',$data, true);
+			$this->pdf->createPDF($html, "customer-tracereport-".time(), true);
+
+		}catch(Exception $ex){
+			print_r($ex);
+		}
 	}
 }

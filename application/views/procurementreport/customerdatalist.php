@@ -56,7 +56,7 @@
                 <div class="panel-heading">Commercial Business Information</div>
                 <div class="panel-body">
                     <div class="col">
-                        <div class="col-xs-4 ">Reference No:&nbsp;&nbsp;<strong><span><?php echo $report->CommercialBusinessInformation->ReferenceNo;?></span></strong></div>
+                        <div class="col-xs-4">Reference No:&nbsp;&nbsp;<strong><span><?php echo $report->CommercialBusinessInformation->ReferenceNo;?></span></strong></div>
                         <div class="col-xs-4">Commercial Name:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->CommercialBusinessInformation->CommercialName)?"":$report->CommercialBusinessInformation->CommercialName);?></span></strong></div>
                         <div class="col-xs-4">Registration Number:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->CommercialBusinessInformation->RegistrationNo)?"":$report->CommercialBusinessInformation->RegistrationNo);?><span></strong></div>
                         <div class="col-xs-4">BusinessStart Date:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->CommercialBusinessInformation->BusinessStartDate)?"":$report->CommercialBusinessInformation->BusinessStartDate);?></span></strong></div>
@@ -68,7 +68,6 @@
                         <div class="col-xs-4">Trade Name:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->CommercialBusinessInformation->TradeName)?"":$report->CommercialBusinessInformation->TradeName);?></span></strong></div>
                         <div class="col-xs-4">Physical Address:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->CommercialBusinessInformation->PhysicalAddress)?"":$report->CommercialBusinessInformation->PhysicalAddress);?></span></strong></div>
                         <div class="col-xs-4">Postal Address:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->CommercialBusinessInformation->PostalAddress)?"":$report->CommercialBusinessInformation->PostalAddress);?></span></strong></div>
-                   
                         <div class="col-xs-4">Registration Date:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->CommercialBusinessInformation->RegistrationDate)?"":$report->CommercialBusinessInformation->RegistrationDate);?></span></strong></div>
                         <div class="col-xs-4">Telephone Number:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->CommercialBusinessInformation->TelephoneNo)?"":$report->CommercialBusinessInformation->TelephoneNo);?></span></strong></div>
                         <div class="col-xs-4">Fax Number:&nbsp;&nbsp;<strong><span><?php echo (is_object($report->CommercialBusinessInformation->FaxNo)?"":$report->CommercialBusinessInformation->FaxNo);?></span></strong></div>

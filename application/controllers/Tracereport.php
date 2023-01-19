@@ -656,6 +656,5 @@ class Tracereport extends CI_Controller {
 		}catch(Exception $ex){
 			print_r($ex);
 		}
-
 	}
 }
