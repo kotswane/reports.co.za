@@ -413,6 +413,7 @@ class Procurementreport extends CI_Controller {
 			$data['report'] = $this->session->userdata('report');
 			$this->load->library('pdf');
 			$html = $this->load->view('procurementreport/pdf-procurementreport',$data, true);
+			$this->pdf->set_paper('A4', 'landscape');
 			$this->pdf->createPDF($html, "customer-tracereport-".time(), true);
 
 		}catch(Exception $ex){
