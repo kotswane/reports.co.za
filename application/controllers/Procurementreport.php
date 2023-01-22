@@ -64,7 +64,7 @@ class Procurementreport extends CI_Controller {
 		$data["infoFlash"] = "";
 		$data["errorFlash"] = "";
 		$data["errorMessage"] = "";
-		$data["consumerList"] = array();
+		$data["consumerList"] = new stdClass();
 
 		
 		if ($this->input->post("postback")=="post"){
@@ -86,7 +86,7 @@ class Procurementreport extends CI_Controller {
 			if ($status['success'] == false){
 				$data['errorMessage'] = 'Sorry Recaptcha Unsuccessful!!';
 				$data["content"] = "procurementreport/companyname";
-				$data["consumerList"]['details'] = array();
+				$data["consumerList"] = new stdClass();
 				$this->load->view('site',$data);
 			} else {
 
@@ -102,7 +102,7 @@ class Procurementreport extends CI_Controller {
 			
 				
 				if($this->input->post('companyname') == "" ){
-					$data["consumerList"]['details'] = array();
+					$data["consumerList"] = new stdClass();
 					$data["errorMessage"] = "Company name required";
 					$data["content"] = "procurementreport/companyname";
 					$this->load->view('site',$data);
@@ -146,7 +146,7 @@ class Procurementreport extends CI_Controller {
 						}else{
 							$data["errorMessage"] = $xml->NotFound;
 						}
-						$data["consumerList"]['details'] = array();
+						$data["consumerList"] = new stdClass();;
 						$data["content"] = "procurementreport/companyname";
 						$this->load->view('site',$data);
 						
@@ -169,7 +169,7 @@ class Procurementreport extends CI_Controller {
 						$this->Auditlog_model->save($auditlog);
 						
 						$objJsonDocument = json_encode($xml);
-						$data["consumerList"]['details'] = json_decode($objJsonDocument,TRUE);
+						$data["consumerList"] = json_decode($objJsonDocument);
 						$data["content"] = "procurementreport/companyname";
 						$this->load->view('site',$data);
 						
@@ -177,7 +177,7 @@ class Procurementreport extends CI_Controller {
 				}
 			}
 		}else {
-			$data["consumerList"]['details'] = array();
+			$data["consumerList"] = new stdClass();
 			$data["content"] = "procurementreport/companyname";
 			$this->load->view('site',$data);
 		}		
@@ -413,7 +413,7 @@ class Procurementreport extends CI_Controller {
 			$data['report'] = $this->session->userdata('report');
 			$this->load->library('pdf');
 			$html = $this->load->view('procurementreport/pdf-procurementreport',$data, true);
-			$this->pdf->createPDFLandScape($html, "customer-tracereport-".time(), true);
+			$this->pdf->createPDFLandScape($html, "procurementreport-".time(), true);
 
 		}catch(Exception $ex){
 			print_r($ex);

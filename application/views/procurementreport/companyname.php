@@ -41,7 +41,7 @@
         </form>
 	 <?php
 	 
-	if (count($consumerList['details']) > 0){
+	if ($consumerList->CommercialDetails){
 	?>
     <div>
       	 <h5><span><strong>Search Results List</strong></span></h5>
@@ -57,17 +57,28 @@
 			<tbody>
 			<?php 
 				$companyname = "companyname";
-				foreach($consumerList['details']['CommercialDetails'] as $consumerListKey => $consumerListValue){
+				if(!is_object($consumerList->CommercialDetails)){
+				foreach($consumerList->CommercialDetails as $consumerListKey => $consumerListValue){
 			?>
             <tr>
-              <td><?php echo $consumerListValue['Reference'];?></td>
-              <td><?php echo $consumerListValue['Businessname'];?></td>
-              <td><?php echo $consumerListValue['RegistrationNo'];?></td>
+              <td><?php echo $consumerListValue->Reference;?></td>
+              <td><?php echo $consumerListValue->Businessname;?></td>
+              <td><?php echo $consumerListValue->RegistrationNo;?></td>
               <td>
-               <a type="button" onClick="fnRedirect('<?php echo site_url()?>/procurementreport/customerdatalist/<?php echo $consumerListValue['EnquiryID'];?>/<?php echo $consumerListValue['EnquiryResultID'];?>/<?php echo $companyname; ?>')"  class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;View</a>              
+               <a type="button" onClick="fnRedirect('<?php echo site_url()?>/procurementreport/customerdatalist/<?php echo $consumerListValue->EnquiryID;?>/<?php echo $consumerListValue->EnquiryResultID;?>/<?php echo $companyname; ?>')"  class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;View</a>              
 			  </td>
             </tr>
-			<?php }?>
+			<?php }
+				} else {?>
+				<tr>
+				  <td><?php echo $consumerList->CommercialDetails->Reference;?></td>
+				  <td><?php echo $consumerList->CommercialDetails->Businessname;?></td>
+				  <td><?php echo $consumerList->CommercialDetails->RegistrationNo;?></td>
+				  <td>
+				   <a type="button" onClick="fnRedirect('<?php echo site_url()?>/procurementreport/customerdatalist/<?php echo $consumerList->CommercialDetails->EnquiryID;?>/<?php echo $consumerList->CommercialDetails->EnquiryResultID;?>/<?php echo $companyname; ?>')"  class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;View</a>              
+				  </td>
+				</tr>				
+				<?php } ?>
 			</tbody>
           </table>
        </div>
