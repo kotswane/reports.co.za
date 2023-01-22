@@ -1823,7 +1823,7 @@
 							?>	
 						<span>Active Director Current Business Interests Not Found</span><br>
 					<?php }?>
-                </div>
+            
               			  
 
 			<div class="panel panel-primary">
@@ -1958,6 +1958,7 @@
 							?>	
 						<span>Active Director Previous Business Interests Not Found</span><br>
 					<?php }?>
+                </div>
                 </div>
               </div> 
 			</div>
