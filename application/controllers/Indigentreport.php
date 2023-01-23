@@ -162,6 +162,9 @@ class Indigentreport extends CI_Controller {
 		$data["reports_type"] = $this->reports_type;
 		$data["reports"] = $this->reports;
 		$response = $this->getSearchData($this->uri->segment(3), $this->uri->segment(4));
+		if($response->Error){
+			$data["XDSError"] = "Error Processing <b>Income and Scoring Request</b>, Please content Developer";
+		}
 		$data['report'] = $response;
 		$this->session->set_userdata(array('report' =>$data['report']));
 		

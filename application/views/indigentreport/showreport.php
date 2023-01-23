@@ -75,6 +75,8 @@
 
 		if(!is_object($myData->HAErrorDescription)){?>
 				<div class="alert alert-danger" role="alert"><?php echo $myData->HAErrorDescription;?></div>
+		<?php } if($XDSError!=""){?>
+				<div class="alert alert-danger" role="alert"><?php echo $XDSError;?></div>
 		<?php } ?>
         <div class="box-body no-padding">
 

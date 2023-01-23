@@ -346,16 +346,66 @@ class Procurementreport extends CI_Controller {
 			
 			if(is_array($response->CommercialActivePrincipalInformation)){
 				foreach($response->CommercialActivePrincipalInformation as $CommercialActivePrincipalInformation){
-				  $data['personaldetails']['details'][$CommercialActivePrincipalInformation->IDNo] = $this->getConsumerMatch($CommercialActivePrincipalInformation->IDNo);	
+				  $data['personaldetails']['details'][$CommercialActivePrincipalInformation->IDNo] = $this->getConsumerMatch($CommercialActivePrincipalInformation->IDNo);
+				  //$data['personaldetails']['spouseDetails'][$CommercialActivePrincipalInformation->IDNo] = $this->getSpouseDetails($CommercialActivePrincipalInformation->IDNo);				  
 				}
 			}else{
 				$data['personaldetails']['details'][$response->CommercialActivePrincipalInformation->IDNo]=$this->getConsumerMatch($response->CommercialActivePrincipalInformation->IDNo);
+				//$data['personaldetails']['spouseDetails'][$CommercialActivePrincipalInformation->IDNo] = $this->getSpouseDetails($response->CommercialActivePrincipalInformation->IDNo);
 			}
 			
 		}
-
+	
 		$this->session->set_userdata(array('report' =>$data['report']));
 		$this->load->view('site',$data);
+	}
+	
+	private function getSpouseDetails($idnumber){
+		
+		$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
+		$resp = $this->client->IsTicketValid($IsTicketValid);
+		if($resp->IsTicketValidResult != true || $resp->IsTicketValidResult ==""){
+			$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
+			redirect('user/login');
+		}
+		
+		
+		
+		$response = $this->client->ConnectGetFamilyIDPhotoVerification(array(
+					'ConnectTicket' => $this->session->userdata('tokenId'), 
+					'ProductID' => 239, 
+					'IdNumber' => $idnumber));
+				$xml = simplexml_load_string($response->ConnectGetFamilyIDPhotoVerificationResult);
+		
+	
+		if ($xml->Error || $xml->NotFound){
+			
+			$auditlog = array(
+			"auditlog_reportname"=>"procurementreport",
+			"auditlog_userId"=>$this->session->userdata('userId'),
+			"auditlog_reporttype"=>"id-search",
+			"auditlog_searchdata"=>json_encode(array( 
+			'ProductID' => 239, 
+			'IdNumber' => $idnumber)),
+			"auditlog_fnexecuted" => "ConnectGetFamilyIDPhotoVerification",
+			"auditlog_issuccess" => false);
+			$this->Auditlog_model->save($auditlog);
+			return new stdClass();
+		}else {
+			$auditlog = array(
+			"auditlog_reportname"=>"procurementreport",
+			"auditlog_userId"=>$this->session->userdata('userId'),
+			"auditlog_reporttype"=>"id-search",
+			"auditlog_searchdata"=>json_encode(array(
+			'ProductID' => 239, 
+			'IdNumber' => $idnumber)),
+			"auditlog_fnexecuted" => "ConnectGetFamilyIDPhotoVerification",
+			"auditlog_issuccess" => true);
+			$this->Auditlog_model->save($auditlog);
+			
+			$objJsonDocument = json_encode($xml);
+			return json_decode($objJsonDocument);
+		}
 	}
 	
 	private function getSearchData($enquiryID, $enquiryResultID, $type){

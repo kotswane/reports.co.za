@@ -1041,7 +1041,16 @@
 									if($personaldetails['details'][$report->CommercialActivePrincipalInformation->IDNo]){
 										$employer = $personaldetails['details'][$report->CommercialActivePrincipalInformation->IDNo]->ConsumerDetail->EmployerDetail;
 									}
-							
+									/*$spouseName = "";
+									$spouseID = "";
+									if($personaldetails['spouseDetails'][$report->CommercialActivePrincipalInformation->IDNo]){
+										if($personaldetails['spouseDetails'][$report->CommercialActivePrincipalInformation->IDNo]->Consumer[0]->RealTimeIDV->HAMarriageStatus == "MARRIED" ){
+											if($report->CommercialActivePrincipalInformation->IDNo == $personaldetails['spouseDetails'][$report->CommercialActivePrincipalInformation->IDNo]->Consumer[1]->RealTimeIDV->HAIDNO){
+											   $spouseName = $personaldetails['spouseDetails'][$report->CommercialActivePrincipalInformation->IDNo]->Consumer[1]->RealTimeIDV->HANames." ".$personaldetails['spouseDetails'][$report->CommercialActivePrincipalInformation->IDNo]->Consumer[1]->RealTimeIDV->HASurname;
+											   $spouseID = $personaldetails['spouseDetails'][$report->CommercialActivePrincipalInformation->IDNo]->Consumer[1]->RealTimeIDV->HAIDNO;
+											}
+										}
+									}*/
 									?>
 									<div class="panel panel-primary">
 								    <div class="panel-heading"> Active Director-1 of 1<br>
@@ -1079,15 +1088,23 @@
 													<tr>
 														 <td><strong><span>Member Control Percent</strong></span></td>
 														 <td><?php echo (is_object($report->CommercialActivePrincipalInformation->MemberControlPerc)?"":$report->CommercialActivePrincipalInformation->MemberControlPerc);?></td>
-													</tr>													
-													<tr>
-														 <td><strong><span>Employer Name</strong></span></td>
-														 <td><?php echo $employer;?></td>
 													</tr>
+													 <tr>
+														 <td><strong><span>Spouse Name</strong></span></td>
+														 <td><?php echo $spouseName;?></td>
+													</tr>													 
+													<tr>
+														 <td><strong><span>Spouse ID</strong></span></td>
+														 <td><?php echo $spouseID;?></td>
+													</tr>													
 												</table>
 											</td>
 											<td>
 												<table class="table">
+													<tr>
+														 <td><strong><span>Employer Name</strong></span></td>
+														 <td><?php echo $employer;?></td>
+													</tr>
 													<tr>
 														 <td><strong><span>Director Indicator</strong></span></td>
 														 <td><?php echo (is_object($report->CommercialActivePrincipalInformation->DirectorIndicator)?"":$report->CommercialActivePrincipalInformation->DirectorIndicator);?></td>
@@ -1155,20 +1172,29 @@
 										<tr>
 											 <td><strong><span>Consumer Score</strong></span></td>
 											 <td><?php echo (is_object($report->CommercialActivePrincipalInformation->ConsumerScore)?"":$report->CommercialActivePrincipalInformation->ConsumerScore);?></td>
-										</tr>										
-										<tr>
-											 <td colspan="2"><a type="button" onClick="fnRedirect('<?php echo site_url()?>/procurementreport/customerdatalist/<?php echo $report->CommercialActivePrincipalInformation->IDNo;?>')"  class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;View</a>   </td>
 										</tr>
 									 </table>	
 								</div>
 							</div>
+							<pre>
 							<?php } else { 
+	
 									foreach($report->CommercialActivePrincipalInformation as $CommercialActivePrincipalInformation){  
 									
 										$employer = "";
 										if($personaldetails['details'][$CommercialActivePrincipalInformation->IDNo]){
 											$employer = $personaldetails['details'][$CommercialActivePrincipalInformation->IDNo]->ConsumerDetail->EmployerDetail;
 										}
+										/*$spouseName = "";
+										$spouseID = "";
+										if($personaldetails['spouseDetails'][$CommercialActivePrincipalInformation->IDNo]){
+											if($personaldetails['spouseDetails'][$CommercialActivePrincipalInformation->IDNo]->Consumer[0]->RealTimeIDV->HAMarriageStatus == "MARRIED" ){
+												if($CommercialActivePrincipalInformation->IDNo == $personaldetails['spouseDetails'][$CommercialActivePrincipalInformation->IDNo]->Consumer[1]->RealTimeIDV->HAIDNO){
+												   $spouseName = $personaldetails['spouseDetails'][$CommercialActivePrincipalInformation->IDNo]->Consumer[1]->RealTimeIDV->HANames." ".$personaldetails['spouseDetails'][$CommercialActivePrincipalInformation->IDNo]->Consumer[1]->RealTimeIDV->HASurname;
+												   $spouseID = $personaldetails['spouseDetails'][$CommercialActivePrincipalInformation->IDNo]->Consumer[1]->RealTimeIDV->HAIDNO;
+												}
+											}
+										}*/
 									?>
 									<div class="panel panel-primary">
 								    <div class="panel-heading"> Active Director-<?php echo ++$count." of ".count($report->CommercialActivePrincipalInformation);?><br>
@@ -1207,14 +1233,23 @@
 														 <td><strong><span>Member Control Percent</strong></span></td>
 														 <td><?php echo (is_object($CommercialActivePrincipalInformation->MemberControlPerc)?"":$CommercialActivePrincipalInformation->MemberControlPerc);?></td>
 													</tr>
-													<tr>
-														 <td><strong><span>Employer Name</strong></span></td>
-														 <td><?php echo $employer;?></td>
+													 <tr>
+														 <td><strong><span>Spouse Name</strong></span></td>
+														 <td><?php echo $spouseName;?></td>
 													</tr>
+													 <tr>
+														 <td><strong><span>Spouse ID</strong></span></td>
+														 <td><?php echo $spouseID;?></td>
+													</tr>
+													
 												</table>
 											</td>
 											<td>
 												<table class="table">
+													<tr>
+														 <td><strong><span>Employer Name</strong></span></td>
+														 <td><?php echo $employer;?></td>
+													</tr>
 													<tr>
 														 <td><strong><span>Director Indicator</strong></span></td>
 														 <td><?php echo (is_object($CommercialActivePrincipalInformation->DirectorIndicator)?"":$CommercialActivePrincipalInformation->DirectorIndicator);?></td>
@@ -1283,9 +1318,6 @@
 														 <td><strong><span>Consumer Score</strong></span></td>
 														 <td><?php echo (is_object($CommercialActivePrincipalInformation->ConsumerScore)?"":$CommercialActivePrincipalInformation->ConsumerScore);?></td>
 													</tr>
-												<tr>
-											 <td colspan="2"><a type="button" onClick="fnRedirect('<?php echo site_url()?>/procurementreport/customerdatalist/<?php echo $report->CommercialActivePrincipalInformation->IDNo;?>')"  class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;View</a>   </td>
-														</tr>
 												</table>
 											</td>
 										</tr>
