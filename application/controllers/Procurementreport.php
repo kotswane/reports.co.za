@@ -341,6 +341,19 @@ class Procurementreport extends CI_Controller {
 		$response = $this->getSearchData($this->uri->segment(3), $this->uri->segment(4),$this->uri->segment(5));
 		$data['content'] = "procurementreport/customerdatalist";
 		$data['report'] = $response;
+		$data['personaldetails']['details'] = array();
+		if(!$response->NotFound || !$xml->response){
+			
+			if(is_array($response->CommercialActivePrincipalInformation)){
+				foreach($response->CommercialActivePrincipalInformation as $CommercialActivePrincipalInformation){
+				  $data['personaldetails']['details'][$CommercialActivePrincipalInformation->IDNo] = $this->getConsumerMatch($CommercialActivePrincipalInformation->IDNo);	
+				}
+			}else{
+				$data['personaldetails']['details'][$response->CommercialActivePrincipalInformation->IDNo]=$this->getConsumerMatch($response->CommercialActivePrincipalInformation->IDNo);
+			}
+			
+		}
+
 		$this->session->set_userdata(array('report' =>$data['report']));
 		$this->load->view('site',$data);
 	}
@@ -418,5 +431,122 @@ class Procurementreport extends CI_Controller {
 		}catch(Exception $ex){
 			print_r($ex);
 		}
+	}
+	
+	private function getConsumerMatch($id){
+		
+				$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
+			
+				$this->client = $this->mysoapclient->getClient();
+				$this->latestclient = $this->mysoapclient->getClientlatest();
+				$resp = $this->client->IsTicketValid($IsTicketValid);
+				if($resp->IsTicketValidResult != true || $resp->IsTicketValidResult ==""){
+					$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
+					redirect('user/login');
+				}
+				
+				$response = $this->client->ConnectConsumerMatch(array(
+				'IdNumber'=>$id,
+				'ConnectTicket'=>$this->session->userdata('tokenId'),
+				'ProductId' => 2,
+				'EnquiryReason' => 'Consumer Trace'
+				));
+				
+				$xml = simplexml_load_string($response->ConnectConsumerMatchResult);
+
+				if ($xml->Error || $xml->NotFound){
+					
+					$auditlog = array(
+						"auditlog_reportname"=>"tracereport",
+						"auditlog_userId"=>$this->session->userdata('userId'),
+						"auditlog_reporttype"=>"id-search",
+						"auditlog_searchdata"=>json_encode(array(
+						'IdNumber'=>$id,
+						'ProductId' => 2,
+						'EnquiryReason' => 'Consumer Trace')),
+						"auditlog_fnexecuted" => "ConnectConsumerMatch",
+						"auditlog_issuccess" => false
+					);
+					$this->Auditlog_model->save($auditlog);
+				
+					if($xml->Error){
+						$data["errorMessage"] = $xml->Error[0];
+					}else{
+						$data["errorMessage"] = $xml->NotFound;
+					}
+					$data["content"] = "tracereport/id-search";
+					$this->load->view('site',$data);
+				}else {
+					
+					$objJsonDocument = json_encode($xml);
+					$arrOutput = json_decode($objJsonDocument, TRUE);
+
+					$auditlog = array(
+						"auditlog_reportname"=>"tracereport",
+						"auditlog_userId"=>$this->session->userdata('userId'),
+						"auditlog_reporttype"=>"id-search",
+						"auditlog_searchdata"=>json_encode(array(
+						'IdNumber'=>$id,
+						'ProductId' => 2,
+						'EnquiryReason' => 'Consumer Trace')),
+						"auditlog_fnexecuted" => "ConnectConsumerMatch",
+						"auditlog_issuccess" => true
+					);
+					$this->Auditlog_model->save($auditlog);
+					
+					return $this->getSearchDataConsumer($arrOutput['ConsumerDetails']['EnquiryID'], $arrOutput['ConsumerDetails']['EnquiryResultID']);
+										
+				}
+	}
+	
+	private function getSearchDataConsumer($enquiryID, $enquiryResultID){
+		
+		if(!$this->session->userdata('username')){
+			 redirect('user/login');
+		}
+		
+		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
+		$response = $this->redisclient->request($data);
+
+		if($response->status != "success"){
+			$this->session->set_userdata(array('tokensession' => 'Session expired, please login again'));
+			redirect('user/login');
+		}
+
+		$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
+		
+		$this->client = $this->mysoapclient->getClient();
+		$this->latestclient = $this->mysoapclient->getClientlatest();
+		$resp = $this->client->IsTicketValid($IsTicketValid);
+		if($resp->IsTicketValidResult != true || $resp->IsTicketValidResult ==""){
+			$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
+			redirect('user/login');
+		}
+		
+		
+		$response = $this->client->ConnectGetResult(array(
+				'EnquiryID' => $enquiryID,
+				'EnquiryResultID' => $enquiryResultID, 
+				'ConnectTicket' => $this->session->userdata('tokenId'), 
+				'ProductID' => 2));
+			
+		$xml = simplexml_load_string($response->ConnectGetResultResult,"SimpleXMLElement");
+		$objJsonDocument = json_encode($xml);
+		$arrOutput = json_decode($objJsonDocument);
+		
+		$auditlog = array(
+			"auditlog_reportname"=>"tracereport",
+			"auditlog_userId"=>$this->session->userdata('userId'),
+			"auditlog_reporttype"=>"id-search",
+			"auditlog_searchdata"=>json_encode(array(
+				'EnquiryID' => $enquiryID,
+				'EnquiryResultID' => $enquiryResultID, 
+				'ProductID' => 2)),
+			"auditlog_fnexecuted" => "ConnectGetResult",
+			"auditlog_issuccess" => true
+		);
+		$this->Auditlog_model->save($auditlog);
+				
+		return $arrOutput;
 	}
 }

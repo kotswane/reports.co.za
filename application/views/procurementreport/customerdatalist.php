@@ -1035,7 +1035,14 @@
                 <div class="panel-heading">Commercial Active Director Information</div>
                 <div class="panel-body">
 					<?php if($report->CommercialActivePrincipalInformation){ 
-							if(is_object($report->CommercialActivePrincipalInformation)){ ?>
+							
+							if(is_object($report->CommercialActivePrincipalInformation)){ 
+									$employer = "";
+									if($personaldetails['details'][$report->CommercialActivePrincipalInformation->IDNo]){
+										$employer = $personaldetails['details'][$report->CommercialActivePrincipalInformation->IDNo]->ConsumerDetail->EmployerDetail;
+									}
+							
+									?>
 									<div class="panel panel-primary">
 								    <div class="panel-heading"> Active Director-1 of 1<br>
 										<?php echo (is_object($report->CommercialActivePrincipalInformation->Fullname)?"":$report->CommercialActivePrincipalInformation->Fullname);?>
@@ -1072,6 +1079,10 @@
 													<tr>
 														 <td><strong><span>Member Control Percent</strong></span></td>
 														 <td><?php echo (is_object($report->CommercialActivePrincipalInformation->MemberControlPerc)?"":$report->CommercialActivePrincipalInformation->MemberControlPerc);?></td>
+													</tr>													
+													<tr>
+														 <td><strong><span>Employer Name</strong></span></td>
+														 <td><?php echo $employer;?></td>
 													</tr>
 												</table>
 											</td>
@@ -1152,7 +1163,13 @@
 								</div>
 							</div>
 							<?php } else { 
-									foreach($report->CommercialActivePrincipalInformation as $CommercialActivePrincipalInformation){  ?>
+									foreach($report->CommercialActivePrincipalInformation as $CommercialActivePrincipalInformation){  
+									
+										$employer = "";
+										if($personaldetails['details'][$CommercialActivePrincipalInformation->IDNo]){
+											$employer = $personaldetails['details'][$CommercialActivePrincipalInformation->IDNo]->ConsumerDetail->EmployerDetail;
+										}
+									?>
 									<div class="panel panel-primary">
 								    <div class="panel-heading"> Active Director-<?php echo ++$count." of ".count($report->CommercialActivePrincipalInformation);?><br>
 										<?php echo (is_object($CommercialActivePrincipalInformation->Fullname)?"":$CommercialActivePrincipalInformation->Fullname);?>
@@ -1189,6 +1206,10 @@
 													<tr>
 														 <td><strong><span>Member Control Percent</strong></span></td>
 														 <td><?php echo (is_object($CommercialActivePrincipalInformation->MemberControlPerc)?"":$CommercialActivePrincipalInformation->MemberControlPerc);?></td>
+													</tr>
+													<tr>
+														 <td><strong><span>Employer Name</strong></span></td>
+														 <td><?php echo $employer;?></td>
 													</tr>
 												</table>
 											</td>
