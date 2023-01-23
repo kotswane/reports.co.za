@@ -1007,24 +1007,24 @@
               </div>
 			  
 				<div class="panel panel-primary">
-                <div class="panel-heading">Principals</div>
+                <div class="panel-heading">Directors</div>
 				<div class="panel-body">
 										
 						<table class="table">
 							<tr>
-								<td><strong><span>Number of Active Principals</strong></span></td>
+								<td><strong><span>Number of Active Directors</strong></span></td>
 								<td><?php echo (is_object($report->CommercialActivePrincipalInfoSummary->NoOfPrincipals)?"":$report->CommercialActivePrincipalInfoSummary->NoOfPrincipals);?></td>
 							</tr>
 							<tr>
-								<td><strong><span>Average Age of Active Principals</strong></span></td>
+								<td><strong><span>Average Age of Active Directors</strong></span></td>
 								<td><?php echo (is_object($report->CommercialActivePrincipalInfoSummary->AverageAge)?"":$report->CommercialActivePrincipalInfoSummary->AverageAge);?></td>
 							</tr>
 							<tr>
-								<td><strong><span>Number of Inactive Principals</strong></span></td>
+								<td><strong><span>Number of Inactive Directors</strong></span></td>
 								<td style="align: left;"><?php echo (is_object($report->CommercialActivePrincipalInfoSummary->NoOfInactivePrincipals)?"":$report->CommercialActivePrincipalInfoSummary->NoOfInactivePrincipals);?></td>
 							</tr>
 							<tr>
-								<td><strong><span>Number of Previous Principals</strong></span></td>
+								<td><strong><span>Number of Previous Directors</strong></span></td>
 								<td><?php echo ((is_object($report->CommercialActivePrincipalInfoSummary->NoOfPreviousPrincipals) || ($report->CommercialActivePrincipalInfoSummary->NoOfPreviousPrincipals == null))?"0":$report->CommercialActivePrincipalInfoSummary->NoOfPreviousPrincipals);?></td>
 							</tr>					
 						 </table>
@@ -1032,12 +1032,12 @@
 				</div>	  
 
               <div class="panel panel-primary">
-                <div class="panel-heading">Commercial Active Principal Information</div>
+                <div class="panel-heading">Commercial Active Director Information</div>
                 <div class="panel-body">
 					<?php if($report->CommercialActivePrincipalInformation){ 
 							if(is_object($report->CommercialActivePrincipalInformation)){ ?>
 									<div class="panel panel-primary">
-								    <div class="panel-heading"> Active Principal-1 of 1<br>
+								    <div class="panel-heading"> Active Director-1 of 1<br>
 										<?php echo (is_object($report->CommercialActivePrincipalInformation->Fullname)?"":$report->CommercialActivePrincipalInformation->Fullname);?>
 									</div>
 								    <div class="panel-body">
@@ -1144,6 +1144,9 @@
 										<tr>
 											 <td><strong><span>Consumer Score</strong></span></td>
 											 <td><?php echo (is_object($report->CommercialActivePrincipalInformation->ConsumerScore)?"":$report->CommercialActivePrincipalInformation->ConsumerScore);?></td>
+										</tr>										
+										<tr>
+											 <td colspan="2"><a type="button" onClick="fnRedirect('<?php echo site_url()?>/procurementreport/customerdatalist/<?php echo $report->CommercialActivePrincipalInformation->IDNo;?>')"  class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;View</a>   </td>
 										</tr>
 									 </table>	
 								</div>
@@ -1151,7 +1154,7 @@
 							<?php } else { 
 									foreach($report->CommercialActivePrincipalInformation as $CommercialActivePrincipalInformation){  ?>
 									<div class="panel panel-primary">
-								    <div class="panel-heading"> Active Principal-<?php echo ++$count." of ".count($report->CommercialActivePrincipalInformation);?><br>
+								    <div class="panel-heading"> Active Director-<?php echo ++$count." of ".count($report->CommercialActivePrincipalInformation);?><br>
 										<?php echo (is_object($CommercialActivePrincipalInformation->Fullname)?"":$CommercialActivePrincipalInformation->Fullname);?>
 									</div>
 									<div class="panel-body">
@@ -1259,6 +1262,9 @@
 														 <td><strong><span>Consumer Score</strong></span></td>
 														 <td><?php echo (is_object($CommercialActivePrincipalInformation->ConsumerScore)?"":$CommercialActivePrincipalInformation->ConsumerScore);?></td>
 													</tr>
+												<tr>
+											 <td colspan="2"><a type="button" onClick="fnRedirect('<?php echo site_url()?>/procurementreport/customerdatalist/<?php echo $report->CommercialActivePrincipalInformation->IDNo;?>')"  class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;View</a>   </td>
+														</tr>
 												</table>
 											</td>
 										</tr>
@@ -1269,7 +1275,7 @@
 						}	
 					 } else { 
 							?>	
-						<span>Commercial Active Principal Information Not Found</span><br>
+						<span>Commercial Active Director Information Not Found</span><br>
 					<?php }?>
                 </div>
               </div>
