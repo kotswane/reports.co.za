@@ -55,6 +55,10 @@
 			 $hasMultiRecords  = false;
 		 }
 		 
+		 $isChild = false;
+		 if(($familyData->Consumer->Relationship == "Child") || ($familyData->Consumer->Relationship == "Children")){
+			 $isChild = true;
+		 }
 		 
 		 if (is_object($myData->HANames)){
 			 $firstName = $report['ConsumerDetail']['FirstName']." ";
@@ -74,7 +78,6 @@
                 <div class="panel-heading">Home Affairs Verification</div>
                 <div class="panel-body">
                     <div class="col">
-                   
                         <div class="col-xs-4">ID No:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HAIDNO)?$report['ConsumerDetail']['IDNo']:$myData->HAIDNO);?></span></strong></div>
                         <div class="col-xs-4">First Name:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HANames)?$name:$myData->HANames);?></span></strong></div>
                         <div class="col-xs-4">Surname:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HASurname)?$report['ConsumerDetail']['Surname']:$myData->HASurname);?></span></strong></div>
@@ -111,13 +114,15 @@
                 <div class="panel-heading">Spouse Details</div>
                 <div class="panel-body">
                     <div class="col">
-                   
+					 <?php if(!$isChild){?>
                         <div class="col-xs-4">Marital Status:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HAMarriageStatus)?"":$myData->HAMarriageStatus);?></span></strong></div>
                         <div class="col-xs-4">Marriage Date:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HAMarriageDate)?"":$myData->HAMarriageDate);?></span></strong></div>
                         <div class="col-xs-4">Spouse Name:&nbsp;&nbsp;<strong><span><?php echo (is_object($theirData->HANames)?"":$theirData->HANames);?></span></strong></div>
 						<div class="col-xs-4">Spouse Surname:&nbsp;&nbsp;<strong><span><?php echo (is_object($theirData->HASurname)?"":$theirData->HASurname);?></span></strong></div>
                         <div class="col-xs-4">Spouse Maiden Name:&nbsp;&nbsp;<strong><span><?php echo (is_object($theirData->MaidenName)?"":$theirData->MaidenName);?></span></strong></div>
-                        
+					 <?php } else { ?>
+							<div class="col-xs-4">Information not found</div>					 
+					 <?php }?>
                     </div>
                 </div>
               </div>
