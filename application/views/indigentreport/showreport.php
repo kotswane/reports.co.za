@@ -54,11 +54,15 @@
 			 $myConsumerEmploymentHistory = $familyData->Consumer->ConsumerEmploymentHistory;
 			 $hasMultiRecords  = false;
 		 }
-		 
-		 $isChild = false;
-		 if(($familyData->Consumer->Relationship == "Child") || ($familyData->Consumer->Relationship == "Children")){
-			 $isChild = true;
-		 }
+
+		$MaritalStatus = $myData->HAMarriageStatus;
+		if($myData->HAMarriageStatus == "MARRIED"){
+			if($myData->HASpouseID == $theirData->HAIDNO){
+				$SpouseName = $theirData->HAIDNO;
+				$SpouseSurname = $theirData->HASurname;
+				$SpouseIDNo = $theirData->HAIDNO;
+			}
+		}
 		 
 		 if (is_object($myData->HANames)){
 			 $firstName = $report['ConsumerDetail']['FirstName']." ";
@@ -114,14 +118,14 @@
                 <div class="panel-heading">Spouse Details</div>
                 <div class="panel-body">
                     <div class="col">
-					 <?php if(!$isChild){?>
+					 <?php if($MaritalStatus == "MARRIED"){?>
                         <div class="col-xs-4">Marital Status:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HAMarriageStatus)?"":$myData->HAMarriageStatus);?></span></strong></div>
                         <div class="col-xs-4">Marriage Date:&nbsp;&nbsp;<strong><span><?php echo (is_object($myData->HAMarriageDate)?"":$myData->HAMarriageDate);?></span></strong></div>
-                        <div class="col-xs-4">Spouse Name:&nbsp;&nbsp;<strong><span><?php echo (is_object($theirData->HANames)?"":$theirData->HANames);?></span></strong></div>
-						<div class="col-xs-4">Spouse Surname:&nbsp;&nbsp;<strong><span><?php echo (is_object($theirData->HASurname)?"":$theirData->HASurname);?></span></strong></div>
-                        <div class="col-xs-4">Spouse Maiden Name:&nbsp;&nbsp;<strong><span><?php echo (is_object($theirData->MaidenName)?"":$theirData->MaidenName);?></span></strong></div>
+                        <div class="col-xs-4">Spouse Name:&nbsp;&nbsp;<strong><span><?php echo $SpouseName;?></span></strong></div>
+						<div class="col-xs-4">Spouse Surname:&nbsp;&nbsp;<strong><span><?php echo $SpouseSurname;?></span></strong></div>
+                        <div class="col-xs-4">Spouse ID No:&nbsp;&nbsp;<strong><span><?php echo $SpouseIDNo;?></span></strong></div>
 					 <?php } else { ?>
-							<div class="col-xs-4">Information not found</div>					 
+							<div class="col-xs-4">Marital Status:&nbsp;&nbsp;<strong><span><?php echo $MaritalStatus;?></span></strong></div>					 
 					 <?php }?>
                     </div>
                 </div>
@@ -281,20 +285,5 @@
 	</div>
 </section>
 </body>
-<script type="text/javascript">
-$(document).ready(function(){
-	$('#myConsumerEmploymentHistory').DataTable({
-        /* No ordering applied by DataTables during initialisation */
-        "order": []
-    });
-	$('#myConsumerTelephoneHistory').DataTable({
-        /* No ordering applied by DataTables during initialisation */
-        "order": []
-    });
-	$('#myConsumerAddressHistory').DataTable({
-        /* No ordering applied by DataTables during initialisation */
-        "order": []
-    });
-});
-</script>
+
 </html>
