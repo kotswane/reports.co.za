@@ -22,8 +22,8 @@
 </div>
      <!-- Start of  Enquiry Input Details-->
    <hr class="hr_rule"/>
-   <div class="title-head"><strong>Enquiry Input Details</strong>
-   <h5 class="subtitle-head"><?php echo $report->SubscriberInputDetails->SubscriberUserName." search input details";?></h5>
+   <div class="panel-heading"><strong>Enquiry Input Details</strong>
+   <h5 class="subpanel-heading"><?php echo $report->SubscriberInputDetails->SubscriberUserName." search input details";?></h5>
   </div>
    <hr class="hr-line"/>
  <div class="col">
@@ -56,8 +56,8 @@
  </div><br />
 
    <hr class="hr_rule"/>
-   <div class="title-head"><strong>Company Statutory Information</strong>
-   <h5 class="subtitle-head">This section displays the Personal information for the consumer. Included here is ID or Passport, Name, Gender, Marital Status,
+   <div class="panel-heading"><strong>Company Statutory Information</strong>
+   <h5 class="subpanel-heading">This section displays the Personal information for the consumer. Included here is ID or Passport, Name, Gender, Marital Status,
 Current Contact, Address, and Employment Info.</h5>
   </div>
    <hr class="hr-line"/>
@@ -196,17 +196,17 @@ Current Contact, Address, and Employment Info.</h5>
  </div><br />  
    
  <hr class="hr_rule"/>
- <div class="title-head"><strong>Commercial Score</strong>
-   <h5 class="subtitle-head">&nbsp;</h5>
+ <div class="panel-heading"><strong>Commercial Score</strong>
+   <h5 class="subpanel-heading">&nbsp;</h5>
   </div><br />
                      <!-- End of Address History-->				 
 <div class="col">
-	 <div class="title-head"><strong>Auditors</strong></div>
+	 <div class="panel-heading"><strong>Auditors</strong></div>
 	<hr class="hr-line"/>
 	<?php if($report->CommercialAuditorInformation){ 
 		if(!is_object($report->CommercialAuditorInformation)){
 			foreach($report->CommercialAuditorInformation as $CommercialAuditorInformation => $CommercialAuditorInformation){ ?>
-			<div class="title-head"><strong>Active Auditor: <?php echo $CommercialAuditorInformation->AuditorName;?></strong></div>
+			<div class="panel-heading"><strong>Active Auditor: <?php echo $CommercialAuditorInformation->AuditorName;?></strong></div>
 			<hr class="hr-line"/>
 			<table class="table-list">
 				<tr class="border_bottom">
@@ -277,7 +277,7 @@ Current Contact, Address, and Employment Info.</h5>
 			</table>
 			<?php }
 		} else { ?>
-				<div class="title-head">Active Auditor: <?php echo $report->CommercialAuditorInformation->AuditorName;?></div>
+				<div class="panel-heading">Active Auditor: <?php echo $report->CommercialAuditorInformation->AuditorName;?></div>
 				<hr class="hr-line"/>
 				<table class="table-list">
 					<tr class="border_bottom">
@@ -355,7 +355,7 @@ Current Contact, Address, and Employment Info.</h5>
 </div><br />
 
 <div class="col">
- <div class="title-head"><strong>Commercial Address History</strong></div>
+ <div class="panel-heading"><strong>Commercial Address History</strong></div>
 <hr class="hr-line"/>
 <?php if($report->XDSCommercialAddressHistory){ ?>
  <table class="table-list">
@@ -402,7 +402,7 @@ Current Contact, Address, and Employment Info.</h5>
 </div><br />
 
 <div class="col">
- <div class="title-head"><strong>Commercial Contact History</strong></div>
+ <div class="panel-heading"><strong>Commercial Contact History</strong></div>
 <hr class="hr-line"/>
 <?php if($report->XDSCommercialContactHistory){ ?>
  <table class="table-list">
@@ -437,7 +437,7 @@ Current Contact, Address, and Employment Info.</h5>
 </div><br />
 
 <div class="col">
- <div class="title-head"><strong>Company Vat Information</strong></div>
+ <div class="panel-heading"><strong>Company Vat Information</strong></div>
 <hr class="hr-line"/>
 <?php if($report->CommercialVATInformation){ ?>
  <table class="table-list">
@@ -478,7 +478,7 @@ Current Contact, Address, and Employment Info.</h5>
 </div><br />
 					
 <div class="col">
- <div class="title-head"><strong>Trade References</strong></div>
+ <div class="panel-heading"><strong>Trade References</strong></div>
 <hr class="hr-line"/>
 <?php if($report->CommercialTradeReferencesInformation){ 
 	if(is_object($report->CommercialTradeReferencesInformation)){
@@ -616,7 +616,7 @@ Current Contact, Address, and Employment Info.</h5>
 </div><br />	
 
 <div class="col">
- <div class="title-head"><strong>Judgments</strong></div>
+ <div class="panel-heading"><strong>Judgments</strong></div>
 <hr class="hr-line"/>
 <?php if($report->CommercialJudgment){ ?>
 <table class="table-list">
@@ -670,7 +670,7 @@ Current Contact, Address, and Employment Info.</h5>
 
 
 <div class="col">
- <div class="title-head"><strong>Possible Judgment</strong></div>
+ <div class="panel-heading"><strong>Possible Judgment</strong></div>
 <hr class="hr-line"/>
 <?php if($report->CommercialPossibleJudgment){ ?>
 <table class="table-list">
@@ -724,18 +724,18 @@ Current Contact, Address, and Employment Info.</h5>
 </div><br />
 			
 <div class="col">
- <div class="title-head"><strong>Business Rescue - (No Data Available)</strong></div>
+ <div class="panel-heading"><strong>Business Rescue - (No Data Available)</strong></div>
  <hr class="hr-line"/>
 </div><br />	
 
 
 <div class="col">
- <div class="title-head"><strong>Property Interest</strong></div>
+ <div class="panel-heading"><strong>Property Interest</strong></div>
  <hr class="hr-line"/>
 <?php if($report->CommercialPropertyInformation){ 
 if(is_object($report->CommercialPropertyInformation)){
 	?>
-		<div class="title-head"><strong>Property Interest 1</strong></div>
+		<div class="panel-heading"><strong>Property Interest 1</strong></div>
 		<table class="table-list">
 			<tr class="border_bottom">
 				<td>
@@ -823,7 +823,7 @@ if(is_object($report->CommercialPropertyInformation)){
 	<?php
 } else {
 	foreach($report->CommercialPropertyInformation as $CommercialPropertyInformation){ ?>
-		<div class="title-head">Property Interest <?php echo ++$countCommercialPropertyInformation;?></div>
+		<div class="panel-heading">Property Interest <?php echo ++$countCommercialPropertyInformation;?></div>
 		<table class="table-list">
 			<tr class="border_bottom">
 				<td>
@@ -917,12 +917,12 @@ if(is_object($report->CommercialPropertyInformation)){
 </div><br />
 
 <div class="col">
- <div class="title-head"><strong>Bank Codes History</strong></div>
+ <div class="panel-heading"><strong>Bank Codes History</strong></div>
  <hr class="hr-line"/>
 <?php if($report->CommercialBankCodeHistory){ 
 if(is_object($report->CommercialBankCodeHistory)){
 	?>
-		<div class="title-head">Bankcode 1</div>
+		<div class="panel-heading">Bankcode 1</div>
 		<table class="table-list">
 			<tr class="border_bottom">
 				<td>
@@ -982,7 +982,7 @@ if(is_object($report->CommercialBankCodeHistory)){
 	<?php
 } else {
 	foreach($report->CommercialBankCodeHistory as $CommercialBankCodeHistory){ ?>
-		<div class="title-head">Property Interest <?php echo ++$countCommercialBankCodeHistory;?></div>
+		<div class="panel-heading">Property Interest <?php echo ++$countCommercialBankCodeHistory;?></div>
 		<table class="table-list">
 			<tr class="border_bottom">
 				<td>
@@ -1047,7 +1047,7 @@ if(is_object($report->CommercialBankCodeHistory)){
 </div> <br />
 
 <div class="col">
- <div class="title-head"><strong>Directors</strong></div>
+ <div class="panel-heading"><strong>Directors</strong></div>
 <hr class="hr-line"/>
 	<table class="table-list">
 		<tr class="border_bottom">
@@ -1070,7 +1070,7 @@ if(is_object($report->CommercialBankCodeHistory)){
 </div><br />
 
 <div class="col">
- <div class="title-head"><strong>Commercial Active Director Information</strong></div>
+ <div class="panel-heading"><strong>Commercial Active Director Information</strong></div>
 <hr class="hr-line"/>
 <?php if($report->CommercialActivePrincipalInformation){ 
 	if(is_object($report->CommercialActivePrincipalInformation)){ 
@@ -1078,7 +1078,7 @@ if(is_object($report->CommercialBankCodeHistory)){
 			if($personaldetails['details'][$report->CommercialActivePrincipalInformation->IDNo]){
 				$employer = $personaldetails['details'][$report->CommercialActivePrincipalInformation->IDNo]->ConsumerDetail->EmployerDetail;
 			} ?>
-	<div class="title-head"><strong>Active Director-1 of 1<br>
+	<div class="panel-heading"><strong>Active Director-1 of 1<br>
 	<?php echo (is_object($report->CommercialActivePrincipalInformation->Fullname)?"":$report->CommercialActivePrincipalInformation->Fullname);?></strong>
 	</div>
 	<table class="table-list">
@@ -1205,7 +1205,7 @@ if(is_object($report->CommercialBankCodeHistory)){
 	if($personaldetails['details'][$CommercialActivePrincipalInformation->IDNo]){
 		$employer = $personaldetails['details'][$CommercialActivePrincipalInformation->IDNo]->ConsumerDetail->EmployerDetail;
 	}?>
-	<div class="title-head"> Active Director-<?php echo ++$count." of ".count($report->CommercialActivePrincipalInformation);?><br>
+	<div class="panel-heading"> Active Director-<?php echo ++$count." of ".count($report->CommercialActivePrincipalInformation);?><br>
 		<?php echo (is_object($CommercialActivePrincipalInformation->Fullname)?"":$CommercialActivePrincipalInformation->Fullname);?>
 	</div>
 	<table class="table-list">
@@ -1340,7 +1340,7 @@ if(is_object($report->CommercialBankCodeHistory)){
 
 
 <div class="col">
- <div class="title-head"><strong>Active Director Address History</strong></div>
+ <div class="panel-heading"><strong>Active Director Address History</strong></div>
  <hr class="hr-line"/>
 <?php if($report->ActiveDirectorAddressHistory){?>
 <table class="table-list">
@@ -1384,7 +1384,7 @@ if(is_object($report->CommercialBankCodeHistory)){
 </div><br />
 
 <div class="col">
- <div class="title-head"><strong>Active Director Contact History</strong></div>
+ <div class="panel-heading"><strong>Active Director Contact History</strong></div>
 <hr class="hr-line"/>
 <?php if($report->ActiveDirectorContactHistory){ ?>
  <table class="table-list">
@@ -1419,14 +1419,14 @@ if(is_object($report->CommercialBankCodeHistory)){
 </div><br/>	
 
 <div class="col">
-<div class="title-head"><strong>Adverse Information</strong></div>
+<div class="panel-heading"><strong>Adverse Information</strong></div>
 <hr class="hr-line"/>
-<div class="title-head">Payment Notifications - (No Data Available)</div>
+<div class="panel-heading">Payment Notifications - (No Data Available)</div>
 <hr class="hr-line"/>
-<div class="title-head">Default Listing - (No Data Available)</div>
+<div class="panel-heading">Default Listing - (No Data Available)</div>
 <hr class="hr-line"/>
 <?php if($report->DirectorJudgments){ ?>
-<div class="title-head">Judgments</div>						
+<div class="panel-heading">Judgments</div>						
 <?php if(is_object($report->DirectorJudgments)){
 		  $name = "";
 		  if(!is_object($report->DirectorJudgments->FirstName)){
@@ -1576,7 +1576,7 @@ if(is_object($report->CommercialBankCodeHistory)){
 
 		
 <div class="col">
-<div class="title-head"><strong>Debt Review</strong></div>
+<div class="panel-heading"><strong>Debt Review</strong></div>
 <hr class="hr-line"/>
 <?php if($report->DirectorDebtReview){ ?>
 <?php if(is_object($report->DirectorDebtReview)){ ?>
@@ -1711,11 +1711,11 @@ if(is_object($report->CommercialBankCodeHistory)){
 </div>
 
 <div class="col">
-<div class="title-head">Active Director Business interests</div>
+<div class="panel-heading">Active Director Business interests</div>
 <hr class="hr-line"/>
 <?php if($report->ActiveDirectorCurrentBusinessinterests){ 
 		if(is_object($report->ActiveDirectorCurrentBusinessinterests)){ ?>
-				<div class="title-head"> Active Director Current Business interests-1 of 1<br>
+				<div class="panel-heading"> Active Director Current Business interests-1 of 1<br>
 					<?php echo (is_object($report->ActiveDirectorCurrentBusinessinterests->CommercialName)?"":$report->ActiveDirectorCurrentBusinessinterests->CommercialName);?>
 				</div>
 				<table class="table-list">
@@ -1773,7 +1773,7 @@ if(is_object($report->CommercialBankCodeHistory)){
 				 </table>
 		<?php } else { 
 				foreach($report->ActiveDirectorCurrentBusinessinterests as $ActiveDirectorCurrentBusinessinterests){  ?>
-				<div class="title-head"> Active Director Current Business interests-<?php echo ++$count." of ".count($report->ActiveDirectorCurrentBusinessinterests);?><br>
+				<div class="panel-heading"> Active Director Current Business interests-<?php echo ++$count." of ".count($report->ActiveDirectorCurrentBusinessinterests);?><br>
 					<?php echo (is_object($ActiveDirectorCurrentBusinessinterests->CommercialName)?"":$ActiveDirectorCurrentBusinessinterests->CommercialName);?>
 				</div>
 				<table class="table-list">
@@ -1837,11 +1837,11 @@ if(is_object($report->CommercialBankCodeHistory)){
 </div>
 		 
 <div class="col">
-<div class="title-head">Active Director Previous Business interests</div>
+<div class="panel-heading">Active Director Previous Business interests</div>
 <hr class="hr-line"/>
 <?php if($report->ActiveDirectorPreviousBusinessinterests){ 
 if(is_object($report->ActiveDirectorPreviousBusinessinterests)){ ?>
-		<div class="title-head"> Active Director Previous Business interests-1 of 1<br>
+		<div class="panel-heading"> Active Director Previous Business interests-1 of 1<br>
 			<?php echo (is_object($report->ActiveDirectorPreviousBusinessinterests->CommercialName)?"":$report->ActiveDirectorPreviousBusinessinterests->CommercialName);?>
 		</div>
 		<table class="table-list">
@@ -1899,7 +1899,7 @@ if(is_object($report->ActiveDirectorPreviousBusinessinterests)){ ?>
 		 </table>
 <?php } else { 
 		foreach($report->ActiveDirectorPreviousBusinessinterests as $ActiveDirectorPreviousBusinessinterests){  ?>
-		<div class="title-head"> Active Director Previous Business interests-<?php echo ++$count." of ".count($report->ActiveDirectorPreviousBusinessinterests);?><br>
+		<div class="panel-heading"> Active Director Previous Business interests-<?php echo ++$count." of ".count($report->ActiveDirectorPreviousBusinessinterests);?><br>
 			<?php echo (is_object($ActiveDirectorPreviousBusinessinterests->CommercialName)?"":$ActiveDirectorPreviousBusinessinterests->CommercialName);?>
 		</div>
 		<table class="table-list">
