@@ -1575,10 +1575,11 @@ if(is_object($report->CommercialBankCodeHistory)){
 <?php } ?>
 
 		
+
+<?php if($report->DirectorDebtReview){ ?>
 <div class="col">
 <div class="panel-heading"><strong>Debt Review</strong></div>
 <hr class="hr-line"/>
-<?php if($report->DirectorDebtReview){ ?>
 <?php if(is_object($report->DirectorDebtReview)){ ?>
 		<table class="table-list">
 			<tr class="border_bottom">
@@ -1702,12 +1703,13 @@ if(is_object($report->CommercialBankCodeHistory)){
 				</table>
 			</td>
 		 </tr>
-	</table>	
+	</table>
+</div>	
 	<?php }
 } else { ?>
 <span>Debt Review Not Found</span><br>
 <?php } ?>
-</div>	
+	
 </div>
 
 <div class="col">
@@ -1773,6 +1775,7 @@ if(is_object($report->CommercialBankCodeHistory)){
 				 </table>
 		<?php } else { 
 				foreach($report->ActiveDirectorCurrentBusinessinterests as $ActiveDirectorCurrentBusinessinterests){  ?>
+				<hr class="hr-line"/>
 				<div class="panel-heading"> Active Director Current Business interests-<?php echo ++$count." of ".count($report->ActiveDirectorCurrentBusinessinterests);?><br>
 					<?php echo (is_object($ActiveDirectorCurrentBusinessinterests->CommercialName)?"":$ActiveDirectorCurrentBusinessinterests->CommercialName);?>
 				</div>
