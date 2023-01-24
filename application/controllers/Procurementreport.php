@@ -342,7 +342,7 @@ class Procurementreport extends CI_Controller {
 		$data['content'] = "procurementreport/customerdatalist";
 		$data['report'] = $response;
 		$data['personaldetails']['details'] = array();
-		if(!$response->NotFound || !$xml->response){
+		/*if(!$response->NotFound || !$xml->response){
 			
 			if(is_array($response->CommercialActivePrincipalInformation)){
 				foreach($response->CommercialActivePrincipalInformation as $CommercialActivePrincipalInformation){
@@ -354,7 +354,7 @@ class Procurementreport extends CI_Controller {
 				//$data['personaldetails']['spouseDetails'][$CommercialActivePrincipalInformation->IDNo] = $this->getSpouseDetails($response->CommercialActivePrincipalInformation->IDNo);
 			}
 			
-		}
+		}*/
 	
 		$this->session->set_userdata(array('report' =>$data['report']));
 		$this->load->view('site',$data);

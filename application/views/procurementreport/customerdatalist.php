@@ -357,7 +357,7 @@
 		       <div class="panel panel-primary">
                 <div class="panel-heading">Company Vat Information</div>
 					<div class="panel-body">
-						<?php if($report->XDSCommercialAddressHistory){ ?>						
+						<?php if($report->CommercialVATInformation){ ?>						
 							<table class="table">
 								<tr>
 									 <th>Company Name</th>
@@ -380,12 +380,12 @@
 									foreach($report->CommercialVATInformation as $CommercialVATInformation){	
 									?>	
 									<tr>
-										<td><?php echo (is_object($report->CommercialVATInformation->CommercialName)?"":$report->CommercialVATInformation->CommercialName);?></td>
-										<td><?php echo (is_object($report->CommercialVATInformation->TradeName)?"":$report->CommercialVATInformation->TradeName);?></td>
-										<td><?php echo (is_object($report->CommercialVATInformation->VATNumber)?"":$report->CommercialVATInformation->VATNumber);?></td>
-										<td><?php echo (is_object($report->CommercialVATInformation->VATLiableDate)?"":$report->CommercialVATInformation->VATLiableDate);?></td>
-										<td><?php echo (is_object($report->CommercialVATInformation->Status)?"":$report->CommercialVATInformation->Status);?></td>
-										<td><?php echo (is_object($report->CommercialVATInformation->StatusChangeDate)?"":$report->CommercialVATInformation->StatusChangeDate);?></td>
+										<td><?php echo (is_object($CommercialVATInformation->CommercialName)?"":$CommercialVATInformation->CommercialName);?></td>
+										<td><?php echo (is_object($CommercialVATInformation->TradeName)?"":$CommercialVATInformation->TradeName);?></td>
+										<td><?php echo (is_object($CommercialVATInformation->VATNumber)?"":$CommercialVATInformation->VATNumber);?></td>
+										<td><?php echo (is_object($CommercialVATInformation->VATLiableDate)?"":$CommercialVATInformation->VATLiableDate);?></td>
+										<td><?php echo (is_object($CommercialVATInformation->Status)?"":$CommercialVATInformation->Status);?></td>
+										<td><?php echo (is_object($CommercialVATInformation->StatusChangeDate)?"":$CommercialVATInformation->StatusChangeDate);?></td>
 									</tr>							
 									<?php } 
 								}?>
@@ -1176,7 +1176,6 @@
 									 </table>	
 								</div>
 							</div>
-							<pre>
 							<?php } else { 
 	
 									foreach($report->CommercialActivePrincipalInformation as $CommercialActivePrincipalInformation){  
@@ -1535,27 +1534,27 @@
 												<table class="table">
 													<tr>
 														 <td><strong><span>Case No.</strong></span></td>
-														 <td><?php echo (is_object($$DirectorJudgments->CaseNumber)?"":$$DirectorJudgments->CaseNumber);?></td>
+														 <td><?php echo (is_object($DirectorJudgments->CaseNumber)?"":$DirectorJudgments->CaseNumber);?></td>
 													</tr>
 													<tr>
 														 <td><strong><span>Issue Date</strong></span></td>
-														 <td><?php echo (is_object($$DirectorJudgments->JudgmentDate)?"":$$DirectorJudgments->JudgmentDate);?></td>
+														 <td><?php echo (is_object($DirectorJudgments->JudgmentDate)?"":$DirectorJudgments->JudgmentDate);?></td>
 													</tr>
 													<tr>
 														 <td><strong><span>Judgment Type</strong></span></td>
-														 <td><?php echo (is_object($$DirectorJudgments->CaseType)?"":$$DirectorJudgments->CaseType);?></td>
+														 <td><?php echo (is_object($DirectorJudgments->CaseType)?"":$DirectorJudgments->CaseType);?></td>
 													</tr>
 													<tr>
 														 <td><strong><span>Amount</strong></span></td>
-														 <td><?php echo (is_object($$DirectorJudgments->DisputeAmt)?"":$$DirectorJudgments->DisputeAmt);?></td>
+														 <td><?php echo (is_object($DirectorJudgments->DisputeAmt)?"":$DirectorJudgments->DisputeAmt);?></td>
 													</tr>
 													<tr>
 														 <td><strong><span>Plaintiff Name</strong></span></td>
-														 <td><?php echo (is_object($$DirectorJudgments->PlaintiffName)?"":$$DirectorJudgments->PlaintiffName);?></td>
+														 <td><?php echo (is_object($DirectorJudgments->PlaintiffName)?"":$DirectorJudgments->PlaintiffName);?></td>
 													</tr>
 													<tr>
 														 <td><strong><span>Court Name</strong></span></td>
-														 <td><?php echo (is_object($$DirectorJudgments->CourtName)?"":$$DirectorJudgments->CourtName);?></td>
+														 <td><?php echo (is_object($DirectorJudgments->CourtName)?"":$DirectorJudgments->CourtName);?></td>
 													</tr>
 												</table>
 											</td>
@@ -1563,15 +1562,15 @@
 												<table class="table">
 													<tr>
 														 <td><strong><span>Attorney Name</strong></span></td>
-														 <td><?php echo (is_object($$DirectorJudgments->AttorneyName)?"":$$DirectorJudgments->AttorneyName);?></td>
+														 <td><?php echo (is_object($DirectorJudgments->AttorneyName)?"":$DirectorJudgments->AttorneyName);?></td>
 													</tr>
 													<tr>
 														 <td><strong><span>Attorney Phone No</strong></span></td>
-														 <td><?php echo (is_object($$DirectorJudgments->TelephoneNo)?"":$$DirectorJudgments->TelephoneNo);?></td>
+														 <td><?php echo (is_object($DirectorJudgments->TelephoneNo)?"":$DirectorJudgments->TelephoneNo);?></td>
 													</tr>
 													<tr>
 														 <td><strong><span>IDNo</strong></span></td>
-														 <td><?php echo (is_object($$DirectorJudgments->IDNo)?"":$$DirectorJudgments->IDNo);?></td>
+														 <td><?php echo (is_object($DirectorJudgments->IDNo)?"":$DirectorJudgments->IDNo);?></td>
 													</tr>
 													
 													<tr>
@@ -1580,11 +1579,11 @@
 													</tr>
 													<tr>
 														 <td><strong><span>Case Reason</strong></span></td>
-														 <td><?php echo (is_object($$DirectorJudgments->CaseReason)?"":$$DirectorJudgments->CaseReason);?></td>
+														 <td><?php echo (is_object($DirectorJudgments->CaseReason)?"":$DirectorJudgments->CaseReason);?></td>
 													</tr>
 													<tr>
 														 <td><strong><span>Comment</strong></span></td>
-														 <td><?php echo (is_object($$DirectorJudgments->Comment)?"":$$DirectorJudgments->Comment);?></td>
+														 <td><?php echo (is_object($DirectorJudgments->Comment)?"":$DirectorJudgments->Comment);?></td>
 													</tr>
 												</table>
 											</td>
