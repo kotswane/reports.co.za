@@ -450,8 +450,8 @@ Current Contact, Address, and Employment Info.</h5>
 		<th  class = "th-list">Status Date</th>
 	</tr>
 	<?php 
-	if(!is_object($report->XDSCommercialContactHistory)){
-		foreach($report->XDSCommercialContactHistory as $XDSCommercialContactHistory){ ?>
+	if(!is_object($report->CommercialVATInformation)){
+		foreach($report->CommercialVATInformation as $CommercialVATInformation){ ?>
 		<tr class="border_bottom">
 			<td><?php echo (is_object($CommercialVATInformation->CommercialName)?"":$CommercialVATInformation->CommercialName);?></td>
 			<td><?php echo (is_object($CommercialVATInformation->TradeName)?"":$CommercialVATInformation->TradeName);?></td>
