@@ -618,6 +618,7 @@ Current Contact, Address, and Employment Info.</h5>
 <div class="col">
  <div class="title-head"><strong>Judgments</strong></div>
 <hr class="hr-line"/>
+<?php if($report->CommercialJudgment){ ?>
 <table class="table-list">
 		<tr class="border_bottom">
 			 <th class = "th-list">Case No.</th>
@@ -631,7 +632,6 @@ Current Contact, Address, and Employment Info.</h5>
 			 <th class = "th-list">Commercial Name</th>
 			 <th class = "th-list">Case Reason</th>
 		</tr>
-		<?php if($report->CommercialJudgment){ ?>
 		<?php if(!is_array($report->CommercialJudgment)){?>
 			<tr class="border_bottom">
 				<td><?php echo (is_object($report->CommercialJudgment->CaseNumber)?"":$report->CommercialJudgment->CaseNumber);?></td>
@@ -662,16 +662,17 @@ Current Contact, Address, and Employment Info.</h5>
 				</tr>							
 				<?php } 
 			}?>
+			</table>
 		<?php } else { ?>
 		<span>Judgment Not Found</span><br>
 		<?php } ?>
-</table>
 </div><br />	
 
 
 <div class="col">
  <div class="title-head"><strong>Possible Judgment</strong></div>
 <hr class="hr-line"/>
+<?php if($report->CommercialPossibleJudgment){ ?>
 <table class="table-list">
 		<tr class="border_bottom">
 			 <th class = "th-list">Case No.</th>
@@ -685,7 +686,6 @@ Current Contact, Address, and Employment Info.</h5>
 			 <th class = "th-list">Commercial Name</th>
 			 <th class = "th-list">Case Reason</th>
 		</tr>
-		<?php if($report->CommercialPossibleJudgment){ ?>
 		<?php if(!is_array($report->CommercialPossibleJudgment)){?>
 			<tr class="border_bottom">
 				<td><?php echo (is_object($report->CommercialPossibleJudgment->CaseNumber)?"":$report->CommercialPossibleJudgment->CaseNumber);?></td>
@@ -716,10 +716,11 @@ Current Contact, Address, and Employment Info.</h5>
 				</tr>							
 				<?php } 
 			}?>
+			</table>
 		<?php } else { ?>
 		<span>Possible Judgment Not Found</span><br>
 		<?php } ?>
-</table>
+
 </div><br />
 			
 <div class="col">
@@ -1711,6 +1712,7 @@ if(is_object($report->CommercialBankCodeHistory)){
 
 <div class="col">
 <div class="title-head">Active Director Business interests</div>
+<hr class="hr-line"/>
 <?php if($report->ActiveDirectorCurrentBusinessinterests){ 
 		if(is_object($report->ActiveDirectorCurrentBusinessinterests)){ ?>
 				<div class="title-head"> Active Director Current Business interests-1 of 1<br>
@@ -1836,6 +1838,7 @@ if(is_object($report->CommercialBankCodeHistory)){
 		 
 <div class="col">
 <div class="title-head">Active Director Previous Business interests</div>
+<hr class="hr-line"/>
 <?php if($report->ActiveDirectorPreviousBusinessinterests){ 
 if(is_object($report->ActiveDirectorPreviousBusinessinterests)){ ?>
 		<div class="title-head"> Active Director Previous Business interests-1 of 1<br>
