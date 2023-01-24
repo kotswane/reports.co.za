@@ -1038,7 +1038,8 @@ if(is_object($report->CommercialBankCodeHistory)){
 				 <td>Comments</td>
 				 <td><?php echo (is_object($CommercialBankCodeHistory->Comment)?"":$CommercialBankCodeHistory->Comment);?></td>
 			</tr>
-		</table>																	
+		</table>
+		<hr class="hr-line"/>		
 	<?php }
 }
  } else { ?>
@@ -1328,7 +1329,8 @@ if(is_object($report->CommercialBankCodeHistory)){
 			</table>
 		</td>
 	</tr>
- </table>	
+ </table>
+ <hr class="hr-line"/> 
 <?php } 
 	} 
 } else { ?>
@@ -1567,7 +1569,8 @@ if(is_object($report->CommercialBankCodeHistory)){
 				</table>
 			</td>
 		 </tr>
-	</table>								
+	</table>
+ <hr class="hr-line"/>	
 	<?php }
 } 
  } else { ?>
@@ -1831,6 +1834,7 @@ if(is_object($report->CommercialBankCodeHistory)){
 						</td>
 					</tr>
 				 </table>
+				  <hr class="hr-line"/>
 		 <?php }
 	}	
  } else { 
@@ -1957,6 +1961,7 @@ if(is_object($report->ActiveDirectorPreviousBusinessinterests)){ ?>
 				</td>
 			</tr>
 		 </table>
+		  <hr class="hr-line"/>
 			 <?php }
 		}	
 	 } else { 
