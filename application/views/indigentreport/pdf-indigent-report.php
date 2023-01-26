@@ -190,18 +190,18 @@ if($myData->HAMarriageStatus == "MARRIED"){
 			if(!is_object($directorship)){
 				foreach($directorship as $director){?>
 				<tr class="border_bottom">
-					<td><?php echo (is_object($directorship->CommercialName)?"":$directorship->CommercialName);?></td>
-					<td><?php echo (is_object($directorship->RegistrationNo)?"":$directorship->RegistrationNo);?></td>
-					<td><?php echo (is_object($directorship->DirectorStatus)?"":$directorship->DirectorStatus);?></td>
-					<td><?php echo (is_object($directorship->CommercialStatus)?"":$directorship->CommercialStatus);?></td>
+					<td><?php echo (is_object($director->CommercialName)?"":$director->CommercialName);?></td>
+					<td><?php echo (is_object($director->RegistrationNo)?"":$director->RegistrationNo);?></td>
+					<td><?php echo (is_object($director->DirectorStatus)?"":$director->DirectorStatus);?></td>
+					<td><?php echo (is_object($director->CommercialStatus)?"":$director->CommercialStatus);?></td>
 				</tr>
 			<?php } 
 		   } else { ?>
 			<tr>
-					<td><?php echo (is_object($director->CommercialName)?"":$director->CommercialName);?></td>
-					<td><?php echo  (is_object($director->RegistrationNo)?"":$director->RegistrationNo);?></td>
-					<td><?php echo (is_object($director->DirectorStatus)?"":$director->DirectorStatus);?></td>
-					<td><?php echo (is_object($director->CommercialStatus)?"":$director->CommercialStatus);?></td>
+					<td><?php echo (is_object($directorship->CommercialName)?"":$directorship->CommercialName);?></td>
+					<td><?php echo  (is_object($directorship->RegistrationNo)?"":$directorship->RegistrationNo);?></td>
+					<td><?php echo (is_object($directorship->DirectorStatus)?"":$directorship->DirectorStatus);?></td>
+					<td><?php echo (is_object($directorship->CommercialStatus)?"":$directorship->CommercialStatus);?></td>
 			</tr>							 
 		 <?php } ?>
 		</table>
