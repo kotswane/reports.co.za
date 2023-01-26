@@ -26,6 +26,15 @@
 	 $hasMultiRecords  = false;
  }
 
+$MaritalStatus = $myData->HAMarriageStatus;
+if($myData->HAMarriageStatus == "MARRIED"){
+	if($myData->HASpouseID == $theirData->HAIDNO){
+		$SpouseName = $theirData->HANames;
+		$SpouseSurname = $theirData->HASurname;
+		$SpouseIDNo = $theirData->HAIDNO;
+	}
+}
+		
 ?>
 <div>
      <div>
@@ -108,6 +117,7 @@
         <th class="th-size-first"></th>
         <th class="th-size-second"></th>
         </tr>
+		<?php if($MaritalStatus == "MARRIED"){?>
         <tr class="tr-label">
         <td class="td-label">Marital Status</td>
         <td class="td-value"><?php echo (is_object($myData->HAMarriageStatus)?"":$myData->HAMarriageStatus);?></td>
@@ -118,16 +128,19 @@
         </tr>
          <tr class="tr-label">
         <td class="td-label">Spouse Name</td>
-        <td class="td-value"><?php echo (is_object($theirData->HANames)?"":$theirData->HANames);?></td>
+        <td class="td-value"><?php echo $SpouseName;?></td>
         </tr>
         <tr class="tr-label">
         <td class="td-label">Spouse Surname</td>
-        <td class="td-value"><?php echo (is_object($theirData->HASurname)?"":$theirData->HASurname);?></td>
+        <td class="td-value"><?php echo $SpouseSurname;?></td>
         </tr>
         <tr class="tr-label">
-        <td class="td-label">Spouse Maiden Name</td>
-        <td class="td-value"><?php echo (is_object($theirData->MaidenName)?"":$theirData->MaidenName);?></td>
+        <td class="td-label">Spouse ID No</td>
+        <td class="td-value"><?php echo $SpouseIDNo;?></td>
         </tr>
+		<?php } else { ?>
+		<td class="td-label" colspane="2"><?php echo $MaritalStatus;?></td>
+		<?php }?>
     </table>              
 		</div><br/><br/>
 
