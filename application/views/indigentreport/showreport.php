@@ -53,7 +53,7 @@
 			 $hasMultiRecords  = false;
 		 }
 
-		$MaritalStatus = $myData->HAMarriageStatus;
+		$MaritalStatus = (is_object($myData->HAMarriageStatus)?"":$myData->HAMarriageStatus);
 		if($myData->HAMarriageStatus == "MARRIED"){
 			if($myData->HASpouseID == $theirData->HAIDNO){
 				$SpouseName = $theirData->HANames;
