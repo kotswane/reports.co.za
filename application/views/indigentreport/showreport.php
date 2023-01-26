@@ -33,7 +33,7 @@
 			<br clear="all" />
             </div>
         </div>
-      <pre>
+     
 	 <?php 
 
 		 if(is_array($familyData->Consumer) > 0){
