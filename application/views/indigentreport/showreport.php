@@ -33,11 +33,9 @@
 			<br clear="all" />
             </div>
         </div>
-      
+      <pre>
 	 <?php 
-		// print_r($report);
-		 //die();
-		 
+
 		 if(is_array($familyData->Consumer) > 0){
 			 $myData = $familyData->Consumer[0]->RealTimeIDV;
 			 $theirData = $familyData->Consumer[1]->RealTimeIDV;
@@ -58,7 +56,7 @@
 		$MaritalStatus = $myData->HAMarriageStatus;
 		if($myData->HAMarriageStatus == "MARRIED"){
 			if($myData->HASpouseID == $theirData->HAIDNO){
-				$SpouseName = $theirData->HAIDNO;
+				$SpouseName = $theirData->HANames;
 				$SpouseSurname = $theirData->HASurname;
 				$SpouseIDNo = $theirData->HAIDNO;
 			}
