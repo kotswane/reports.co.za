@@ -49,7 +49,9 @@ class Procurementreport extends CI_Controller {
 		if(!$this->session->userdata('username')){
 			 redirect('user/login');
 		}	
-
+		if(!$this->session->userdata('agreed_tc_and_c')){
+			 redirect('disclaimer');
+		}
 		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
 		$response = $this->redisclient->request($data);
 
@@ -187,7 +189,9 @@ class Procurementreport extends CI_Controller {
 		if(!$this->session->userdata('username')){
 			 redirect('user/login');
 		}	
-
+		if(!$this->session->userdata('agreed_tc_and_c')){
+			 redirect('disclaimer');
+		}
 		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
 		$response = $this->redisclient->request($data);
 
@@ -322,7 +326,9 @@ class Procurementreport extends CI_Controller {
 		if(!$this->session->userdata('username')){
 			 redirect('user/login');
 		}	
-
+		if(!$this->session->userdata('agreed_tc_and_c')){
+			 redirect('disclaimer');
+		}
 		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
 		$response = $this->redisclient->request($data);
 
@@ -412,7 +418,9 @@ class Procurementreport extends CI_Controller {
 		if(!$this->session->userdata('username')){
 			 redirect('user/login');
 		}
-		
+		if(!$this->session->userdata('agreed_tc_and_c')){
+			 redirect('disclaimer');
+		}		
 		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
 		$response = $this->redisclient->request($data);
 
@@ -462,7 +470,9 @@ class Procurementreport extends CI_Controller {
 		if(!$this->session->userdata('username')){
 			 redirect('user/login');
 		}
-		
+		if(!$this->session->userdata('agreed_tc_and_c')){
+			 redirect('disclaimer');
+		}		
 		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
 		$response = $this->redisclient->request($data);
 
@@ -484,7 +494,9 @@ class Procurementreport extends CI_Controller {
 	}
 	
 	private function getConsumerMatch($id){
-		
+		if(!$this->session->userdata('agreed_tc_and_c')){
+			 redirect('disclaimer');
+		}		
 				$IsTicketValid = array("XDSConnectTicket"=>$this->session->userdata('tokenId'));
 			
 				$this->client = $this->mysoapclient->getClient();
@@ -554,7 +566,9 @@ class Procurementreport extends CI_Controller {
 		if(!$this->session->userdata('username')){
 			 redirect('user/login');
 		}
-		
+		if(!$this->session->userdata('agreed_tc_and_c')){
+			 redirect('disclaimer');
+		}		
 		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
 		$response = $this->redisclient->request($data);
 

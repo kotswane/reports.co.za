@@ -40,7 +40,9 @@ class Dashboard extends CI_Controller {
 		if(!$this->session->userdata('username')){
 			 redirect('user/login');
 		}
-		
+		if(!$this->session->userdata('agreed_tc_and_c')){
+			 redirect('disclaimer');
+		}		
 		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
 		$response = $this->redisclient->request($data);
 
