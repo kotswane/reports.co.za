@@ -4,7 +4,7 @@
     <!-- Sidebar Menu -->
     <ul class="sidebar-menu" data-widget="tree">
         <!-- <li class="header"></li> -->
-        <li><a href="<?php echo site_url();?>/tracereport"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+        <li><a href="<?php echo site_url();?>/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 		
 		<?php
 			foreach ($reports as $reportData){
