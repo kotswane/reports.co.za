@@ -74,7 +74,7 @@ class User extends CI_Controller {
 							
 							if($response->status == "success"){
 								$this->session->set_userdata(array('username' => $this->input->post("username"),'isloggedin' => true,'tokenId' => $loginResponse->LoginResult,'userId' => $login[0]->id));
-								redirect('/tracereport');
+								redirect('/dashboard');
 							}else {
 								$data['errorSession'] = "You have an active session in another computer, please logout and login here"; 
 								$this->load->view('login',$data);
