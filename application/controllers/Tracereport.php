@@ -31,7 +31,9 @@ class Tracereport extends CI_Controller {
 		if(!$this->session->userdata('username')){
 			 redirect('user/login');
 		}
-		
+		if(!$this->session->userdata('agreed_tc_and_c')){
+			 redirect('user/logout');
+		}		
 
 		$this->load->model("Province_model");
 		$this->load->model("Auditlog_model");
@@ -45,8 +47,8 @@ class Tracereport extends CI_Controller {
 			 redirect('user/login');
 		}
 		if(!$this->session->userdata('agreed_tc_and_c')){
-			 redirect('disclaimer');
-		}		
+			 redirect('user/logout');
+		}
 		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
 		$response = $this->redisclient->request($data);
 
@@ -70,7 +72,7 @@ class Tracereport extends CI_Controller {
 			 redirect('user/login');
 		}		
 		if(!$this->session->userdata('agreed_tc_and_c')){
-			 redirect('disclaimer');
+			 redirect('user/logout');
 		}		
 		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
 		$response = $this->redisclient->request($data);
@@ -154,8 +156,8 @@ class Tracereport extends CI_Controller {
 				}else {
 					
 					$objJsonDocument = json_encode($xml);
-					$arrOutput = json_decode($objJsonDocument, TRUE);
-					
+					$arrOutput = json_decode($objJsonDocument);
+
 					$auditlog = array(
 						"auditlog_reportname"=>"tracereport",
 						"auditlog_userId"=>$this->session->userdata('userId'),
@@ -168,10 +170,19 @@ class Tracereport extends CI_Controller {
 						"auditlog_issuccess" => true
 					);
 					$this->Auditlog_model->save($auditlog);
+					$data['report']['details'] = array();
+					if(is_object($arrOutput->ConsumerDetails)){
+						$response = $this->getSearchData($arrOutput->ConsumerDetails->EnquiryID, $arrOutput->ConsumerDetails->EnquiryResultID);
+						$data['report']['details'][] = $response;
+					}else{ 
+						foreach($arrOutput->ConsumerDetails as $ConsumerDetails){
+							
+							$data['report']['details'][] = $this->getSearchData($ConsumerDetails->EnquiryID, $ConsumerDetails->EnquiryResultID);
+						}
 					
-					$response = $this->getSearchData($arrOutput['ConsumerDetails']['EnquiryID'], $arrOutput['ConsumerDetails']['EnquiryResultID']);
-					$data['report'] = $response;
-					$this->session->set_userdata(array('report' =>$data['report']));
+					}
+
+					$this->session->set_userdata(array('report' =>$data['report']['details']));
 					$data["content"] = "tracereport/trace-report";
 					$this->load->view('site',$data);
 				}
@@ -189,7 +200,7 @@ class Tracereport extends CI_Controller {
 			 redirect('user/login');
 		}
 		if(!$this->session->userdata('agreed_tc_and_c')){
-			 redirect('disclaimer');
+			 redirect('user/logout');
 		}		
 		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
 		$response = $this->redisclient->request($data);
@@ -286,7 +297,7 @@ class Tracereport extends CI_Controller {
 				}else{
 					$data["consumerList"]["details"] = array();
 					$objJsonDocument = json_encode($xml);
-					$arrOutput = json_decode($objJsonDocument, TRUE);
+					$arrOutput = json_decode($objJsonDocument);
 					$auditlog = array(
 						"auditlog_reportname"=>"tracereport",
 						"auditlog_userId"=>$this->session->userdata('userId'),
@@ -303,26 +314,31 @@ class Tracereport extends CI_Controller {
 						"auditlog_issuccess" => true
 					);
 					$this->Auditlog_model->save($auditlog);
-					foreach($arrOutput as $arrOutputListKey => $arrOutputListValue){
-
-						if (!is_array($arrOutputListValue)){
-							$data["consumerList"]["details"][]= $arrOutputListValue;
+				
+					
+					if(is_object($arrOutput->ConsumerDetails)){
+					
+							$data["consumerList"]["details"][]= $arrOutput->ConsumerDetails;
 							
 							$resp = $this->client->IsTicketValid($IsTicketValid);
 							if($resp->IsTicketValidResult != true || $resp->IsTicketValidResult ==""){
 								$this->session->set_userdata(array('tokensession' =>'Session expired, please login again'));
 								redirect('user/login');
 							}
+							
+
 							$response = $this->client->AdminEnquiryResult(array(
 							'ConnectTicket' => $this->session->userdata('tokenId'),
-							'EnquiryResultID' => $arrOutputListValue['EnquiryResultID']));
+							'EnquiryResultID' => $arrOutput->ConsumerDetails->EnquiryResultID));
 					
+							 
+						 
 							$auditlog = array(
 								"auditlog_reportname"=>"tracereport",
 								"auditlog_userId"=>$this->session->userdata('userId'),
 								"auditlog_reporttype"=>"addresssearch",
 								"auditlog_searchdata"=>json_encode(array(
-								'EnquiryResultID' => $arrOutputListValue['EnquiryResultID'])),
+								'EnquiryResultID' =>  $arrOutput->ConsumerDetails->EnquiryResultID)),
 								"auditlog_fnexecuted" => "AdminEnquiryResult",
 								"auditlog_issuccess" => true
 							);
@@ -332,9 +348,10 @@ class Tracereport extends CI_Controller {
 							$objJsonDocument = json_encode($xml);
 							$arrOutput = json_decode($objJsonDocument, TRUE);
 							$data["consumerList"]["DetailsViewed"][]= (($arrOutput["Result"]["DetailsViewedYN"]=="true")? "Yes":"No");
-						}else{
-
-								foreach($arrOutputListValue as $arrOutputListValueListKey => $arrOutputListValueListValue){
+							
+					}else{
+							foreach($arrOutput->ConsumerDetails as $arrOutputListValueListKey => $arrOutputListValueListValue){
+								
 								
 								$data["consumerList"]["details"][]= $arrOutputListValueListValue;
 								$resp = $this->client->IsTicketValid($IsTicketValid);
@@ -345,14 +362,14 @@ class Tracereport extends CI_Controller {
 								
 								$response = $this->client->AdminEnquiryResult(array(
 								'ConnectTicket' => $this->session->userdata('tokenId'),
-								'EnquiryResultID' => $arrOutputListValueListValue['EnquiryResultID']));
+								'EnquiryResultID' => $arrOutputListValueListValue->EnquiryResultID));
 								
 								$auditlog = array(
 									"auditlog_reportname"=>"tracereport",
 									"auditlog_userId"=>$this->session->userdata('userId'),
 									"auditlog_reporttype"=>"addresssearch",
 									"auditlog_searchdata"=>json_encode(array(
-									'EnquiryResultID' => $arrOutputListValueListValue['EnquiryResultID'])),
+									'EnquiryResultID' => $arrOutputListValueListValue->EnquiryResultID)),
 									"auditlog_fnexecuted" => "AdminEnquiryResult",
 									"auditlog_issuccess" => true
 								);
@@ -362,9 +379,7 @@ class Tracereport extends CI_Controller {
 								$objJsonDocument = json_encode($xml);
 								$arrOutput = json_decode($objJsonDocument, TRUE);
 								$data["consumerList"]["DetailsViewed"][]= (($arrOutput["Result"]["DetailsViewedYN"]=="true")? "Yes":"No");
-							}
-						}
-						
+							}								
 					}
 					
 				}
@@ -384,7 +399,7 @@ class Tracereport extends CI_Controller {
 			 redirect('user/login');
 		}
 		if(!$this->session->userdata('agreed_tc_and_c')){
-			 redirect('disclaimer');
+			 redirect('user/logout');
 		}		
 		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
 		$response = $this->redisclient->request($data);
@@ -548,7 +563,7 @@ class Tracereport extends CI_Controller {
 			 redirect('user/login');
 		}
 		if(!$this->session->userdata('agreed_tc_and_c')){
-			 redirect('disclaimer');
+			 redirect('user/logout');
 		}		
 		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
 		$response = $this->redisclient->request($data);
@@ -568,6 +583,7 @@ class Tracereport extends CI_Controller {
 			redirect('user/login');
 		}
 		
+
 		
 		$response = $this->client->ConnectGetResult(array(
 				'EnquiryID' => $enquiryID,
@@ -600,7 +616,7 @@ class Tracereport extends CI_Controller {
 			 redirect('user/login');
 		}		
 		if(!$this->session->userdata('agreed_tc_and_c')){
-			 redirect('disclaimer');
+			 redirect('user/logout');
 		}
 		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
 		$response = $this->redisclient->request($data);
@@ -624,7 +640,7 @@ class Tracereport extends CI_Controller {
 		$data["reports_type"] = $this->reports_type;
 		$data["reports"] = $this->reports;
 		$response = $this->getSearchData($this->uri->segment(3), $this->uri->segment(4));
-		$data['report'] = $response;
+		$data['report']['details'][] = $response;
 		$this->session->set_userdata(array('report' =>$data['report']));
 		$data["content"] = "tracereport/trace-report";
 		$this->load->view('site',$data);
@@ -650,7 +666,7 @@ class Tracereport extends CI_Controller {
 			 redirect('user/login');
 		}
 		if(!$this->session->userdata('agreed_tc_and_c')){
-			 redirect('disclaimer');
+			 redirect('user/logout');
 		}		
 		$data = array('id'=>$this->session->userdata('userId'),'site'=>'tracing portal');
 		$response = $this->redisclient->request($data);
@@ -662,7 +678,7 @@ class Tracereport extends CI_Controller {
 
 		try{
 			ob_clean();
-			$data['report'] = $this->session->userdata('report');
+			$data['report']['details'][] = $this->session->userdata('report');
 			$this->load->library('pdf');
 			$html = $this->load->view('tracereport/pdf-trace-report',$data, true);
 			$this->pdf->createPDF($html, "customer-tracereport-".time(), true);
